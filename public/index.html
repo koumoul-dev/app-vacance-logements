@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:300,400,500,700,400italic">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+
+    <!-- The next 3 elements are important metadatas. They will be used by data-fair when importing this application. -->
+    <title lang="fr">Vacance des logements</title>
+    <meta name="description" lang="fr" content="Cette application permet de récupérer des statistiques sur la vacance des logements">
+    <meta name="application-name" content="app-vacance-logements">
+    <meta name="keywords" lang="fr" content="vacance,logements">
+    <meta name="thumbnail" content="thumbnail.png">
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <!-- Capture a global variable defined by data-fair's reverse proxy. -->
+    <script type="text/javascript">window.APPLICATION=%APPLICATION%;</script>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

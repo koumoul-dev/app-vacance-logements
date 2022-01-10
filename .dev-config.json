@@ -1,0 +1,14 @@
+{
+  "datasets": [
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/vacances-insee-18",
+      "title": "Vacances Insee 18",
+      "id": "vacances-insee-18"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-vacants-du-parc-prive-par-commune-au-01012019-lovac-1",
+      "title": "logements vacants du parc prive par commune au 01012019 lovac 1 ",
+      "id": "logements-vacants-du-parc-prive-par-commune-au-01012019-lovac-1"
+    }
+  ]
+}
