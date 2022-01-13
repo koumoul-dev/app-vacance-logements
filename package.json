@@ -1,7 +1,6 @@
 {
   "name": "app-vacance-logements",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
