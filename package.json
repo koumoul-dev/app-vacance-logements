@@ -6,7 +6,9 @@
     "lint": "vue-cli-service lint",
     "dev": "DATAFAIR_OWNER_ID=-yBjDrgFI DATAFAIR_API_KEY=bzoteUJqRHJnRkk6NjJNZVZmRkRBTWZvWlhQdmZNWGtF APP_URL=http://localhost:8080/app df-dev-server",
     "dev-src": "vue-cli-service serve",
-    "build": "vue-cli-service build --modern"
+    "build": "vue-cli-service build --modern",
+    "postpublish": "node scripts/postpublish.js",
+    "prepublish": "PUBLIC_URL=https://cdn.jsdelivr.net/npm/app-vacance-logements@${npm_package_version}/dist vue-cli-service build --modern"
   },
   "dependencies": {
     "@data-fair/components-app": "^0.2.3",
