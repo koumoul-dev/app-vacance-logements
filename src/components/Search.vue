@@ -1,15 +1,30 @@
 <template>
-  <v-autocomplete
-    v-model="city"
-    :items="cities"
-    :loading="loading"
-    :search-input.sync="search"
-    :filter="() => true"
-    :clearable="true"
-    return-object
-    dense
-    placeholder="Commune ou code postal"
-  />
+  <v-row align="center">
+    <v-col :cols="3">
+      <v-img
+        src="../assets/pdvplv.png"
+        height="96"
+        contain
+      />
+    </v-col>
+    <v-col :cols="6">
+      <v-autocomplete
+        v-model="city"
+        class="mt-5"
+        :items="cities"
+        :loading="loading"
+        :search-input.sync="search"
+        :filter="() => true"
+        :clearable="true"
+        return-object
+        outlined
+        rounded
+        prepend-inner-icon="mdi-magnify"
+        placeholder="Commune ou code postal"
+      />
+    </v-col>
+    <v-col :cols="3" />
+  </v-row>
 </template>
 
 <script>

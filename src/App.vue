@@ -2,15 +2,32 @@
   <v-app>
     <v-main>
       <div v-if="application">
-        <search />
         <div
           v-if="!configureError"
         >
-          <card-parc style="width:20%;display:inline-block;" />
-          <card-insee style="width:20%;display:inline-block;" />
-          <card-lovac style="width:20%;display:inline-block;" />
-          <card-pc style="width:20%;display:inline-block;" />
-          <card-ges style="width:20%;display:inline-block;" />
+          <search />
+          <template v-if="city">
+            <city-infos />
+            <card-parc style="width:20%;display:inline-block;" />
+            <card-insee style="width:20%;display:inline-block;" />
+            <card-lovac style="width:20%;display:inline-block;" />
+            <card-pc style="width:20%;display:inline-block;" />
+            <card-ges style="width:20%;display:inline-block;" />
+          </template>
+          <v-container
+            v-else
+            class="px-5"
+          >
+            <v-col class="text-center pa-6 mt-6">
+              <v-alert
+                :value="true"
+                type="info"
+                outlined
+              >
+                <h4>Veuillez sélectionner une commune</h4>
+              </v-alert>
+            </v-col>
+          </v-container>
         </div>
         <v-img v-else-if="params('draft') === 'true'">
           <v-container class="px-5">
@@ -38,6 +55,7 @@ import CardInsee from './components/CardInsee'
 import CardLovac from './components/CardLovac'
 import CardPc from './components/CardPC'
 import CardGes from './components/CardGES'
+import CityInfos from './components/CityInfos'
 
 export default {
   name: 'App',
@@ -47,10 +65,11 @@ export default {
     CardInsee,
     CardLovac,
     CardPc,
-    CardGes
+    CardGes,
+    CityInfos
   },
   computed: {
-    ...mapState(['application']),
+    ...mapState(['application', 'city']),
     ...mapGetters(['config']),
     configureError () {
       // if (!this.datasetUrl) return 'Veuillez sélectionner une source de données'

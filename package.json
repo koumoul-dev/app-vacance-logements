@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
-    "dev": "APP_URL=http://localhost:8080/app df-dev-server",
+    "dev": "DATAFAIR_OWNER_ID=-yBjDrgFI DATAFAIR_API_KEY=bzoteUJqRHJnRkk6NjJNZVZmRkRBTWZvWlhQdmZNWGtF APP_URL=http://localhost:8080/app df-dev-server",
     "dev-src": "vue-cli-service serve",
     "build": "vue-cli-service build --modern"
   },
