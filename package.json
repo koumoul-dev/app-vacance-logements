@@ -1,6 +1,9 @@
 {
   "name": "app-vacance-logements",
   "version": "0.1.1",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
