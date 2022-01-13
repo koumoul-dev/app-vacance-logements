@@ -4,6 +4,7 @@
       <div v-if="application">
         <div
           v-if="!configureError"
+          data-iframe-height
         >
           <search />
           <template v-if="city">
