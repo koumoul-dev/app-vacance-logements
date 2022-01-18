@@ -1,14 +1,34 @@
 {
   "datasets": [
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/vacances-insee-18",
-      "title": "Vacances Insee 18",
-      "id": "vacances-insee-18"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/log-1-insee-pdv-traite",
+      "title": "LOG 1 Insee PDV traité",
+      "id": "log-1-insee-pdv-traite"
     },
     {
       "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-vacants-du-parc-prive-par-commune-au-01012019-lovac-1",
-      "title": "logements vacants du parc prive par commune au 01012019 lovac 1 ",
+      "title": "LOVAC_Communes au 01012019",
       "id": "logements-vacants-du-parc-prive-par-commune-au-01012019-lovac-1"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/lovac_epci-au-01012019",
+      "title": "LOVAC_EPCI au 01012019",
+      "id": "lovac_epci-au-01012019"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-14-a-18-france",
+      "title": "Evolution Parc Vacance 14 à 18 france",
+      "id": "evolution-parc-vacance-14-a-18-france"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-14-a-18-epci",
+      "title": "Evolution Parc Vacance 14 à 18 EPCI",
+      "id": "evolution-parc-vacance-14-a-18-epci"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-14-a-18-epci",
+      "title": "Evolution Parc Vacance 14 à 18 EPCI",
+      "id": "evolution-parc-vacance-14-a-18-epci"
     }
   ]
 }

@@ -53,6 +53,9 @@ export default {
         this.cities = cities.map(r => ({ text: r.Nom_commune + ` (${r.Code_postal})`, value: r.Code_commune_INSEE }))
       }
       this.loading = false
+    },
+    city () {
+      this.$store.dispatch('refresh')
     }
   }
 }

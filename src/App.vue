@@ -7,20 +7,53 @@
           data-iframe-height
         >
           <search />
-          <template v-if="city">
+          <template v-if="inseeInfos">
             <city-infos />
-            <card-parc style="width:20%;display:inline-block;" />
-            <card-insee style="width:20%;display:inline-block;" />
-            <card-lovac style="width:20%;display:inline-block;" />
-            <card-pc style="width:20%;display:inline-block;" />
-            <card-ges style="width:20%;display:inline-block;" />
+            <v-row class="mx-0">
+              <v-col
+                style="width:20%"
+                class="px-2"
+              >
+                <card-parc />
+              </v-col>
+              <v-col
+                style="width:20%"
+                class="px-2"
+              >
+                <card-insee />
+              </v-col>
+              <v-col
+                style="width:20%"
+                class="px-2"
+              >
+                <card-lovac />
+              </v-col>
+              <v-col
+                style="width:20%"
+                class="px-2"
+              >
+                <card-pc />
+              </v-col>
+              <v-col
+                style="width:20%"
+                class="px-2"
+              >
+                <card-ges />
+              </v-col>
+            </v-row>
           </template>
           <v-container
             v-else
             class="px-5"
           >
             <v-col class="text-center pa-6 mt-6">
+              <v-progress-circular
+                v-if="loading"
+                indeterminate
+                :size="100"
+              />
               <v-alert
+                v-else
                 :value="true"
                 type="info"
                 outlined
@@ -70,15 +103,12 @@ export default {
     CityInfos
   },
   computed: {
-    ...mapState(['application', 'city']),
+    ...mapState(['application', 'inseeInfos', 'loading']),
     ...mapGetters(['config']),
     configureError () {
       // if (!this.datasetUrl) return 'Veuillez sélectionner une source de données'
       return null
     }
-  },
-  mounted () {
-    if (!this.configureError) this.$store.dispatch('init')
   },
   methods: {
     params (p) {
