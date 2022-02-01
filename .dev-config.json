@@ -26,9 +26,9 @@
       "id": "evolution-parc-vacance-14-a-18-epci"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-14-a-18-epci",
-      "title": "Evolution Parc Vacance 14 à 18 EPCI",
-      "id": "evolution-parc-vacance-14-a-18-epci"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/pc-logements-autorises-2018-france",
+      "title": "PC logements autorisés 2018 France",
+      "id": "pc-logements-autorises-2018-france"
     }
   ]
 }

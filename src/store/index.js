@@ -16,7 +16,8 @@ export default () => {
       cityLovacData: null,
       epciLovacData: null,
       cityHistoricalData: null,
-      epciHistoricalData: null
+      epciHistoricalData: null,
+      pcData: null
     },
     getters: {
       config (state) {
@@ -36,7 +37,8 @@ export default () => {
           cityLovacData: null,
           epciLovacData: null,
           cityHistoricalData: null,
-          epciHistoricalData: null
+          epciHistoricalData: null,
+          pcData: null
         })
         if (!state.city) {
           commit('setAny', {
@@ -45,7 +47,8 @@ export default () => {
             cityLovacData: null,
             epciLovacData: null,
             cityHistoricalData: null,
-            epciHistoricalData: null
+            epciHistoricalData: null,
+            pcData: null
           })
         } else {
           commit('setAny', { loading: true })
@@ -60,7 +63,9 @@ export default () => {
             const epciLovacData = (await axios.get(getters.config.datasets[2].href + '/lines', { params })).data.results[0]
             params.qs = `EPCI:${inseeInfos.CODE_EPCI}`
             const epciHistoricalData = (await axios.get(getters.config.datasets[4].href + '/lines', { params })).data.results[0]
-            commit('setAny', { inseeInfos, ageInseeData, cityLovacData, epciLovacData, cityHistoricalData, epciHistoricalData })
+            params.qs = `COMM:${state.city.value}`
+            const pcData = (await axios.get(getters.config.datasets[5].href + '/lines', { params })).data.results[0]
+            commit('setAny', { inseeInfos, ageInseeData, cityLovacData, epciLovacData, cityHistoricalData, epciHistoricalData, pcData })
           } catch (err) {
             commit('setAny', {
               inseeInfos: null,
@@ -68,7 +73,8 @@ export default () => {
               cityLovacData: null,
               epciLovacData: null,
               cityHistoricalData: null,
-              epciHistoricalData: null
+              epciHistoricalData: null,
+              pcData: null
             })
             dispatch('setError', (err.response && err.response.data) || err.message)
           }
