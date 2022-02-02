@@ -23,12 +23,11 @@
           <strong>{{ ageInseeData.TOT_LV.toLocaleString('fr') }}</strong>
         </v-col>
         <v-col>
-          <v-sparkline
+          <history-graph
             v-if="cityHistoricalData && cityHistoricalData.TOT_LV_14"
-            line-width="8"
-            auto-draw
-            smooth
             :value="evolutionTotCity"
+            :labels="evolutionLabels"
+            title="Logements vacants"
           />
         </v-col>
       </v-row>
@@ -43,12 +42,11 @@
           <strong>{{ ageInseeData.TX_LV.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
         </v-col>
         <v-col>
-          <v-sparkline
+          <history-graph
             v-if="cityHistoricalData && cityHistoricalData.TX_LV_14"
-            line-width="8"
-            auto-draw
-            smooth
             :value="evolutionTxCity"
+            :labels="evolutionLabels"
+            title="Taux de vacance"
           />
         </v-col>
       </v-row>
@@ -125,12 +123,11 @@
           <strong v-else>inconnu</strong>
         </v-col>
         <v-col>
-          <v-sparkline
+          <history-graph
             v-if="epciHistoricalData && epciHistoricalData.TX_LV_14_EPCI"
-            line-width="8"
-            auto-draw
-            smooth
             :value="evolutionTxEPCI"
+            :labels="evolutionLabels"
+            title="Taux de vacance EPCI"
           />
         </v-col>
       </v-row>
@@ -146,12 +143,11 @@
           <strong v-else>inconnu</strong>
         </v-col>
         <v-col>
-          <v-sparkline
+          <history-graph
             v-if="epciHistoricalData && epciHistoricalData.TOT_LV_14_EPCI"
-            line-width="8"
-            auto-draw
-            smooth
             :value="evolutionTotEPCI"
+            :labels="evolutionLabels"
+            title="Logements vacants EPCI"
           />
         </v-col>
       </v-row>
@@ -174,9 +170,11 @@
 </template>
 
 <script>
+import HistoryGraph from './history-graph'
 import { mapState } from 'vuex'
 
 export default {
+  components: { HistoryGraph },
   computed: {
     ...mapState(['cityHistoricalData', 'epciHistoricalData', 'ageInseeData']),
     evolutionTxCity () {
@@ -243,6 +241,15 @@ export default {
         '1971 - 1990',
         '1991 - 2005',
         '2006 - 2015'
+      ]
+    },
+    evolutionLabels () {
+      return [
+        '2014',
+        '2015',
+        '2016',
+        '2017',
+        '2018'
       ]
     }
   }

@@ -23,12 +23,11 @@
           <strong>{{ ageInseeData.TOT_PARC.toLocaleString('fr') }}</strong>
         </v-col>
         <v-col>
-          <v-sparkline
+          <history-graph
             v-if="cityHistoricalData && cityHistoricalData.TOT_PARC_14"
-            auto-draw
-            smooth
-            line-width="8"
             :value="evolutionCity"
+            :labels="evolutionLabels"
+            title="Total logements"
           />
         </v-col>
       </v-row>
@@ -95,12 +94,11 @@
           <strong>{{ epciHistoricalData.TOT_PARC_18_EPCI.toLocaleString('fr') }}</strong>
         </v-col>
         <v-col>
-          <v-sparkline
+          <history-graph
             v-if="epciHistoricalData && epciHistoricalData.TOT_PARC_14_EPCI"
-            line-width="8"
-            auto-draw
-            smooth
             :value="evolutionEPCI"
+            :labels="evolutionLabels"
+            title="Total logements EPCI"
           />
         </v-col>
       </v-row>
@@ -123,27 +121,29 @@
 </template>
 
 <script>
+import HistoryGraph from './history-graph'
 import { mapState } from 'vuex'
 
 export default {
+  components: { HistoryGraph },
   computed: {
     ...mapState(['cityHistoricalData', 'epciHistoricalData', 'ageInseeData']),
     evolutionCity () {
       return [
-        0,
-        (this.cityHistoricalData.TOT_PARC_15 / this.cityHistoricalData.TOT_PARC_14 - 1) * 100,
-        (this.cityHistoricalData.TOT_PARC_16 / this.cityHistoricalData.TOT_PARC_14 - 1) * 100,
-        (this.cityHistoricalData.TOT_PARC_17 / this.cityHistoricalData.TOT_PARC_14 - 1) * 100,
-        (this.cityHistoricalData.TOT_PARC_18 / this.cityHistoricalData.TOT_PARC_14 - 1) * 100
+        this.cityHistoricalData.TOT_PARC_14,
+        this.cityHistoricalData.TOT_PARC_15,
+        this.cityHistoricalData.TOT_PARC_16,
+        this.cityHistoricalData.TOT_PARC_17,
+        this.cityHistoricalData.TOT_PARC_18
       ]
     },
     evolutionEPCI () {
       return [
-        0,
-        (this.epciHistoricalData.TOT_PARC_15_EPCI / this.epciHistoricalData.TOT_PARC_14_EPCI - 1) * 100,
-        (this.epciHistoricalData.TOT_PARC_16_EPCI / this.epciHistoricalData.TOT_PARC_14_EPCI - 1) * 100,
-        (this.epciHistoricalData.TOT_PARC_17_EPCI / this.epciHistoricalData.TOT_PARC_14_EPCI - 1) * 100,
-        (this.epciHistoricalData.TOT_PARC_18_EPCI / this.epciHistoricalData.TOT_PARC_14_EPCI - 1) * 100
+        this.epciHistoricalData.TOT_PARC_14_EPCI,
+        this.epciHistoricalData.TOT_PARC_15_EPCI,
+        this.epciHistoricalData.TOT_PARC_16_EPCI,
+        this.epciHistoricalData.TOT_PARC_17_EPCI,
+        this.epciHistoricalData.TOT_PARC_18_EPCI
       ]
     },
     ages () {
@@ -164,6 +164,15 @@ export default {
         '1971 - 1990',
         '1991 - 2005',
         '2006 - 2015'
+      ]
+    },
+    evolutionLabels () {
+      return [
+        '2014',
+        '2015',
+        '2016',
+        '2017',
+        '2018'
       ]
     }
   }

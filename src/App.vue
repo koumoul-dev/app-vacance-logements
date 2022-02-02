@@ -7,41 +7,44 @@
           data-iframe-height
         >
           <search />
-          <template v-if="inseeInfos">
+          <v-container v-if="inseeInfos">
             <city-infos />
             <v-row class="mx-0">
               <v-col
-                style="width:20%"
-                class="px-2"
+                :cols="12"
+                :sm="6"
+                :md="4"
               >
                 <card-parc />
               </v-col>
               <v-col
-                style="width:20%"
-                class="px-2"
+                :cols="12"
+                :sm="6"
+                :md="4"
               >
                 <card-insee />
               </v-col>
               <v-col
-                style="width:20%"
-                class="px-2"
+                :cols="12"
+                :sm="6"
+                :md="4"
               >
                 <card-lovac />
               </v-col>
               <v-col
-                style="width:20%"
-                class="px-2"
+                :cols="12"
+                :sm="6"
               >
                 <card-pc />
               </v-col>
               <v-col
-                style="width:20%"
-                class="px-2"
+                :cols="12"
+                :sm="6"
               >
                 <card-ges />
               </v-col>
             </v-row>
-          </template>
+          </v-container>
           <v-container
             v-else
             class="px-5"
