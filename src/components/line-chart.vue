@@ -10,7 +10,6 @@ export default {
   },
   computed: {
     chartData () {
-      console.log(this.$vuetify.theme.themes.light.primary)
       return {
         labels: this.labels,
         datasets: [

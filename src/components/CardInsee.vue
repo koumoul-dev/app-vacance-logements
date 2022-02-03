@@ -13,104 +13,134 @@
       class="black--text"
     >
       <v-row align="center">
-        <v-col :cols="6">
-          <span>Logements vacants</span>
+        <v-col
+          :cols="12"
+          :md="6"
+        >
+          <v-row align="center">
+            <v-col :cols="6">
+              <span>Logements vacants</span>
+            </v-col>
+            <v-col :cols="3">
+              <strong>{{ ageInseeData.TOT_LV.toLocaleString('fr') }}</strong>
+            </v-col>
+            <v-col
+              :cols="3"
+              class="px-1 py-0"
+            >
+              <history-graph
+                v-if="cityHistoricalData && cityHistoricalData.TOT_LV_14"
+                :value="evolutionTotCity"
+                :labels="evolutionLabels"
+                title="Logements vacants"
+              />
+            </v-col>
+          </v-row>
         </v-col>
         <v-col
-          :cols="2"
-          class="px-0"
+          :cols="12"
+          :md="6"
         >
-          <strong>{{ ageInseeData.TOT_LV.toLocaleString('fr') }}</strong>
+          <v-row align="center">
+            <v-col :cols="6">
+              <span>Taux de vacance</span>
+            </v-col>
+            <v-col :cols="3">
+              <strong>{{ ageInseeData.TX_LV.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+            </v-col>
+            <v-col
+              :cols="3"
+              class="px-1 py-0"
+            >
+              <history-graph
+                v-if="cityHistoricalData && cityHistoricalData.TX_LV_14"
+                :value="evolutionTxCity"
+                :labels="evolutionLabels"
+                title="Taux de vacance"
+              />
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col>
-          <history-graph
-            v-if="cityHistoricalData && cityHistoricalData.TOT_LV_14"
-            :value="evolutionTotCity"
-            :labels="evolutionLabels"
-            title="Logements vacants"
+      </v-row>
+      <v-row align="center">
+        <v-col
+          :cols="12"
+          :md="6"
+        >
+          <v-row align="center">
+            <v-col :cols="8">
+              <span>Part des Logements Individuels vacants</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ ageInseeData.TX_LV_MI.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col
+          :cols="12"
+          :md="6"
+        >
+          <v-row align="center">
+            <v-col :cols="8">
+              <span>Part des Logements Collectifs vacants</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ ageInseeData.TX_LV_COLL.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col
+          :cols="12"
+          :md="6"
+          class="text-center"
+        >
+          <v-sparkline
+            v-if="agesMi"
+            smooth
+            auto-line-width
+            type="bar"
+            :labels="ageLabels"
+            :value="agesMi"
+            :padding="16"
           />
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="6">
-          <span>Taux de vacance</span>
-        </v-col>
-        <v-col
-          :cols="2"
-          class="px-0"
-        >
-          <strong>{{ ageInseeData.TX_LV.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
-        </v-col>
-        <v-col>
-          <history-graph
-            v-if="cityHistoricalData && cityHistoricalData.TX_LV_14"
-            :value="evolutionTxCity"
-            :labels="evolutionLabels"
-            title="Taux de vacance"
-          />
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="6">
-          <span>Part des Logements Individuels vacants</span>
-        </v-col>
-        <v-col
-          :cols="2"
-          class="px-0"
-        >
-          <strong>{{ ageInseeData.TX_LV_MI.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="6">
-          <span>Part des Logements Collectifs vacants</span>
-        </v-col>
-        <v-col
-          :cols="2"
-          class="px-0"
-        >
-          <strong>{{ ageInseeData.TX_LV_COLL.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="12">
           <span>Age des logements individuels vacants</span>
         </v-col>
-      </v-row>
-    </v-card-text>
-    <v-sparkline
-      v-if="agesMi"
-      smooth
-      auto-line-width
-      type="bar"
-      :labels="ageLabels"
-      :value="agesMi"
-      :padding="16"
-    />
-    <v-card-text
-      v-if="ageInseeData"
-      class="black--text"
-    >
-      <v-row align="center">
-        <v-col :cols="12">
+        <v-divider
+          v-if="windowWidth >= 600"
+          vertical
+        />
+        <v-col
+          :cols="12"
+          :md="6"
+          class="text-center"
+        >
+          <v-sparkline
+            v-if="agesColl"
+            smooth
+            auto-line-width
+            type="bar"
+            :labels="ageLabels"
+            :value="agesColl"
+            :padding="16"
+          />
           <span>Age des logements collectifs vacants</span>
         </v-col>
       </v-row>
     </v-card-text>
-    <v-sparkline
-      v-if="agesColl"
-      smooth
-      auto-line-width
-      type="bar"
-      :labels="ageLabels"
-      :value="agesColl"
-      :padding="16"
-    />
-    <v-card-text
+
+    <!-- <v-card-text
       v-if="ageInseeData"
       class="black--text"
     >
-      <!-- <v-divider /> -->
+
+    </v-card-text> -->
+
+    <!-- <v-card-text
+      v-if="ageInseeData"
+      class="black--text"
+    >
       <v-row align="center">
         <v-col :cols="6">
           <span>Taux de vacance EPCI</span>
@@ -151,21 +181,22 @@
           />
         </v-col>
       </v-row>
+    </v-card-text> -->
+    <v-card-text v-else>
+      <v-container
+        class="px-5"
+      >
+        <v-col class="text-center px-5 mb-5">
+          <v-alert
+            :value="true"
+            type="warning"
+            outlined
+          >
+            <h4>Aucune information disponible</h4>
+          </v-alert>
+        </v-col>
+      </v-container>
     </v-card-text>
-    <v-container
-      v-else
-      class="px-5"
-    >
-      <v-col class="text-center px-5 mb-5">
-        <v-alert
-          :value="true"
-          type="warning"
-          outlined
-        >
-          <h4>Aucune information disponible</h4>
-        </v-alert>
-      </v-col>
-    </v-container>
   </v-card>
 </template>
 

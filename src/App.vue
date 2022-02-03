@@ -7,26 +7,23 @@
           data-iframe-height
         >
           <search />
-          <v-container v-if="inseeInfos">
+          <v-container
+            v-if="inseeInfos"
+            class="pa-0"
+          >
             <city-infos />
             <v-row class="mx-0">
-              <v-col
-                :cols="12"
-                :sm="6"
-                :md="4"
-              >
+              <v-col :cols="12">
                 <card-parc />
               </v-col>
               <v-col
                 :cols="12"
-                :sm="6"
-                :md="4"
+                :md="8"
               >
                 <card-insee />
               </v-col>
               <v-col
                 :cols="12"
-                :sm="6"
                 :md="4"
               >
                 <card-lovac />

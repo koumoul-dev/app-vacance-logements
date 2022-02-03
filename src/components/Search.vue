@@ -1,13 +1,33 @@
 <template>
   <v-row align="center">
-    <v-col :cols="3">
+    <v-col
+      :cols="6"
+      :sm="3"
+      :order-sm="0"
+    >
       <v-img
         src="../assets/pdvplv.png"
         height="96"
         contain
       />
     </v-col>
-    <v-col :cols="6">
+    <v-col
+      :cols="6"
+      :sm="3"
+      :order-sm="2"
+    >
+      <v-img
+        src="../assets/logo-ademe.png"
+        height="96"
+        contain
+      />
+    </v-col>
+    <v-col
+      :cols="12"
+      :sm="6"
+      :order-sm="1"
+      class="py-0"
+    >
       <v-autocomplete
         v-model="city"
         class="mt-5"
@@ -19,11 +39,11 @@
         return-object
         outlined
         rounded
+        :dense="windowWidth < 600"
         prepend-inner-icon="mdi-magnify"
         placeholder="Commune ou code postal"
       />
     </v-col>
-    <v-col :cols="3" />
   </v-row>
 </template>
 

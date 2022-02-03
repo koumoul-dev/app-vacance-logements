@@ -13,73 +13,74 @@
       class="black--text"
     >
       <v-row align="center">
-        <v-col :cols="6">
-          <span>Total logements</span>
+        <v-col
+          :cols="12"
+          :md="6"
+        >
+          <v-row align="center">
+            <v-col :cols="6">
+              <span>Total logements</span>
+            </v-col>
+            <v-col :cols="3">
+              <strong>{{ ageInseeData.TOT_PARC.toLocaleString('fr') }}</strong>
+            </v-col>
+            <v-col
+              :cols="3"
+              class="px-1 py-0"
+            >
+              <history-graph
+                v-if="cityHistoricalData && cityHistoricalData.TOT_PARC_14"
+                :value="evolutionCity"
+                :labels="evolutionLabels"
+                title="Total logements"
+              />
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col :cols="6">
+              <span>Taux logement social</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>A venir</strong>
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col :cols="6">
+              <span>Part des Logements Individuels</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ ageInseeData.TX_MI.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col :cols="6">
+              <span>Part des Logements Collectifs</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ ageInseeData.TX_COLL.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+            </v-col>
+          </v-row>
         </v-col>
         <v-col
-          :cols="2"
-          class="px-0"
+          :cols="12"
+          :md="6"
+          class="text-center"
         >
-          <strong>{{ ageInseeData.TOT_PARC.toLocaleString('fr') }}</strong>
-        </v-col>
-        <v-col>
-          <history-graph
-            v-if="cityHistoricalData && cityHistoricalData.TOT_PARC_14"
-            :value="evolutionCity"
-            :labels="evolutionLabels"
-            title="Total logements"
+          <v-sparkline
+            v-if="ages"
+            smooth
+            auto-line-width
+            type="bar"
+            :labels="ageLabels"
+            :value="ages"
+            :padding="16"
           />
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="6">
-          <span>Taux logement social</span>
-        </v-col>
-        <v-col
-          :cols="4"
-          class="px-0"
-        >
-          <strong>A venir</strong>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="6">
-          <span>Part des Logements Individuels</span>
-        </v-col>
-        <v-col
-          :cols="4"
-          class="px-0"
-        >
-          <strong>{{ ageInseeData.TX_MI.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="6">
-          <span>Part des Logements Collectifs</span>
-        </v-col>
-        <v-col
-          :cols="4"
-          class="px-0"
-        >
-          <strong>{{ ageInseeData.TX_COLL.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="6">
           <span>Age du parc</span>
         </v-col>
       </v-row>
     </v-card-text>
-    <v-sparkline
-      v-if="ages"
-      smooth
-      auto-line-width
-      type="bar"
-      :labels="ageLabels"
-      :value="ages"
-      :padding="16"
-    />
-    <v-card-text
+
+    <!-- <v-card-text
       v-if="ageInseeData"
       class="black--text"
     >
@@ -102,7 +103,7 @@
           />
         </v-col>
       </v-row>
-    </v-card-text>
+    </v-card-text> -->
     <v-container
       v-else
       class="px-5"

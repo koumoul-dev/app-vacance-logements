@@ -10,38 +10,29 @@
     </div>
     <v-card-text
       v-if="pcData"
-      class="text-center black--text"
+      class="black--text"
     >
       <v-row align="center">
-        <v-col :cols="6">
+        <v-col :cols="8">
           <span>Logements autorisés</span>
         </v-col>
-        <v-col
-          :cols="2"
-          class="px-0"
-        >
+        <v-col :cols="4">
           <strong>{{ pcData.NB_LGT_TOT_CREES.toLocaleString('fr') }}</strong>
         </v-col>
       </v-row>
       <v-row align="center">
-        <v-col :cols="6">
+        <v-col :cols="8">
           <span>Logements Individuels autorisés </span>
         </v-col>
-        <v-col
-          :cols="2"
-          class="px-0"
-        >
+        <v-col :cols="4">
           <strong>{{ pcData.NB_LGT_IND_CREES.toLocaleString('fr') }}</strong>
         </v-col>
       </v-row>
       <v-row align="center">
-        <v-col :cols="6">
+        <v-col :cols="8">
           <span>Logements Collectifs autorisés</span>
         </v-col>
-        <v-col
-          :cols="2"
-          class="px-0"
-        >
+        <v-col :cols="4">
           <strong>{{ pcData.NB_LGT_COL_CREES.toLocaleString('fr') }}</strong>
         </v-col>
       </v-row>

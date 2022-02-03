@@ -1,14 +1,18 @@
 <template>
   <v-card
     rounded="xl"
-    class="ma-2"
+    class="pa-2 ma-2"
     outlined
   >
     <v-row
       v-if="inseeInfos"
       align="center"
     >
-      <v-col :cols="3">
+      <v-col
+        :cols="6"
+        :sm="3"
+        class="py-0 px-1 text-center"
+      >
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title>
@@ -20,7 +24,11 @@
           </v-list-item-content>
         </v-list-item>
       </v-col>
-      <v-col :cols="3">
+      <v-col
+        :cols="6"
+        :sm="3"
+        class="py-0 px-1 text-center"
+      >
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title>
@@ -32,7 +40,11 @@
           </v-list-item-content>
         </v-list-item>
       </v-col>
-      <v-col :cols="3">
+      <v-col
+        :cols="6"
+        :sm="3"
+        class="py-0 px-1 text-center"
+      >
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title>
@@ -44,7 +56,11 @@
           </v-list-item-content>
         </v-list-item>
       </v-col>
-      <v-col :cols="3">
+      <v-col
+        :cols="6"
+        :sm="3"
+        class="py-0 px-1 text-center"
+      >
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title>
