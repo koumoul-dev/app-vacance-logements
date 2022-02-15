@@ -9,7 +9,7 @@
       EMISSIONS GES
     </div>
     <v-card-text
-      v-if="ageInseeData"
+      v-if="log1Data"
       class="text-center black--text"
     >
       <span>Construction des MI : <strong>A venir</strong></span><br>
@@ -56,7 +56,7 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['ageInseeData'])
+    ...mapState(['log1Data'])
   }
 }
 </script>

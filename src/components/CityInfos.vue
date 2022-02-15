@@ -13,7 +13,11 @@
         :sm="3"
         class="py-0 px-1 text-center"
       >
-        <v-list-item>
+        <v-list-item
+          color="primary"
+          :input-value="currentLevel === 'region'"
+          @click="select('region')"
+        >
           <v-list-item-content>
             <v-list-item-title>
               Région
@@ -29,7 +33,11 @@
         :sm="3"
         class="py-0 px-1 text-center"
       >
-        <v-list-item>
+        <v-list-item
+          color="primary"
+          :input-value="currentLevel === 'department'"
+          @click="select('department')"
+        >
           <v-list-item-content>
             <v-list-item-title>
               Département
@@ -45,7 +53,11 @@
         :sm="3"
         class="py-0 px-1 text-center"
       >
-        <v-list-item>
+        <v-list-item
+          color="primary"
+          :input-value="currentLevel === 'epci'"
+          @click="select('epci')"
+        >
           <v-list-item-content>
             <v-list-item-title>
               Intercommunalité
@@ -61,7 +73,11 @@
         :sm="3"
         class="py-0 px-1 text-center"
       >
-        <v-list-item>
+        <v-list-item
+          color="primary"
+          :input-value="currentLevel === 'city'"
+          @click="select('city')"
+        >
           <v-list-item-content>
             <v-list-item-title>
               Commune
@@ -93,7 +109,15 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['inseeInfos'])
+    ...mapState(['inseeInfos', 'currentLevel'])
+  },
+  methods: {
+    select (level) {
+      if (level !== this.currentLevel) {
+        this.$store.commit('setAny', { currentLevel: level })
+        this.$store.dispatch('fetch')
+      }
+    }
   }
 }
 </script>

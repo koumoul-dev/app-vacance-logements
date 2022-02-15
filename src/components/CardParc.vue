@@ -9,7 +9,7 @@
       PARC
     </div>
     <v-card-text
-      v-if="ageInseeData"
+      v-if="log1Data"
       class="black--text"
     >
       <v-row align="center">
@@ -22,14 +22,14 @@
               <span>Total logements</span>
             </v-col>
             <v-col :cols="3">
-              <strong>{{ ageInseeData.TOT_PARC.toLocaleString('fr') }}</strong>
+              <strong>{{ log1Data.TOT_PARC.toLocaleString('fr') }}</strong>
             </v-col>
             <v-col
               :cols="3"
               class="px-1 py-0"
             >
               <history-graph
-                v-if="cityHistoricalData && cityHistoricalData.TOT_PARC_14"
+                v-if="evolutionData && evolutionData.TOT_PARC_14"
                 :value="evolutionCity"
                 :labels="evolutionLabels"
                 title="Total logements"
@@ -49,7 +49,7 @@
               <span>Part des Logements Individuels</span>
             </v-col>
             <v-col :cols="4">
-              <strong>{{ ageInseeData.TX_MI.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+              <strong>{{ log1Data.TX_MI.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
             </v-col>
           </v-row>
           <v-row align="center">
@@ -57,7 +57,7 @@
               <span>Part des Logements Collectifs</span>
             </v-col>
             <v-col :cols="4">
-              <strong>{{ ageInseeData.TX_COLL.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+              <strong>{{ log1Data.TX_COLL.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
             </v-col>
           </v-row>
         </v-col>
@@ -80,30 +80,6 @@
       </v-row>
     </v-card-text>
 
-    <!-- <v-card-text
-      v-if="ageInseeData"
-      class="black--text"
-    >
-      <v-row align="center">
-        <v-col :cols="6">
-          <span>Total logements EPCI</span>
-        </v-col>
-        <v-col
-          :cols="2"
-          class="px-0"
-        >
-          <strong>{{ epciHistoricalData.TOT_PARC_18_EPCI.toLocaleString('fr') }}</strong>
-        </v-col>
-        <v-col>
-          <history-graph
-            v-if="epciHistoricalData && epciHistoricalData.TOT_PARC_14_EPCI"
-            :value="evolutionEPCI"
-            :labels="evolutionLabels"
-            title="Total logements EPCI"
-          />
-        </v-col>
-      </v-row>
-    </v-card-text> -->
     <v-container
       v-else
       class="px-5"
@@ -128,33 +104,24 @@ import { mapState } from 'vuex'
 export default {
   components: { HistoryGraph },
   computed: {
-    ...mapState(['cityHistoricalData', 'epciHistoricalData', 'ageInseeData']),
+    ...mapState(['evolutionData', 'log1Data']),
     evolutionCity () {
       return [
-        this.cityHistoricalData.TOT_PARC_14,
-        this.cityHistoricalData.TOT_PARC_15,
-        this.cityHistoricalData.TOT_PARC_16,
-        this.cityHistoricalData.TOT_PARC_17,
-        this.cityHistoricalData.TOT_PARC_18
-      ]
-    },
-    evolutionEPCI () {
-      return [
-        this.epciHistoricalData.TOT_PARC_14_EPCI,
-        this.epciHistoricalData.TOT_PARC_15_EPCI,
-        this.epciHistoricalData.TOT_PARC_16_EPCI,
-        this.epciHistoricalData.TOT_PARC_17_EPCI,
-        this.epciHistoricalData.TOT_PARC_18_EPCI
+        this.evolutionData.TOT_PARC_14,
+        this.evolutionData.TOT_PARC_15,
+        this.evolutionData.TOT_PARC_16,
+        this.evolutionData.TOT_PARC_17,
+        this.evolutionData.TOT_PARC_18
       ]
     },
     ages () {
       return [
-        this.ageInseeData.TOT_PARC_av19,
-        this.ageInseeData.TOT_PARC_19_45,
-        this.ageInseeData.TOT_PARC_46_70,
-        this.ageInseeData.TOT_PARC_71_90,
-        this.ageInseeData.TOT_PARC_91_05,
-        this.ageInseeData.TOT_PARC_06_15
+        this.log1Data.TOT_PARC_av19,
+        this.log1Data.TOT_PARC_19_45,
+        this.log1Data.TOT_PARC_46_70,
+        this.log1Data.TOT_PARC_71_90,
+        this.log1Data.TOT_PARC_91_05,
+        this.log1Data.TOT_PARC_06_15
       ]
     },
     ageLabels () {

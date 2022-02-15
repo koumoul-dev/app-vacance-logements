@@ -9,7 +9,7 @@
       VACANCE INSEE (18)
     </div>
     <v-card-text
-      v-if="ageInseeData"
+      v-if="log1Data"
       class="black--text"
     >
       <v-row align="center">
@@ -22,14 +22,14 @@
               <span>Logements vacants</span>
             </v-col>
             <v-col :cols="3">
-              <strong>{{ ageInseeData.TOT_LV.toLocaleString('fr') }}</strong>
+              <strong>{{ log1Data.TOT_LV.toLocaleString('fr') }}</strong>
             </v-col>
             <v-col
               :cols="3"
               class="px-1 py-0"
             >
               <history-graph
-                v-if="cityHistoricalData && cityHistoricalData.TOT_LV_14"
+                v-if="evolutionData && evolutionData.TOT_LV_14"
                 :value="evolutionTotCity"
                 :labels="evolutionLabels"
                 title="Logements vacants"
@@ -46,14 +46,14 @@
               <span>Taux de vacance</span>
             </v-col>
             <v-col :cols="3">
-              <strong>{{ ageInseeData.TX_LV.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+              <strong>{{ log1Data.TX_LV.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
             </v-col>
             <v-col
               :cols="3"
               class="px-1 py-0"
             >
               <history-graph
-                v-if="cityHistoricalData && cityHistoricalData.TX_LV_14"
+                v-if="evolutionData && evolutionData.TX_LV_14"
                 :value="evolutionTxCity"
                 :labels="evolutionLabels"
                 title="Taux de vacance"
@@ -72,7 +72,7 @@
               <span>Part des Logements Individuels vacants</span>
             </v-col>
             <v-col :cols="4">
-              <strong>{{ ageInseeData.TX_LV_MI.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+              <strong>{{ log1Data.TX_LV_MI.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
             </v-col>
           </v-row>
         </v-col>
@@ -85,7 +85,7 @@
               <span>Part des Logements Collectifs vacants</span>
             </v-col>
             <v-col :cols="4">
-              <strong>{{ ageInseeData.TX_LV_COLL.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+              <strong>{{ log1Data.TX_LV_COLL.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
             </v-col>
           </v-row>
         </v-col>
@@ -129,59 +129,6 @@
         </v-col>
       </v-row>
     </v-card-text>
-
-    <!-- <v-card-text
-      v-if="ageInseeData"
-      class="black--text"
-    >
-
-    </v-card-text> -->
-
-    <!-- <v-card-text
-      v-if="ageInseeData"
-      class="black--text"
-    >
-      <v-row align="center">
-        <v-col :cols="6">
-          <span>Taux de vacance EPCI</span>
-        </v-col>
-        <v-col
-          :cols="2"
-          class="px-0"
-        >
-          <strong v-if="epciHistoricalData">{{ epciHistoricalData.TX_LV_18_EPCI.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
-          <strong v-else>inconnu</strong>
-        </v-col>
-        <v-col>
-          <history-graph
-            v-if="epciHistoricalData && epciHistoricalData.TX_LV_14_EPCI"
-            :value="evolutionTxEPCI"
-            :labels="evolutionLabels"
-            title="Taux de vacance EPCI"
-          />
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="6">
-          <span>Logements vacants EPCI</span>
-        </v-col>
-        <v-col
-          :cols="2"
-          class="px-0"
-        >
-          <strong v-if="epciHistoricalData">{{ epciHistoricalData.TOT_LV_18_EPCI.toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong>
-          <strong v-else>inconnu</strong>
-        </v-col>
-        <v-col>
-          <history-graph
-            v-if="epciHistoricalData && epciHistoricalData.TOT_LV_14_EPCI"
-            :value="evolutionTotEPCI"
-            :labels="evolutionLabels"
-            title="Logements vacants EPCI"
-          />
-        </v-col>
-      </v-row>
-    </v-card-text> -->
     <v-card-text v-else>
       <v-container
         class="px-5"
@@ -207,61 +154,43 @@ import { mapState } from 'vuex'
 export default {
   components: { HistoryGraph },
   computed: {
-    ...mapState(['cityHistoricalData', 'epciHistoricalData', 'ageInseeData']),
+    ...mapState(['evolutionData', 'log1Data']),
     evolutionTxCity () {
       return [
-        Number(this.cityHistoricalData.TX_LV_14),
-        Number(this.cityHistoricalData.TX_LV_15),
-        Number(this.cityHistoricalData.TX_LV_16),
-        Number(this.cityHistoricalData.TX_LV_17),
-        Number(this.cityHistoricalData.TX_LV_18)
+        Number(this.evolutionData.TX_LV_14),
+        Number(this.evolutionData.TX_LV_15),
+        Number(this.evolutionData.TX_LV_16),
+        Number(this.evolutionData.TX_LV_17),
+        Number(this.evolutionData.TX_LV_18)
       ]
     },
     evolutionTotCity () {
       return [
-        parseInt(this.cityHistoricalData.TOT_LV_14),
-        parseInt(this.cityHistoricalData.TOT_LV_15),
-        parseInt(this.cityHistoricalData.TOT_LV_16),
-        parseInt(this.cityHistoricalData.TOT_LV_17),
-        parseInt(this.cityHistoricalData.TOT_LV_18)
-      ]
-    },
-    evolutionTxEPCI () {
-      return [
-        Number(this.epciHistoricalData.TX_LV_14_EPCI),
-        Number(this.epciHistoricalData.TX_LV_15_EPCI),
-        Number(this.epciHistoricalData.TX_LV_16_EPCI),
-        Number(this.epciHistoricalData.TX_LV_17_EPCI),
-        Number(this.epciHistoricalData.TX_LV_18_EPCI)
-      ]
-    },
-    evolutionTotEPCI () {
-      return [
-        Number(this.epciHistoricalData.TOT_LV_14_EPCI),
-        Number(this.epciHistoricalData.TOT_LV_15_EPCI),
-        Number(this.epciHistoricalData.TOT_LV_16_EPCI),
-        Number(this.epciHistoricalData.TOT_LV_17_EPCI),
-        Number(this.epciHistoricalData.TOT_LV_18_EPCI)
+        parseInt(this.evolutionData.TOT_LV_14),
+        parseInt(this.evolutionData.TOT_LV_15),
+        parseInt(this.evolutionData.TOT_LV_16),
+        parseInt(this.evolutionData.TOT_LV_17),
+        parseInt(this.evolutionData.TOT_LV_18)
       ]
     },
     agesMi () {
       return [
-        this.ageInseeData.LV_av19_MI,
-        this.ageInseeData.LV_19_45_MI,
-        this.ageInseeData.LV_46_70_MI,
-        this.ageInseeData.LV_71_90_MI,
-        this.ageInseeData.LV_91_05_MI,
-        this.ageInseeData.LV_06_15_MI
+        this.log1Data.LV_av19_MI,
+        this.log1Data.LV_19_45_MI,
+        this.log1Data.LV_46_70_MI,
+        this.log1Data.LV_71_90_MI,
+        this.log1Data.LV_91_05_MI,
+        this.log1Data.LV_06_15_MI
       ]
     },
     agesColl () {
       return [
-        this.ageInseeData.LV_av19_COL,
-        this.ageInseeData.LV_19_45_COLL,
-        this.ageInseeData.LV_46_70_COLL,
-        this.ageInseeData.LV_71_90_COLL,
-        this.ageInseeData.LV_91_05_COLL,
-        this.ageInseeData.LV_06_15_COLL
+        this.log1Data.LV_av19_COL,
+        this.log1Data.LV_19_45_COLL,
+        this.log1Data.LV_46_70_COLL,
+        this.log1Data.LV_71_90_COLL,
+        this.log1Data.LV_91_05_COLL,
+        this.log1Data.LV_06_15_COLL
       ]
     },
     ageLabels () {

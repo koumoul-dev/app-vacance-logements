@@ -12,7 +12,10 @@
             class="pa-0"
           >
             <city-infos />
-            <v-row class="mx-0">
+            <v-row
+              v-if="!loading"
+              class="mx-0"
+            >
               <v-col :cols="12">
                 <card-parc />
               </v-col>
@@ -43,7 +46,6 @@
             </v-row>
           </v-container>
           <v-container
-            v-else
             class="px-5"
           >
             <v-col class="text-center pa-6 mt-6">
