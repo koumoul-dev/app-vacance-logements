@@ -9,25 +9,69 @@
       EMISSIONS GES
     </div>
     <v-card-text
-      v-if="log1Data"
-      class="text-center black--text"
+      v-if="pcData"
+      class="black--text"
     >
-      <span>Construction des MI : <strong>A venir</strong></span><br>
-      <br>
-      <span>Construction des COLL : <strong>A venir</strong></span><br>
-      <br>
-      <span>Total : <strong>A venir</strong></span><br>
-      <br>
-      <v-divider />
-      <br>
-      <span>Equivalent transport</span><br>
-      <br>
-      <span><strong>## km</strong> parcourus en voiture</span><br>
-      <br>
-      <span><strong>##</strong> vols A/R entre Montréal et Toronto</span><br>
-      <br>
-      <span><strong>##</strong> A/R en train entre Paris et Bordeaux</span><br>
-      <br>
+      <v-row align="center">
+        <v-col :cols="8">
+          <span>Construction des Logements Individuels</span>
+        </v-col>
+        <v-col :cols="4">
+          <strong>{{ constIndiv.toLocaleString('fr') }} t</strong>
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col :cols="8">
+          <span>Construction des Logements Collectifs</span>
+        </v-col>
+        <v-col :cols="4">
+          <strong>{{ constColl.toLocaleString('fr') }} t</strong>
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col :cols="8">
+          <span>Total</span>
+        </v-col>
+        <v-col :cols="4">
+          <strong>{{ totGES.toLocaleString('fr') }} t</strong>
+        </v-col>
+      </v-row>
+      <div class="text-center text-h6 py-3 grey--text font-weight-bold">
+        Equivalent transport
+      </div>
+      <v-row align="center">
+        <v-col
+          :cols="4"
+          class="text-right"
+        >
+          <strong>{{ (totGES/0.00014).toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong>
+        </v-col>
+        <v-col :cols="8">
+          <span>km parcourus en voiture</span>
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col
+          :cols="4"
+          class="text-right"
+        >
+          <strong>{{ (totGES/1.0088).toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong>
+        </v-col>
+        <v-col :cols="8">
+          <span>A/R en avion entre Montréal et Toronto</span>
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col
+          :cols="4"
+          class="text-right"
+        >
+          <strong>{{ (totGES/0.001858).toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong>
+        </v-col>
+        <v-col :cols="8">
+          <span>A/R en train entre Paris et Bordeaux</span>
+        </v-col>
+      </v-row>
 
       <!-- Emission carbone maison individuelle = 425 kg co2 . m²
         Emission carbone logement collectif = 525 kg co2 . m²
@@ -56,7 +100,22 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['log1Data'])
+    ...mapState(['pcData']),
+    lgtInd () {
+      return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_IND_CREES, 0)
+    },
+    lgtCol () {
+      return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_COL_CREES, 0)
+    },
+    constIndiv () {
+      return (425 * 112 * this.lgtInd) / 1000
+    },
+    constColl () {
+      return (525 * 63 * this.lgtCol) / 1000
+    },
+    totGES () {
+      return this.constIndiv + this.constColl
+    }
   }
 }
 </script>

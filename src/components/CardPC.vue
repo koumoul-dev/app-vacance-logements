@@ -17,7 +17,7 @@
           <span>Logements autorisés</span>
         </v-col>
         <v-col :cols="4">
-          <strong>{{ pcData.NB_LGT_TOT_CREES.toLocaleString('fr') }}</strong>
+          <strong>{{ lgtTot.toLocaleString('fr') }}</strong>
         </v-col>
       </v-row>
       <v-row align="center">
@@ -25,7 +25,7 @@
           <span>Logements Individuels autorisés </span>
         </v-col>
         <v-col :cols="4">
-          <strong>{{ pcData.NB_LGT_IND_CREES.toLocaleString('fr') }}</strong>
+          <strong>{{ lgtInd.toLocaleString('fr') }}</strong>
         </v-col>
       </v-row>
       <v-row align="center">
@@ -33,11 +33,11 @@
           <span>Logements Collectifs autorisés</span>
         </v-col>
         <v-col :cols="4">
-          <strong>{{ pcData.NB_LGT_COL_CREES.toLocaleString('fr') }}</strong>
+          <strong>{{ lgtCol.toLocaleString('fr') }}</strong>
         </v-col>
       </v-row>
       <br>
-      <div>Rénover les <strong>##</strong> logements vacants &gt; 2 ans aurait contribué à <strong>## %</strong> de la construction neuve cette année</div>
+      <div>Rénover les <strong>{{ lovacData.Nb_logvac_2A_010119.toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong> logements vacants &gt; 2 ans aurait contribué à <strong>{{ lgtPerc }} %</strong> de la construction neuve cette année</div>
     </v-card-text>
     <v-container
       v-else
@@ -62,7 +62,20 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['pcData'])
+    ...mapState(['pcData', 'lovacData']),
+    lgtTot () {
+      return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_TOT_CREES, 0)
+    },
+    lgtInd () {
+      return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_IND_CREES, 0)
+    },
+    lgtCol () {
+      return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_COL_CREES, 0)
+    },
+    lgtPerc () {
+      if (!this.lgtTot) return 0
+      return Math.min((this.lovacData.Nb_logvac_2A_010119 || 0) * 100 / this.lgtTot, 100)
+    }
   }
 }
 </script>
