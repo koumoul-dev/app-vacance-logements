@@ -14,40 +14,40 @@
     >
       <v-row align="center">
         <v-col :cols="8">
-          <span>Construction des Logements Individuels</span>
+          <span>GES émis pour la construction neuve</span>
         </v-col>
         <v-col :cols="4">
-          <strong>{{ constIndiv.toLocaleString('fr') }} t</strong>
+          <strong>{{ totGES.toLocaleString('fr', {maximumFractionDigits: 0}) }} t</strong>
         </v-col>
       </v-row>
       <v-row align="center">
         <v-col :cols="8">
-          <span>Construction des Logements Collectifs</span>
+          <span>GES émis pour la construction de logements individuels</span>
         </v-col>
         <v-col :cols="4">
-          <strong>{{ constColl.toLocaleString('fr') }} t</strong>
+          <strong>{{ constIndiv.toLocaleString('fr', {maximumFractionDigits: 0}) }} t</strong>
         </v-col>
       </v-row>
       <v-row align="center">
         <v-col :cols="8">
-          <span>Total</span>
+          <span>GES émis pour la construction de logements collectifs</span>
         </v-col>
         <v-col :cols="4">
-          <strong>{{ totGES.toLocaleString('fr') }} t</strong>
+          <strong>{{ constColl.toLocaleString('fr', {maximumFractionDigits: 0}) }} t</strong>
         </v-col>
       </v-row>
       <div class="text-center text-h6 py-3 grey--text font-weight-bold">
-        Equivalent transport
+        Cela correspond à :
       </div>
       <v-row align="center">
         <v-col
           :cols="4"
           class="text-right"
         >
-          <strong>{{ (totGES/0.00014).toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong>
+          <strong>{{ (totGES/0.00014).toLocaleString('fr') }}</strong>
         </v-col>
         <v-col :cols="8">
-          <span>km parcourus en voiture</span>
+          <span>km parcourus en citadine thermique</span>
         </v-col>
       </v-row>
       <v-row align="center">
@@ -55,10 +55,10 @@
           :cols="4"
           class="text-right"
         >
-          <strong>{{ (totGES/1.0088).toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong>
+          <strong>{{ (totGES/1.0088).toLocaleString('fr', {maximumFractionDigits: 0}) }}</strong>
         </v-col>
         <v-col :cols="8">
-          <span>A/R en avion entre Montréal et Toronto</span>
+          <span>A/R Paris - New York en avion</span>
         </v-col>
       </v-row>
       <v-row align="center">
@@ -66,10 +66,10 @@
           :cols="4"
           class="text-right"
         >
-          <strong>{{ (totGES/0.001858).toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong>
+          <strong>{{ (totGES/0.001858).toLocaleString('fr', {maximumFractionDigits: 0}) }}</strong>
         </v-col>
         <v-col :cols="8">
-          <span>A/R en train entre Paris et Bordeaux</span>
+          <span>A/R Paris - Bordeaux en TGV</span>
         </v-col>
       </v-row>
 

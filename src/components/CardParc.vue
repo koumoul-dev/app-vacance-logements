@@ -19,7 +19,7 @@
         >
           <v-row align="center">
             <v-col :cols="6">
-              <span>Total logements</span>
+              <span>Parc total de logements</span>
             </v-col>
             <v-col :cols="3">
               <strong>{{ log1Data.TOT_PARC.toLocaleString('fr') }}</strong>
@@ -38,7 +38,7 @@
           </v-row>
           <v-row align="center">
             <v-col :cols="6">
-              <span>Taux logement social</span>
+              <span>Taux de logements sociaux</span>
             </v-col>
             <v-col :cols="4">
               <strong>A venir</strong>
@@ -74,6 +74,7 @@
             :labels="ageLabels"
             :value="ages"
             :padding="16"
+            :label-size="8"
           />
           <span>Age du parc</span>
         </v-col>

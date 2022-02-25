@@ -14,6 +14,15 @@
     >
       <v-row align="center">
         <v-col :cols="8">
+          <span>Logements vacants privés</span>
+        </v-col>
+        <v-col :cols="4">
+          <strong v-if="lovacData">{{ lovacData.Nb_logvac_pp_010119.toLocaleString('fr') }}</strong>
+          <strong v-else>inconnu</strong>
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col :cols="8">
           <span>Taux de vacance</span>
         </v-col>
         <v-col :cols="4">
@@ -23,7 +32,7 @@
       </v-row>
       <v-row align="center">
         <v-col :cols="8">
-          <span>Vacance &lt; 2 ans</span>
+          <span>Logements vacants &lt; 2 ans</span>
         </v-col>
         <v-col :cols="4">
           <strong v-if="lovacData">{{ lovacData.Prop_logvac_pp_C_010119.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
@@ -32,7 +41,7 @@
       </v-row>
       <v-row align="center">
         <v-col :cols="8">
-          <span>Vacance &gt; 2 ans</span>
+          <span>Logements vacants &gt; 2 ans</span>
         </v-col>
         <v-col :cols="4">
           <strong v-if="lovacData">{{ lovacData.Prop_logvac_pp_2A_010119.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
@@ -41,19 +50,10 @@
       </v-row>
       <v-row align="center">
         <v-col :cols="8">
-          <span>Parc logements privés</span>
+          <span>Logements privés</span>
         </v-col>
         <v-col :cols="4">
           <strong v-if="lovacData">{{ lovacData.Nb_log_pp_2020.toLocaleString('fr') }}</strong>
-          <strong v-else>inconnu</strong>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="8">
-          <span>Logements vacants privés</span>
-        </v-col>
-        <v-col :cols="4">
-          <strong v-if="lovacData">{{ lovacData.Nb_logvac_pp_010119.toLocaleString('fr') }}</strong>
           <strong v-else>inconnu</strong>
         </v-col>
       </v-row>

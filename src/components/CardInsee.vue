@@ -104,6 +104,7 @@
             :labels="ageLabels"
             :value="agesMi"
             :padding="16"
+            :label-size="8"
           />
           <span>Age des logements individuels vacants</span>
         </v-col>
@@ -124,6 +125,7 @@
             :labels="ageLabels"
             :value="agesColl"
             :padding="16"
+            :label-size="8"
           />
           <span>Age des logements collectifs vacants</span>
         </v-col>

@@ -1,7 +1,8 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    max-width="600px"
+  <v-menu
+    v-model="menu"
+    :min-width="`${Math.max(336,windowWidth/3)}px`"
+    offset-y
   >
     <template #activator="{on: onDialog}">
       <v-tooltip top>
@@ -23,7 +24,7 @@
         <span>Description des champs</span>
       </v-tooltip>
     </template>
-    <v-card v-if="dialog">
+    <v-card v-if="menu">
       <v-toolbar
         dense
         flat
@@ -32,7 +33,7 @@
         <v-spacer />
         <v-btn
           icon
-          @click.native="dialog = false"
+          @click.native="menu = false"
         >
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -48,7 +49,7 @@
         />
       </v-card-text>
     </v-card>
-  </v-dialog>
+  </v-menu>
 </template>
 
 <script>
@@ -63,7 +64,7 @@ export default {
   },
   data () {
     return {
-      dialog: null
+      menu: null
     }
   }
 }
