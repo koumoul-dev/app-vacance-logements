@@ -40,10 +40,10 @@
           <strong>{{ lgtCol.toLocaleString('fr') }}</strong>
         </v-col>
       </v-row>
-      <br>
+      <!-- <br>
       <div v-if="lovacData">
         Rénover les <strong>{{ lovacData.Nb_logvac_2A_010119.toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong> logements vacants &gt; 2 ans aurait contribué à <strong>{{ lgtPerc }} %</strong> de la construction neuve cette année
-      </div>
+      </div> -->
     </v-card-text>
     <v-container
       v-else

@@ -40,7 +40,7 @@
           <strong>{{ constColl.toLocaleString('fr', {maximumFractionDigits: 0}) }} t</strong>
         </v-col>
       </v-row>
-      <div class="text-center text-h6 py-3 grey--text font-weight-bold">
+      <div class="text-center text-h6 py-3 grey--text text--darken-1 font-weight-bold">
         Cela correspond à :
       </div>
       <v-row align="center">
