@@ -5,8 +5,12 @@
     rounded="xl"
     style="height:100%;"
   >
-    <div class="text-center text-h5 py-3 grey--text font-weight-bold">
+    <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       EMISSIONS GES
+      <card-description
+        title="Emissions de Gaz à Effet de Serre (estimations, eqCO2)"
+        field="descGES"
+      />
     </div>
     <v-card-text
       v-if="pcData"
@@ -96,9 +100,11 @@
 </template>
 
 <script>
+import CardDescription from './card-description'
 import { mapState } from 'vuex'
 
 export default {
+  components: { CardDescription },
   computed: {
     ...mapState(['pcData']),
     lgtInd () {

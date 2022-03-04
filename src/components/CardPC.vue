@@ -5,8 +5,12 @@
     rounded="xl"
     style="height:100%;"
   >
-    <div class="text-center text-h5 py-3 grey--text font-weight-bold">
+    <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       PC AUTORISES
+      <card-description
+        title="Permis de construire autorisés (Sitadel, 2018)"
+        field="descPC"
+      />
     </div>
     <v-card-text
       v-if="pcData"
@@ -59,10 +63,12 @@
 </template>
 
 <script>
+import CardDescription from './card-description'
 import { mapState } from 'vuex'
 // import axios from 'axios'
 
 export default {
+  components: { CardDescription },
   computed: {
     ...mapState(['pcData', 'lovacData']),
     lgtTot () {

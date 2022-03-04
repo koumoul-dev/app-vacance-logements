@@ -5,8 +5,12 @@
     rounded="xl"
     style="height:100%;"
   >
-    <div class="text-center text-h5 py-3 grey--text font-weight-bold">
-      VACANCE INSEE (18)
+    <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
+      VACANCE INSEE
+      <card-description
+        title="Logements Vacants (Insee 2018)"
+        field="descInsee"
+      />
     </div>
     <v-card-text
       v-if="log1Data"
@@ -151,10 +155,11 @@
 
 <script>
 import HistoryGraph from './history-graph'
+import CardDescription from './card-description'
 import { mapState } from 'vuex'
 
 export default {
-  components: { HistoryGraph },
+  components: { HistoryGraph, CardDescription },
   computed: {
     ...mapState(['evolutionData', 'log1Data']),
     evolutionTxCity () {

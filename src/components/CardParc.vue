@@ -5,8 +5,12 @@
     rounded="xl"
     style="height:100%;"
   >
-    <div class="text-center text-h5 py-3 grey--text font-weight-bold">
+    <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       PARC
+      <card-description
+        title="Parc total de logements (Insee 2018)"
+        field="descParc"
+      />
     </div>
     <v-card-text
       v-if="log1Data"
@@ -100,10 +104,11 @@
 
 <script>
 import HistoryGraph from './history-graph'
+import CardDescription from './card-description'
 import { mapState } from 'vuex'
 
 export default {
-  components: { HistoryGraph },
+  components: { HistoryGraph, CardDescription },
   computed: {
     ...mapState(['evolutionData', 'log1Data']),
     evolutionCity () {

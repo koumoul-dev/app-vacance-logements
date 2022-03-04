@@ -5,8 +5,12 @@
     rounded="xl"
     style="height:100%;"
   >
-    <div class="text-center text-h5 py-3 grey--text font-weight-bold">
-      VACANCE LOVAC (19)
+    <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
+      VACANCE LOVAC
+      <card-description
+        title="Logements Vacants (Lovac 2019)"
+        field="descLovac"
+      />
     </div>
     <v-card-text
       v-if="lovacData"
@@ -76,9 +80,11 @@
 </template>
 
 <script>
+import CardDescription from './card-description'
 import { mapState } from 'vuex'
 
 export default {
+  components: { CardDescription },
   computed: {
     ...mapState(['lovacData'])
   }
