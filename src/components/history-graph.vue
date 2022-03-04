@@ -21,7 +21,7 @@
             />
           </v-btn>
         </template>
-        <span>Description des champs</span>
+        <span>Détails de l'évolution</span>
       </v-tooltip>
     </template>
     <v-card v-if="menu">

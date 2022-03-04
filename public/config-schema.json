@@ -9,6 +9,35 @@
           "$ref": "#/definitions/datasets"
         }
       }
+    }, {
+      "title": "Infobulles",
+      "properties": {
+        "descParc": {
+          "title": "Parc total de logements (Insee 2018)",
+          "type": "string",
+          "x-display": "textarea"
+        },
+        "descInsee": {
+          "title": "Logements Vacants (Insee 2018)",
+          "type": "string",
+          "x-display": "textarea"
+        },
+        "descLoval": {
+          "title": "Logements Vacants (Lovac 2019)",
+          "type": "string",
+          "x-display": "textarea"
+        },
+        "descPC": {
+          "title": "Permis de construire autorisés (Sitadel, 2018)",
+          "type": "string",
+          "x-display": "textarea"
+        },
+        "descGES": {
+          "title": "Emissions de Gaz à Effet de Serre (estimations, eqCO2)",
+          "type": "string",
+          "x-display": "textarea"
+        }
+      }
     }
   ],
   "definitions": {
