@@ -6,7 +6,7 @@
     style="height:100%;"
   >
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
-      VACANCE INSEE
+      {{ config.titleInsee }}
       <card-description
         title="Logements Vacants (Insee 2018)"
         field="descInsee"
@@ -156,12 +156,13 @@
 <script>
 import HistoryGraph from './history-graph'
 import CardDescription from './card-description'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: { HistoryGraph, CardDescription },
   computed: {
     ...mapState(['evolutionData', 'log1Data']),
+    ...mapGetters(['config']),
     evolutionTxCity () {
       return [
         Number(this.evolutionData.TX_LV_14),

@@ -6,7 +6,7 @@
     style="height:100%;"
   >
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
-      VACANCE LOVAC
+      {{ config.titleLovac }}
       <card-description
         title="Logements Vacants (Lovac 2019)"
         field="descLovac"
@@ -81,12 +81,13 @@
 
 <script>
 import CardDescription from './card-description'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: { CardDescription },
   computed: {
-    ...mapState(['lovacData'])
+    ...mapState(['lovacData']),
+    ...mapGetters(['config'])
   }
 }
 </script>

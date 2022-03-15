@@ -6,7 +6,7 @@
     style="height:100%;"
   >
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
-      PC AUTORISES
+      {{ config.titlePC }}
       <card-description
         title="Permis de construire autorisés (Sitadel, 2018)"
         field="descPC"
@@ -64,13 +64,14 @@
 
 <script>
 import CardDescription from './card-description'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 // import axios from 'axios'
 
 export default {
   components: { CardDescription },
   computed: {
     ...mapState(['pcData', 'lovacData']),
+    ...mapGetters(['config']),
     lgtTot () {
       return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_TOT_CREES, 0)
     },

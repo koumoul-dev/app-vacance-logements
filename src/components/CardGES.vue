@@ -6,7 +6,7 @@
     style="height:100%;"
   >
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
-      EMISSIONS GES
+      {{ config.titleGES }}
       <card-description
         title="Emissions de Gaz à Effet de Serre (estimations, eqCO2)"
         field="descGES"
@@ -101,12 +101,13 @@
 
 <script>
 import CardDescription from './card-description'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: { CardDescription },
   computed: {
     ...mapState(['pcData']),
+    ...mapGetters(['config']),
     lgtInd () {
       return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_IND_CREES, 0)
     },

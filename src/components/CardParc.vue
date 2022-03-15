@@ -6,7 +6,7 @@
     style="height:100%;"
   >
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
-      PARC
+      {{ config.titleParc }}
       <card-description
         title="Parc total de logements (Insee 2018)"
         field="descParc"
@@ -105,12 +105,13 @@
 <script>
 import HistoryGraph from './history-graph'
 import CardDescription from './card-description'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: { HistoryGraph, CardDescription },
   computed: {
     ...mapState(['evolutionData', 'log1Data']),
+    ...mapGetters(['config']),
     evolutionCity () {
       return [
         this.evolutionData.TOT_PARC_14,
