@@ -2,6 +2,7 @@
   <v-menu
     v-model="menu"
     :min-width="`${Math.max(336,windowWidth/3)}px`"
+    :close-on-content-click="false"
     offset-y
   >
     <template #activator="{on: onDialog}">
@@ -10,15 +11,23 @@
           <v-btn
             class="px-1"
             outlined
-            text
             v-on="{...onDialog, ...onTooltip}"
           >
-            <v-sparkline
+            <v-icon v-if="value[0]<value[value.length-1]">
+              mdi-arrow-top-right
+            </v-icon>
+            <v-icon v-else-if="value[0]>value[value.length-1]">
+              mdi-arrow-bottom-right
+            </v-icon>
+            <v-icon v-else>
+              mdi-arrow-right
+            </v-icon>
+            <!-- <v-sparkline
               line-width="8"
               auto-draw
               smooth
               :value="value"
-            />
+            /> -->
           </v-btn>
         </template>
         <span>Détails de l'évolution</span>
@@ -40,23 +49,32 @@
       </v-toolbar>
 
       <v-card-text>
-        <line-chart
+        <bar-chart
           :value="value"
           :labels="labels"
           :title="title"
           :width="null"
           :height="null"
         />
+        <!-- <v-sparkline
+          smooth
+          auto-line-width
+          type="bar"
+          :labels="labels"
+          :value="value"
+          :padding="16"
+          :label-size="8"
+        /> -->
       </v-card-text>
     </v-card>
   </v-menu>
 </template>
 
 <script>
-import LineChart from './line-chart'
+import BarChart from './bar-chart'
 
 export default {
-  components: { LineChart },
+  components: { BarChart },
   props: {
     value: { type: Array, required: true },
     title: { type: String, required: true },

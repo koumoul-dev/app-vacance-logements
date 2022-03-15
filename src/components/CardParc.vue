@@ -33,9 +33,9 @@
               class="px-1 py-0"
             >
               <history-graph
-                v-if="evolutionData && evolutionData.TOT_PARC_14"
-                :value="evolutionCity"
-                :labels="evolutionLabels"
+                v-if="evolutionData && evolutionData.length > 1"
+                :value="evolutionData.map(d => d.TOT_PARC)"
+                :labels="evolutionData.map(d => d.ANNEE)"
                 title="Total logements"
               />
             </v-col>
@@ -113,15 +113,6 @@ export default {
   computed: {
     ...mapState(['evolutionData', 'log1Data', 'currentLevel']),
     ...mapGetters(['config']),
-    evolutionCity () {
-      return [
-        this.evolutionData.TOT_PARC_14,
-        this.evolutionData.TOT_PARC_15,
-        this.evolutionData.TOT_PARC_16,
-        this.evolutionData.TOT_PARC_17,
-        this.evolutionData.TOT_PARC_18
-      ]
-    },
     ages () {
       return [
         this.log1Data.TOT_PARC_av19,
@@ -140,15 +131,6 @@ export default {
         '1971 - 1990',
         '1991 - 2005',
         '2006 - 2015'
-      ]
-    },
-    evolutionLabels () {
-      return [
-        '2014',
-        '2015',
-        '2016',
-        '2017',
-        '2018'
       ]
     }
   }

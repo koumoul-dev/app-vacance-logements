@@ -142,7 +142,8 @@ export default () => {
             const lovacData = (await axios.get(getters.config.datasets[8 + levelOffset[state.currentLevel]].href + '/lines', { params })).data.results[0]
             params.qs = `${inseePropName[state.currentLevel]}:${state.inseeInfos[levelPropName[state.currentLevel]]}`
             const log1Data = (await axios.get(getters.config.datasets[0 + levelOffset[state.currentLevel]].href + '/lines', { params })).data.results[0]
-            const evolutionData = (await axios.get(getters.config.datasets[4 + levelOffset[state.currentLevel]].href + '/lines', { params })).data.results[0]
+            const results = (await axios.get(getters.config.datasets[4 + levelOffset[state.currentLevel]].href + '/lines', { params })).data.results
+            const evolutionData = results.filter(d => typeof d.TOT_PARC === 'number').sort((d1, d2) => d1.ANNEE - d2.ANNEE).filter((d, i) => i % 5 === 0)
             params.qs = `${pcPropName[state.currentLevel]}:${state.inseeInfos[levelPropName[state.currentLevel]]}`
             const pcData = (await axios.get(getters.config.datasets[12 + levelOffset[state.currentLevel]].href + '/lines', { params })).data.results[0]
             commit('setAny', { log1Data, lovacData, evolutionData, pcData })

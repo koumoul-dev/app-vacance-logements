@@ -33,9 +33,9 @@
               class="px-1 py-0"
             >
               <history-graph
-                v-if="evolutionData && evolutionData.TOT_LV_14"
-                :value="evolutionTotCity"
-                :labels="evolutionLabels"
+                v-if="evolutionData && evolutionData.length > 1"
+                :value="evolutionData.map(d => d.TOT_LV)"
+                :labels="evolutionData.map(d => d.ANNEE)"
                 title="Logements vacants"
               />
             </v-col>
@@ -57,9 +57,9 @@
               class="px-1 py-0"
             >
               <history-graph
-                v-if="evolutionData && evolutionData.TX_LV_14"
-                :value="evolutionTxCity"
-                :labels="evolutionLabels"
+                v-if="evolutionData && evolutionData.length > 1"
+                :value="evolutionData.map(d => d.TX_LV)"
+                :labels="evolutionData.map(d => d.ANNEE)"
                 title="Taux de vacance"
               />
             </v-col>
@@ -163,24 +163,6 @@ export default {
   computed: {
     ...mapState(['evolutionData', 'log1Data']),
     ...mapGetters(['config']),
-    evolutionTxCity () {
-      return [
-        Number(this.evolutionData.TX_LV_14),
-        Number(this.evolutionData.TX_LV_15),
-        Number(this.evolutionData.TX_LV_16),
-        Number(this.evolutionData.TX_LV_17),
-        Number(this.evolutionData.TX_LV_18)
-      ]
-    },
-    evolutionTotCity () {
-      return [
-        parseInt(this.evolutionData.TOT_LV_14),
-        parseInt(this.evolutionData.TOT_LV_15),
-        parseInt(this.evolutionData.TOT_LV_16),
-        parseInt(this.evolutionData.TOT_LV_17),
-        parseInt(this.evolutionData.TOT_LV_18)
-      ]
-    },
     agesMi () {
       return [
         this.log1Data.LV_av19_MI,
@@ -209,15 +191,6 @@ export default {
         '1971 - 1990',
         '1991 - 2005',
         '2006 - 2015'
-      ]
-    },
-    evolutionLabels () {
-      return [
-        '2014',
-        '2015',
-        '2016',
-        '2017',
-        '2018'
       ]
     }
   }
