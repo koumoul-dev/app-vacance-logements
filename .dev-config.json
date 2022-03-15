@@ -21,24 +21,24 @@
       "id": "log-1-insee-pdv-_-reg"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-14-a-18-france",
-      "title": "Evolution Parc Vacance 14 à 18 communes",
-      "id": "evolution-parc-vacance-14-a-18-france"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-com",
+      "title": "Evolution Parc Vacance COM",
+      "id": "evolution-parc-vacance-com"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-14-a-18-epci",
-      "title": "Evolution Parc Vacance 14 à 18 EPCI",
-      "id": "evolution-parc-vacance-14-a-18-epci"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-interco",
+      "title": "Evolution Parc Vacance Interco",
+      "id": "evolution-parc-vacance-interco"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-14-a-18-dep",
-      "title": "Evolution Parc Vacance 14 à 18 DEP",
-      "id": "evolution-parc-vacance-14-a-18-dep"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-dep",
+      "title": "Evolution Parc Vacance DEP",
+      "id": "evolution-parc-vacance-dep"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-14-a-18-reg",
-      "title": "Evolution Parc Vacance 14 à 18 REG",
-      "id": "evolution-parc-vacance-14-a-18-reg"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/evolution-parc-vacance-reg",
+      "title": "Evolution Parc Vacance REG",
+      "id": "evolution-parc-vacance-reg"
     },
     {
       "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-vacants-du-parc-prive-par-commune-au-01012019-lovac-1",
