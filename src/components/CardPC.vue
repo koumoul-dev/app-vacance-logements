@@ -21,15 +21,15 @@
           <span>Logements autorisés</span>
         </v-col>
         <v-col :cols="4">
-          <strong>{{ lgtTot.toLocaleString('fr') }}</strong>
+          <strong>{{ pcData.NB_LGT_TOT_AUT.toLocaleString('fr') }}</strong>
         </v-col>
       </v-row>
       <v-row align="center">
         <v-col :cols="8">
-          <span>Logements Individuels autorisés </span>
+          <span>Logements Individuels autorisés</span>
         </v-col>
         <v-col :cols="4">
-          <strong>{{ lgtInd.toLocaleString('fr') }}</strong>
+          <strong>{{ pcData.NB_LGT_IND_AUT.toLocaleString('fr') }}</strong>
         </v-col>
       </v-row>
       <v-row align="center">
@@ -37,7 +37,49 @@
           <span>Logements Collectifs autorisés</span>
         </v-col>
         <v-col :cols="4">
-          <strong>{{ lgtCol.toLocaleString('fr') }}</strong>
+          <strong>{{ pcData.NB_LGT_COL_AUT.toLocaleString('fr') }}</strong>
+        </v-col>
+      </v-row>
+
+      <v-row align="center">
+        <v-col :cols="8">
+          <span>Logements mis en chantier</span>
+        </v-col>
+        <v-col :cols="4">
+          <strong>{{ pcData.NB_LGT_TOT_MEC.toLocaleString('fr') }}</strong>
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col :cols="8">
+          <span>Logements Individuels mis en chantier</span>
+        </v-col>
+        <v-col :cols="4">
+          <strong>{{ pcData.NB_LGT_IND_MEC.toLocaleString('fr') }}</strong>
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col :cols="8">
+          <span>Logements Collectifs mis en chantier</span>
+        </v-col>
+        <v-col :cols="4">
+          <strong>{{ pcData.NB_LGT_COL_MEC.toLocaleString('fr') }}</strong>
+        </v-col>
+      </v-row>
+
+      <v-row align="center">
+        <v-col :cols="8">
+          <span>Flux d’artificialisation global</span>
+        </v-col>
+        <v-col :cols="4">
+          <strong>{{ (pcData.naf18art19 / 10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col :cols="8">
+          <span>Flux d’artificialisation pour l’habitat</span>
+        </v-col>
+        <v-col :cols="4">
+          <strong>{{ (pcData.art18hab19/10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
         </v-col>
       </v-row>
       <!-- <br>
@@ -72,15 +114,15 @@ export default {
   computed: {
     ...mapState(['pcData', 'lovacData']),
     ...mapGetters(['config']),
-    lgtTot () {
-      return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_TOT_CREES, 0)
-    },
-    lgtInd () {
-      return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_IND_CREES, 0)
-    },
-    lgtCol () {
-      return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_COL_CREES, 0)
-    },
+    // lgtTot () {
+    //   return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_TOT_CREES, 0)
+    // },
+    // lgtInd () {
+    //   return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_IND_CREES, 0)
+    // },
+    // lgtCol () {
+    //   return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_COL_CREES, 0)
+    // },
     lgtPerc () {
       if (!this.lgtTot) return 0
       return Math.min((this.lovacData.Nb_logvac_2A_010119 || 0) * 100 / this.lgtTot, 100)

@@ -33,7 +33,7 @@ const inseePropName = {
 }
 
 const pcPropName = {
-  city: 'COMM',
+  city: 'CODGEO',
   epci: 'EPCI',
   department: 'DEP',
   region: 'REG'
@@ -144,8 +144,7 @@ export default () => {
             const log1Data = (await axios.get(getters.config.datasets[0 + levelOffset[state.currentLevel]].href + '/lines', { params })).data.results[0]
             const evolutionData = (await axios.get(getters.config.datasets[4 + levelOffset[state.currentLevel]].href + '/lines', { params })).data.results[0]
             params.qs = `${pcPropName[state.currentLevel]}:${state.inseeInfos[levelPropName[state.currentLevel]]}`
-            params.size = 10000
-            const pcData = (await axios.get(getters.config.datasets[12].href + '/lines', { params })).data.results
+            const pcData = (await axios.get(getters.config.datasets[12 + levelOffset[state.currentLevel]].href + '/lines', { params })).data.results[0]
             commit('setAny', { log1Data, lovacData, evolutionData, pcData })
           } catch (err) { }
           commit('setAny', { loading: false })

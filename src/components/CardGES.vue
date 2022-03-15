@@ -108,17 +108,11 @@ export default {
   computed: {
     ...mapState(['pcData']),
     ...mapGetters(['config']),
-    lgtInd () {
-      return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_IND_CREES, 0)
-    },
-    lgtCol () {
-      return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_COL_CREES, 0)
-    },
     constIndiv () {
-      return (425 * 112 * this.lgtInd) / 1000
+      return (425 * 112 * this.pcData.NB_LGT_IND_AUT) / 1000
     },
     constColl () {
-      return (525 * 63 * this.lgtCol) / 1000
+      return (525 * 63 * this.pcData.NB_LGT_COL_AUT) / 1000
     },
     totGES () {
       return this.constIndiv + this.constColl

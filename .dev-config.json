@@ -61,9 +61,24 @@
       "id": "lovac_reg-au-01012019"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/pc-logements-autorises-2018-france",
-      "title": "PC logements autorisés 2018 France",
-      "id": "pc-logements-autorises-2018-france"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-neufs-communes-18",
+      "title": "Logements neufs Communes 18",
+      "id": "logements-neufs-communes-18"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-neufs-epci-2018",
+      "title": "Logements neufs EPCI 2018",
+      "id": "logements-neufs-epci-2018"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-neufs-departements-2018",
+      "title": "Logements neufs Départements 2018",
+      "id": "logements-neufs-departements-2018"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-neufs-regions-2018",
+      "title": "Logements neufs Régions 2018",
+      "id": "logements-neufs-regions-2018"
     }
   ],
   "descParc": "Données issues du jeu LOG 1\n\nLOG1 - Logements construits avant 2016 par type, catégorie et époque d'achèvement de la construction en 2018\nLes données 2018 sont diffusées selon la géographie en vigueur au 1ᵉʳ janvier 2021.\nLes effectifs supérieurs à 500 peuvent normalement être utilisés en toute confiance. Les effectifs inférieurs à 200 doivent être maniés avec précaution, car, en raison de l'imprécision liée au sondage, ils peuvent ne pas être significatifs. Les comparaisons entre territoires de petites tailles sont à proscrire.\nPour des zones de moins de 2 000 habitants, il est recommandé de ne pas utiliser les données issues de l'exploitation complémentaire.\nFichier source : https://www.insee.fr/fr/statistiques/5397829?sommaire=5397845&geo=FE-1\n\nTraitement : Suppression de toutes les données pour la catégorie « Autres ». Agrégat des Résidences secondaires et des logements occasionnels. Additions et calcul des taux. Agrégats pour EPCI, département et région à partir de la commune\nFichier traité : publication et documentation en cours",

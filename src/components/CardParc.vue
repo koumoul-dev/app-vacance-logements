@@ -45,7 +45,8 @@
               <span>Taux de logements sociaux</span>
             </v-col>
             <v-col :cols="4">
-              <strong>A venir</strong>
+              <strong v-if="currentLevel === 'city'">{{ log1Data.TX_LS.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+              <strong v-else>A venir</strong>
             </v-col>
           </v-row>
           <v-row align="center">
@@ -110,7 +111,7 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   components: { HistoryGraph, CardDescription },
   computed: {
-    ...mapState(['evolutionData', 'log1Data']),
+    ...mapState(['evolutionData', 'log1Data', 'currentLevel']),
     ...mapGetters(['config']),
     evolutionCity () {
       return [
