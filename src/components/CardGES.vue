@@ -3,12 +3,12 @@
     flat
     color="#c9dbba"
     rounded="xl"
-    style="height:100%;"
+    style="height:100%;display: flex;flex-flow: column;"
   >
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       {{ config.titleGES }}
       <card-description
-        title="Emissions de Gaz à Effet de Serre (estimations, eqCO2)"
+        :title="title"
         field="descGES"
       />
     </div>
@@ -82,20 +82,28 @@
         Surface moyenne maison individuelle = 112 m²
         Surface moyenne logement collectif = 63 m² -->
     </v-card-text>
-    <v-container
-      v-else
-      class="px-5"
+    <v-card-text v-else>
+      <v-container
+        class="px-5"
+      >
+        <v-col class="text-center px-5 mb-5">
+          <v-alert
+            :value="true"
+            type="warning"
+            outlined
+          >
+            <h4>Aucune information disponible</h4>
+          </v-alert>
+        </v-col>
+      </v-container>
+    </v-card-text>
+    <div style="flex: 1 1 auto;" />
+    <div
+      class="text-caption text-center grey--text text--darken-1"
+      style="width:100%"
     >
-      <v-col class="text-center px-5 mb-5">
-        <v-alert
-          :value="true"
-          type="warning"
-          outlined
-        >
-          <h4>Aucune information disponible</h4>
-        </v-alert>
-      </v-col>
-    </v-container>
+      {{ title }}
+    </div>
   </v-card>
 </template>
 
@@ -109,13 +117,16 @@ export default {
     ...mapState(['pcData']),
     ...mapGetters(['config']),
     constIndiv () {
-      return (425 * 112 * this.pcData.NB_LGT_IND_AUT) / 1000
+      return (425 * 112 * this.pcData.NB_LGT_IND_MEC) / 1000
     },
     constColl () {
-      return (525 * 63 * this.pcData.NB_LGT_COL_AUT) / 1000
+      return (525 * 63 * this.pcData.NB_LGT_COL_MEC) / 1000
     },
     totGES () {
       return this.constIndiv + this.constColl
+    },
+    title () {
+      return 'Emissions de Gaz à Effet de Serre (estimations, eqCO2)'
     }
   }
 }

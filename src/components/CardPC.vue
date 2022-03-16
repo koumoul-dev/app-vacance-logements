@@ -3,12 +3,12 @@
     flat
     color="#faa381"
     rounded="xl"
-    style="height:100%;"
+    style="height:100%;display: flex;flex-flow: column;"
   >
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       {{ config.titlePC }}
       <card-description
-        title="Permis de construire autorisés (Sitadel, 2018)"
+        :title="title"
         field="descPC"
       />
     </div>
@@ -22,6 +22,14 @@
         </v-col>
         <v-col :cols="4">
           <strong>{{ pcData.NB_LGT_TOT_AUT.toLocaleString('fr') }}</strong>
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col :cols="8">
+          <span>Indice de construction</span>
+        </v-col>
+        <v-col :cols="4">
+          <strong>{{ (100*pcData.NB_LGT_TOT_AUT/log1Data.TOT_PARC).toLocaleString('fr', {maximumFractionDigits: 2}) }} %</strong>
         </v-col>
       </v-row>
       <v-row align="center">
@@ -40,7 +48,7 @@
           <strong>{{ pcData.NB_LGT_COL_AUT.toLocaleString('fr') }}</strong>
         </v-col>
       </v-row>
-
+      <v-divider class="my-3" />
       <v-row align="center">
         <v-col :cols="8">
           <span>Logements mis en chantier</span>
@@ -65,7 +73,7 @@
           <strong>{{ pcData.NB_LGT_COL_MEC.toLocaleString('fr') }}</strong>
         </v-col>
       </v-row>
-
+      <v-divider class="my-3" />
       <v-row align="center">
         <v-col :cols="8">
           <span>Flux d’artificialisation global</span>
@@ -87,20 +95,28 @@
         Rénover les <strong>{{ lovacData.Nb_logvac_2A_010119.toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong> logements vacants &gt; 2 ans aurait contribué à <strong>{{ lgtPerc }} %</strong> de la construction neuve cette année
       </div> -->
     </v-card-text>
-    <v-container
-      v-else
-      class="px-5"
+    <v-card-text v-else>
+      <v-container
+        class="px-5"
+      >
+        <v-col class="text-center px-5 mb-5">
+          <v-alert
+            :value="true"
+            type="warning"
+            outlined
+          >
+            <h4>Aucune information disponible</h4>
+          </v-alert>
+        </v-col>
+      </v-container>
+    </v-card-text>
+    <div style="flex: 1 1 auto;" />
+    <div
+      class="text-caption text-center grey--text text--darken-1"
+      style="width:100%"
     >
-      <v-col class="text-center px-5 mb-5">
-        <v-alert
-          :value="true"
-          type="warning"
-          outlined
-        >
-          <h4>Aucune information disponible</h4>
-        </v-alert>
-      </v-col>
-    </v-container>
+      {{ title }}
+    </div>
   </v-card>
 </template>
 
@@ -112,7 +128,7 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   components: { CardDescription },
   computed: {
-    ...mapState(['pcData', 'lovacData']),
+    ...mapState(['pcData', 'lovacData', 'log1Data']),
     ...mapGetters(['config']),
     // lgtTot () {
     //   return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_TOT_CREES, 0)
@@ -126,6 +142,9 @@ export default {
     lgtPerc () {
       if (!this.lgtTot) return 0
       return Math.min((this.lovacData.Nb_logvac_2A_010119 || 0) * 100 / this.lgtTot, 100)
+    },
+    title () {
+      return 'Logements Vacants (Insee 2018)'
     }
   }
 }

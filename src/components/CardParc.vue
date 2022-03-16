@@ -3,12 +3,12 @@
     flat
     color="#cbf3d2"
     rounded="xl"
-    style="height:100%;"
+    style="height:100%;display: flex;flex-flow: column;"
   >
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       {{ config.titleParc }}
       <card-description
-        title="Parc total de logements (Insee 2018)"
+        :title="title"
         field="descParc"
       />
     </div>
@@ -38,6 +38,22 @@
                 :labels="evolutionData.map(d => d.ANNEE)"
                 title="Total logements"
               />
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col :cols="6">
+              <span>Résidences principales</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ log1Data.TX_RP.toLocaleString('fr', {maximumFractionDigits: 0}) }} %</strong>
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col :cols="6">
+              <span>Résidences secondaires</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ log1Data.TX_RS.toLocaleString('fr', {maximumFractionDigits: 0}) }} %</strong>
             </v-col>
           </v-row>
           <v-row align="center">
@@ -85,21 +101,28 @@
         </v-col>
       </v-row>
     </v-card-text>
-
-    <v-container
-      v-else
-      class="px-5"
+    <v-card-text v-else>
+      <v-container
+        class="px-5"
+      >
+        <v-col class="text-center px-5 mb-5">
+          <v-alert
+            :value="true"
+            type="warning"
+            outlined
+          >
+            <h4>Aucune information disponible</h4>
+          </v-alert>
+        </v-col>
+      </v-container>
+    </v-card-text>
+    <div style="flex: 1 1 auto;" />
+    <div
+      class="text-caption text-center grey--text text--darken-1"
+      style="width:100%"
     >
-      <v-col class="text-center px-5 mb-5">
-        <v-alert
-          :value="true"
-          type="warning"
-          outlined
-        >
-          <h4>Aucune information disponible</h4>
-        </v-alert>
-      </v-col>
-    </v-container>
+      {{ title }}
+    </div>
   </v-card>
 </template>
 
@@ -132,6 +155,9 @@ export default {
         '1991 - 2005',
         '2006 - 2015'
       ]
+    },
+    title () {
+      return 'Parc total de logements (Insee 2018)'
     }
   }
 }

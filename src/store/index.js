@@ -123,7 +123,7 @@ export default () => {
               inseeInfos.INSEE_COM = state.city.value
               inseeInfos.NOM_COM = state.city.text.split(' (')[0]
             }
-            commit('setAny', { inseeInfos })
+            commit('setAny', { inseeInfos, currentLevel: 'city' })
           } catch (err) { }
         }
         dispatch('fetch')

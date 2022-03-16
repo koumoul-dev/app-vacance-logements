@@ -3,12 +3,12 @@
     flat
     color="#b0e0e6"
     rounded="xl"
-    style="height:100%;"
+    style="height:100%;display: flex;flex-flow: column;"
   >
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       {{ config.titleLovac }}
       <card-description
-        title="Logements Vacants (Lovac 2019)"
+        :title="title"
         field="descLovac"
       />
     </div>
@@ -62,20 +62,28 @@
         </v-col>
       </v-row>
     </v-card-text>
-    <v-container
-      v-else
-      class="px-5"
+    <v-card-text v-else>
+      <v-container
+        class="px-5"
+      >
+        <v-col class="text-center px-5 mb-5">
+          <v-alert
+            :value="true"
+            type="warning"
+            outlined
+          >
+            <h4>Aucune information disponible</h4>
+          </v-alert>
+        </v-col>
+      </v-container>
+    </v-card-text>
+    <div style="flex: 1 1 auto;" />
+    <div
+      class="text-caption text-center grey--text text--darken-1"
+      style="width:100%"
     >
-      <v-col class="text-center px-5 mb-5">
-        <v-alert
-          :value="true"
-          type="warning"
-          outlined
-        >
-          <h4>Aucune information disponible</h4>
-        </v-alert>
-      </v-col>
-    </v-container>
+      {{ title }}
+    </div>
   </v-card>
 </template>
 
@@ -87,7 +95,10 @@ export default {
   components: { CardDescription },
   computed: {
     ...mapState(['lovacData']),
-    ...mapGetters(['config'])
+    ...mapGetters(['config']),
+    title () {
+      return 'Logements Vacants (Lovac 2019)'
+    }
   }
 }
 </script>
