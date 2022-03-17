@@ -17,7 +17,8 @@ export default {
             label: this.title,
             borderColor: this.$vuetify.theme.themes.light.primary,
             backgroundColor: this.$vuetify.theme.themes.light.primary,
-            data: this.value
+            data: this.value,
+            barPercentage: 0.5
           }
         ]
       }

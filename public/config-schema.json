@@ -10,6 +10,30 @@
         }
       }
     }, {
+      "title": "Logos et liens",
+      "properties": {
+        "leftLogo": {
+          "title": "URL vers l'image pour le logo à gauche",
+          "type": "string",
+          "default": "https://i0.wp.com/territoirecirculaire.fr/wp-content/uploads/2021/10/cropped-logo-full-hd-1.png"
+        },
+        "leftLink": {
+          "title": "URL au clic sur le logo à gauche",
+          "type": "string",
+          "default": "https://territoirecirculaire.fr/"
+        },
+        "rightLogo": {
+          "title": "URL vers l'image pour le logo à droite",
+          "type": "string",
+          "default": "https://www.ademe.fr/sites/all/themes/ademe/logo_rf.png"
+        },
+        "rightLink": {
+          "title": "URL au clic sur le logo à droite",
+          "type": "string",
+          "default": "https://www.ademe.fr/"
+        }
+      }
+    }, {
       "title": "Titres et infobulles",
       "properties": {
         "titleParc":{

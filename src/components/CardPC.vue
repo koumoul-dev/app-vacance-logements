@@ -17,83 +17,112 @@
       class="black--text"
     >
       <v-row align="center">
-        <v-col :cols="8">
-          <span>Logements autorisés</span>
+        <v-col :cols="10">
+          <v-row>
+            <v-col :cols="8">
+              <span>Logements autorisés</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ pcData.NB_LGT_TOT_AUT.toLocaleString('fr') }}</strong>
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col :cols="8">
+              <span>Indice de construction</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ (100*pcData.NB_LGT_TOT_AUT/log1Data.TOT_PARC).toLocaleString('fr', {maximumFractionDigits: 2}) }} %</strong>
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col :cols="8">
+              <span>Logements Individuels autorisés</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ pcData.NB_LGT_IND_AUT.toLocaleString('fr') }}</strong>
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col :cols="8">
+              <span>Logements Collectifs autorisés</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ pcData.NB_LGT_COL_AUT.toLocaleString('fr') }}</strong>
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col :cols="4">
-          <strong>{{ pcData.NB_LGT_TOT_AUT.toLocaleString('fr') }}</strong>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="8">
-          <span>Indice de construction</span>
-        </v-col>
-        <v-col :cols="4">
-          <strong>{{ (100*pcData.NB_LGT_TOT_AUT/log1Data.TOT_PARC).toLocaleString('fr', {maximumFractionDigits: 2}) }} %</strong>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="8">
-          <span>Logements Individuels autorisés</span>
-        </v-col>
-        <v-col :cols="4">
-          <strong>{{ pcData.NB_LGT_IND_AUT.toLocaleString('fr') }}</strong>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="8">
-          <span>Logements Collectifs autorisés</span>
-        </v-col>
-        <v-col :cols="4">
-          <strong>{{ pcData.NB_LGT_COL_AUT.toLocaleString('fr') }}</strong>
-        </v-col>
-      </v-row>
-      <v-divider class="my-3" />
-      <v-row align="center">
-        <v-col :cols="8">
-          <span>Logements mis en chantier</span>
-        </v-col>
-        <v-col :cols="4">
-          <strong>{{ pcData.NB_LGT_TOT_MEC.toLocaleString('fr') }}</strong>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="8">
-          <span>Logements Individuels mis en chantier</span>
-        </v-col>
-        <v-col :cols="4">
-          <strong>{{ pcData.NB_LGT_IND_MEC.toLocaleString('fr') }}</strong>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col :cols="8">
-          <span>Logements Collectifs mis en chantier</span>
-        </v-col>
-        <v-col :cols="4">
-          <strong>{{ pcData.NB_LGT_COL_MEC.toLocaleString('fr') }}</strong>
+        <v-col :cols="2">
+          <v-img
+            src="../assets/logements autorisés.svg"
+            height="96"
+            contain
+          />
         </v-col>
       </v-row>
       <v-divider class="my-3" />
       <v-row align="center">
-        <v-col :cols="8">
-          <span>Flux d’artificialisation global</span>
+        <v-col :cols="10">
+          <v-row align="center">
+            <v-col :cols="8">
+              <span>Logements mis en chantier</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ pcData.NB_LGT_TOT_MEC.toLocaleString('fr') }}</strong>
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col :cols="8">
+              <span>Logements Individuels mis en chantier</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ pcData.NB_LGT_IND_MEC.toLocaleString('fr') }}</strong>
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col :cols="8">
+              <span>Logements Collectifs mis en chantier</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ pcData.NB_LGT_COL_MEC.toLocaleString('fr') }}</strong>
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col :cols="4">
-          <strong>{{ (pcData.naf18art19 / 10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
+        <v-col :cols="2">
+          <v-img
+            src="../assets/logements mis en chantier.svg"
+            height="96"
+            contain
+          />
         </v-col>
       </v-row>
+      <v-divider class="my-3" />
       <v-row align="center">
-        <v-col :cols="8">
-          <span>Flux d’artificialisation pour l’habitat</span>
+        <v-col :cols="10">
+          <v-row align="center">
+            <v-col :cols="8">
+              <span>Flux d’artificialisation global</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ (pcData.naf18art19 / 10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col :cols="8">
+              <span>Flux d’artificialisation pour l’habitat</span>
+            </v-col>
+            <v-col :cols="4">
+              <strong>{{ (pcData.art18hab19/10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col :cols="4">
-          <strong>{{ (pcData.art18hab19/10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
+        <v-col :cols="2">
+          <v-img
+            src="../assets/artificialisation.svg"
+            height="96"
+            contain
+          />
         </v-col>
       </v-row>
-      <!-- <br>
-      <div v-if="lovacData">
-        Rénover les <strong>{{ lovacData.Nb_logvac_2A_010119.toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong> logements vacants &gt; 2 ans aurait contribué à <strong>{{ lgtPerc }} %</strong> de la construction neuve cette année
-      </div> -->
     </v-card-text>
     <v-card-text v-else>
       <v-container

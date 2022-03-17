@@ -6,8 +6,8 @@
       :order-sm="0"
     >
       <v-img
-        src="../assets/pdvplv.png"
-        height="96"
+        :src="config.leftLogo"
+        height="96px"
         contain
       />
     </v-col>
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import axios from 'axios'
 
 export default {
@@ -58,6 +58,7 @@ export default {
     loading: false
   }),
   computed: {
+    ...mapGetters(['config']),
     city: {
       set: async function (val) { this.$store.state.city = val },
       get () { return this.$store.state.city }

@@ -83,6 +83,9 @@
       style="width:100%"
     >
       {{ title }}
+      <template v-if="lovacData && typeof lovacData.TX_COUV === 'number'">
+        <br>Couverture {{ lovacData.TX_COUV.toLocaleString('fr', {maximumFractionDigits: 0}) }} %
+      </template>
     </div>
   </v-card>
 </template>
