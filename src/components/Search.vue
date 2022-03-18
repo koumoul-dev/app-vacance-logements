@@ -5,22 +5,32 @@
       :sm="3"
       :order-sm="0"
     >
-      <v-img
-        :src="config.leftLogo"
-        height="96px"
-        contain
-      />
+      <a
+        :href="config.leftLink"
+        target="blank"
+      >
+        <v-img
+          :src="config.leftLogo"
+          height="96px"
+          contain
+        />
+      </a>
     </v-col>
     <v-col
       :cols="6"
       :sm="3"
       :order-sm="2"
     >
-      <v-img
-        src="../assets/logo-ademe.png"
-        height="96"
-        contain
-      />
+      <a
+        :href="config.rightLink"
+        target="blank"
+      >
+        <v-img
+          :src="config.rightLogo"
+          height="96px"
+          contain
+        />
+      </a>
     </v-col>
     <v-col
       :cols="12"

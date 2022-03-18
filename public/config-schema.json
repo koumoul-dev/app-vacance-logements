@@ -25,7 +25,7 @@
         "rightLogo": {
           "title": "URL vers l'image pour le logo à droite",
           "type": "string",
-          "default": "https://www.ademe.fr/sites/all/themes/ademe/logo_rf.png"
+          "default": "https://www.ademe.fr/sites/default/files/logoademe2020_rvb.png"
         },
         "rightLink": {
           "title": "URL au clic sur le logo à droite",

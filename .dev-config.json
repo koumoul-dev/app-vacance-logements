@@ -82,7 +82,7 @@
     }
   ],
   "rightLink": "https://www.ademe.fr/",
-  "rightLogo": "https://www.ademe.fr/sites/all/themes/ademe/logo_rf.png",
+  "rightLogo": "https://www.ademe.fr/sites/default/files/logoademe2020_rvb.png",
   "leftLink": "https://territoirecirculaire.fr/",
   "leftLogo": "https://i0.wp.com/territoirecirculaire.fr/wp-content/uploads/2021/10/cropped-logo-full-hd-1.png",
   "descParc": "Données issues du jeu LOG 1\n\nLOG1 - Logements construits avant 2016 par type, catégorie et époque d'achèvement de la construction en 2018\nLes données 2018 sont diffusées selon la géographie en vigueur au 1ᵉʳ janvier 2021.\nLes effectifs supérieurs à 500 peuvent normalement être utilisés en toute confiance. Les effectifs inférieurs à 200 doivent être maniés avec précaution, car, en raison de l'imprécision liée au sondage, ils peuvent ne pas être significatifs. Les comparaisons entre territoires de petites tailles sont à proscrire.\nPour des zones de moins de 2 000 habitants, il est recommandé de ne pas utiliser les données issues de l'exploitation complémentaire.\nFichier source : https://www.insee.fr/fr/statistiques/5397829?sommaire=5397845&geo=FE-1\n\nTraitement : Suppression de toutes les données pour la catégorie « Autres ». Agrégat des Résidences secondaires et des logements occasionnels. Additions et calcul des taux. Agrégats pour EPCI, département et région à partir de la commune\nFichier traité : publication et documentation en cours",
