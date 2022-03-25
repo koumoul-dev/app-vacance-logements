@@ -79,13 +79,17 @@
     </v-card-text>
     <div style="flex: 1 1 auto;" />
     <div
+      v-if="lovacData && typeof lovacData.TX_COUV === 'number'"
+      class="text-center grey--text text--darken-3"
+      style="width:100%;font-size:13px"
+    >
+      Taux de couverture LOVAC : {{ lovacData.TX_COUV.toLocaleString('fr', {maximumFractionDigits: 0}) }} %
+    </div>
+    <div
       class="text-caption text-center grey--text text--darken-1"
       style="width:100%"
     >
-      {{ title }}
-      <template v-if="lovacData && typeof lovacData.TX_COUV === 'number'">
-        <br>Couverture {{ lovacData.TX_COUV.toLocaleString('fr', {maximumFractionDigits: 0}) }} %
-      </template>
+      Sources : Lovac 2019
     </div>
   </v-card>
 </template>
@@ -100,7 +104,7 @@ export default {
     ...mapState(['lovacData']),
     ...mapGetters(['config']),
     title () {
-      return 'Logements Vacants (Lovac 2019)'
+      return 'Logements Vacants Privés  (Lovac 2019)'
     }
   }
 }

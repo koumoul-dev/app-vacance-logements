@@ -28,7 +28,7 @@
           </v-row>
           <v-row align="center">
             <v-col :cols="8">
-              <span>Indice de construction</span>
+              <span>Taux d’effort de construction</span>
             </v-col>
             <v-col :cols="4">
               <strong>{{ (100*pcData.NB_LGT_TOT_AUT/log1Data.TOT_PARC).toLocaleString('fr', {maximumFractionDigits: 2}) }} %</strong>
@@ -144,7 +144,7 @@
       class="text-caption text-center grey--text text--darken-1"
       style="width:100%"
     >
-      {{ title }}
+      Sources : SITADEL2, CEREMA
     </div>
   </v-card>
 </template>
@@ -173,7 +173,7 @@ export default {
       return Math.min((this.lovacData.Nb_logvac_2A_010119 || 0) * 100 / this.lgtTot, 100)
     },
     title () {
-      return 'Logements Vacants (Insee 2018)'
+      return 'Aménagement et urbanisme  (Sitadel 2018)'
     }
   }
 }

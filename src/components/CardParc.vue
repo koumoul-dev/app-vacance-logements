@@ -121,7 +121,7 @@
       class="text-caption text-center grey--text text--darken-1"
       style="width:100%"
     >
-      {{ title }}
+      Sources : Insee RP2013/2018, RPLS
     </div>
   </v-card>
 </template>
