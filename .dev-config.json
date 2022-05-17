@@ -41,24 +41,24 @@
       "id": "evolution-parc-vacance-reg"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-vacants-du-parc-prive-par-commune-au-01012019-lovac-1",
-      "title": "LOVAC_Communes au 01012019",
-      "id": "logements-vacants-du-parc-prive-par-commune-au-01012019-lovac-1"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/lovac-communes-01012020",
+      "title": "LOVAC - Communes (01/01/2020)",
+      "id": "lovac-communes-01012020"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/lovac_epci-au-01012019",
-      "title": "LOVAC_EPCI au 01012019",
-      "id": "lovac_epci-au-01012019"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/lovac-epci-01012020",
+      "title": "LOVAC - EPCI (01/01/2020)",
+      "id": "lovac-epci-01012020"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/lovac_dep-au-01012019",
-      "title": "LOVAC_Dep au 01012019",
-      "id": "lovac_dep-au-01012019"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/lovac-departements-01012020",
+      "title": "LOVAC - Départements (01/01/2020)",
+      "id": "lovac-departements-01012020"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/lovac_reg-au-01012019",
-      "title": "LOVAC_Reg au 01012019",
-      "id": "lovac_reg-au-01012019"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/lovac-regions-01012020",
+      "title": "LOVAC - Régions (01/01/2020)",
+      "id": "lovac-regions-01012020"
     },
     {
       "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-neufs-communes-18",

@@ -21,7 +21,7 @@
           <span>Logements vacants privés</span>
         </v-col>
         <v-col :cols="4">
-          <strong v-if="lovacData">{{ lovacData.Nb_logvac_pp_010119.toLocaleString('fr') }}</strong>
+          <strong v-if="lovacData">{{ lovacData.Nb_logvac_pp.toLocaleString('fr') }}</strong>
           <strong v-else>inconnu</strong>
         </v-col>
       </v-row>
@@ -30,7 +30,7 @@
           <span>Taux de vacance</span>
         </v-col>
         <v-col :cols="4">
-          <strong v-if="lovacData">{{ lovacData.Prop_logvac_pp_010119.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+          <strong v-if="lovacData">{{ lovacData.Prop_logvac_pp.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
           <strong v-else>inconnu</strong>
         </v-col>
       </v-row>
@@ -39,7 +39,7 @@
           <span>Logements vacants &lt; 2 ans</span>
         </v-col>
         <v-col :cols="4">
-          <strong v-if="lovacData">{{ lovacData.Prop_logvac_pp_C_010119.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+          <strong v-if="lovacData">{{ lovacData.Prop_logvac_pp_C.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
           <strong v-else>inconnu</strong>
         </v-col>
       </v-row>
@@ -48,7 +48,7 @@
           <span>Logements vacants &gt; 2 ans</span>
         </v-col>
         <v-col :cols="4">
-          <strong v-if="lovacData">{{ lovacData.Prop_logvac_pp_2A_010119.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+          <strong v-if="lovacData">{{ lovacData.Prop_logvac_pp_2A.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
           <strong v-else>inconnu</strong>
         </v-col>
       </v-row>
@@ -57,7 +57,7 @@
           <span>Logements privés</span>
         </v-col>
         <v-col :cols="4">
-          <strong v-if="lovacData">{{ lovacData.Nb_log_pp_2020.toLocaleString('fr') }}</strong>
+          <strong v-if="lovacData">{{ lovacData.Nb_log_pp.toLocaleString('fr') }}</strong>
           <strong v-else>inconnu</strong>
         </v-col>
       </v-row>
@@ -89,7 +89,7 @@
       class="text-caption text-center grey--text text--darken-1"
       style="width:100%"
     >
-      Sources : Lovac 2019
+      Sources : Lovac 2020
     </div>
   </v-card>
 </template>
@@ -104,7 +104,7 @@ export default {
     ...mapState(['lovacData']),
     ...mapGetters(['config']),
     title () {
-      return 'Logements Vacants Privés  (Lovac 2019)'
+      return 'Logements Vacants Privés  (Lovac 2020)'
     }
   }
 }

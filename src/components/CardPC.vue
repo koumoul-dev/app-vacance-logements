@@ -170,7 +170,7 @@ export default {
     // },
     lgtPerc () {
       if (!this.lgtTot) return 0
-      return Math.min((this.lovacData.Nb_logvac_2A_010119 || 0) * 100 / this.lgtTot, 100)
+      return Math.min((this.lovacData.Nb_logvac_2A || 0) * 100 / this.lgtTot, 100)
     },
     title () {
       return 'Aménagement et urbanisme  (Sitadel 2018)'
