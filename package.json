@@ -1,6 +1,7 @@
 {
   "name": "app-vacance-logements",
   "version": "0.1.16",
+  "license": "MIT",
   "files": [
     "dist"
   ],
