@@ -15,8 +15,7 @@
     "prepublish": "PUBLIC_URL=https://cdn.jsdelivr.net/npm/app-vacance-logements@${npm_package_version}/dist vue-cli-service build --modern"
   },
   "dependencies": {
-    "@data-fair/components-app": "^0.2.3",
-    "@data-fair/dev-server": "^1.0.1",
+    "@data-fair/components-app": "^0.4.1",
     "axios": "^0.21.1",
     "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
@@ -30,6 +29,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.0",
+    "@data-fair/dev-server": "~1.7.3",
     "@data-fair/vue-cli-plugin-app": "~0.1.2",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "^5.0.0-rc.1",

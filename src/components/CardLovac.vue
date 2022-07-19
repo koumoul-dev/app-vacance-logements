@@ -8,8 +8,7 @@
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       {{ config.titleLovac }}
       <card-description
-        :title="title"
-        field="descLovac"
+        field="Lovac"
       />
     </div>
     <v-card-text
@@ -102,10 +101,7 @@ export default {
   components: { CardDescription },
   computed: {
     ...mapState(['lovacData']),
-    ...mapGetters(['config']),
-    title () {
-      return 'Logements Vacants Privés  (Lovac 2020)'
-    }
+    ...mapGetters(['config'])
   }
 }
 </script>

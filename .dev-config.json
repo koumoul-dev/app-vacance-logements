@@ -94,5 +94,10 @@
   "titlePC": "PC AUTORISES !!!",
   "titleLovac": "VACANCE LOVAC !!!",
   "titleInsee": "VACANCE INSEE !!!!!",
-  "titleParc": "PARC !!!!!!!!!!!!!"
+  "titleParc": "PARC !!!!!!!!!!!!!",
+  "titleTooltipGES": "Emissions de Gaz à Effet de Serre (estimations, eqCO2)",
+  "titleTooltipPC": "Aménagement et urbanisme  (Sitadel 2018)",
+  "titleTooltipLovac": "Logements Vacants Privés  (Lovac 2020)",
+  "titleTooltipInsee": "Logements Vacants",
+  "titleTooltipParc": "Parc total de logements"
 }

@@ -8,8 +8,7 @@
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       {{ config.titleParc }}
       <card-description
-        :title="title"
-        field="descParc"
+        field="Parc"
       />
     </div>
     <v-card-text
@@ -155,9 +154,6 @@ export default {
         '1991 - 2005',
         '2006 - 2015'
       ]
-    },
-    title () {
-      return 'Parc total de logements (Insee 2018)'
     }
   }
 }

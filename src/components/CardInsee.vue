@@ -8,8 +8,7 @@
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       {{ config.titleInsee }}
       <card-description
-        :title="title"
-        field="descInsee"
+        field="Insee"
       />
     </div>
     <v-card-text
@@ -182,7 +181,7 @@ export default {
     },
     agesColl () {
       return [
-        this.log1Data.LV_av19_COL,
+        this.log1Data.LV_av19_COLL || this.log1Data.LV_av19_COL, // or for temporary compatibility
         this.log1Data.LV_19_45_COLL,
         this.log1Data.LV_46_70_COLL,
         this.log1Data.LV_71_90_COLL,
@@ -199,9 +198,6 @@ export default {
         '1991 - 2005',
         '2006 - 2015'
       ]
-    },
-    title () {
-      return 'Logements Vacants (Insee 2018)'
     }
   }
 }

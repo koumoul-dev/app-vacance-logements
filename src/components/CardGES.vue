@@ -8,8 +8,7 @@
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       {{ config.titleGES }}
       <card-description
-        :title="title"
-        field="descGES"
+        field="GES"
       />
     </div>
     <v-card-text
@@ -124,9 +123,6 @@ export default {
     },
     totGES () {
       return this.constIndiv + this.constColl
-    },
-    title () {
-      return 'Emissions de Gaz à Effet de Serre (estimations, eqCO2)'
     }
   }
 }

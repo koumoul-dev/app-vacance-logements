@@ -46,7 +46,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   props: {
-    title: { type: String, required: true },
     field: { type: String, required: true }
   },
   data () {
@@ -57,7 +56,10 @@ export default {
   computed: {
     ...mapGetters(['config']),
     text () {
-      return marked.parse(this.config[this.field])
+      return marked.parse(this.config['desc' + this.field])
+    },
+    title () {
+      return this.config['titleTooltip' + this.field]
     }
   }
 }

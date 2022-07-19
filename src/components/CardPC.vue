@@ -8,8 +8,7 @@
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
       {{ config.titlePC }}
       <card-description
-        :title="title"
-        field="descPC"
+        field="PC"
       />
     </div>
     <v-card-text
@@ -159,21 +158,9 @@ export default {
   computed: {
     ...mapState(['pcData', 'lovacData', 'log1Data']),
     ...mapGetters(['config']),
-    // lgtTot () {
-    //   return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_TOT_CREES, 0)
-    // },
-    // lgtInd () {
-    //   return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_IND_CREES, 0)
-    // },
-    // lgtCol () {
-    //   return this.pcData.reduce((acc, curr) => acc + curr.NB_LGT_COL_CREES, 0)
-    // },
     lgtPerc () {
       if (!this.lgtTot) return 0
       return Math.min((this.lovacData.Nb_logvac_2A || 0) * 100 / this.lgtTot, 100)
-    },
-    title () {
-      return 'Aménagement et urbanisme  (Sitadel 2018)'
     }
   }
 }
