@@ -102,7 +102,7 @@
               <span>Flux d’artificialisation global</span>
             </v-col>
             <v-col :cols="4">
-              <strong>{{ (pcData.naf18art19 / 10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
+              <strong>{{ ((pcData.naf19art20 || pcData.naf18art19) / 10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
             </v-col>
           </v-row>
           <v-row align="center">
@@ -110,7 +110,7 @@
               <span>Flux d’artificialisation pour l’habitat</span>
             </v-col>
             <v-col :cols="4">
-              <strong>{{ (pcData.art18hab19/10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
+              <strong>{{ ((pcData.art19hab20 || pcData.art18hab19)/10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
             </v-col>
           </v-row>
         </v-col>
