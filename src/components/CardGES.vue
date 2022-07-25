@@ -101,7 +101,7 @@
       class="text-caption text-center grey--text text--darken-1"
       style="width:100%"
     >
-      Sources : Ademe, Base Carbone
+      Sources : {{ config.sourcesGES }}
     </div>
   </v-card>
 </template>

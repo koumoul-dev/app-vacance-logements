@@ -154,7 +154,7 @@
       class="text-caption text-center grey--text text--darken-1"
       style="width:100%;"
     >
-      Sources : Insee RP2013/2018
+      Sources : {{ config.sourcesInsee }}
     </div>
   </v-card>
 </template>

@@ -88,7 +88,7 @@
       class="text-caption text-center grey--text text--darken-1"
       style="width:100%"
     >
-      Sources : Lovac 2020
+      Sources : {{ config.sourcesLovac }}
     </div>
   </v-card>
 </template>

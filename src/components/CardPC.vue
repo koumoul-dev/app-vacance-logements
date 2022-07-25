@@ -102,7 +102,7 @@
               <span>Flux d’artificialisation global</span>
             </v-col>
             <v-col :cols="4">
-              <strong>{{ ((pcData.naf19art20 || pcData.naf18art19) / 10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
+              <strong>{{ (pcData.naf19art20/ 10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
             </v-col>
           </v-row>
           <v-row align="center">
@@ -110,7 +110,7 @@
               <span>Flux d’artificialisation pour l’habitat</span>
             </v-col>
             <v-col :cols="4">
-              <strong>{{ ((pcData.art19hab20 || pcData.art18hab19)/10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
+              <strong>{{ (pcData.art19hab20/10000).toLocaleString('fr', {maximumFractionDigits: 2}) }} ha</strong>
             </v-col>
           </v-row>
         </v-col>
@@ -143,7 +143,7 @@
       class="text-caption text-center grey--text text--darken-1"
       style="width:100%"
     >
-      Sources : SITADEL2, CEREMA
+      Sources : {{ config.sourcesPC }}
     </div>
   </v-card>
 </template>
