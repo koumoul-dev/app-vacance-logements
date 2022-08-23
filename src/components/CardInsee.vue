@@ -1,7 +1,8 @@
 <template>
   <v-card
     flat
-    color="#dcdba8"
+    :color="params('capture') !== 'true' ? '#dcdba8' : undefined"
+    :outlined="params('capture') === 'true'"
     rounded="xl"
     style="height:100%;display: flex;flex-flow: column;"
   >
@@ -198,6 +199,12 @@ export default {
         '1991 - 2005',
         '2006 - 2015'
       ]
+    }
+  },
+  methods: {
+    params (p) {
+      const params = new URLSearchParams(window.location.search)
+      return params.get(p)
     }
   }
 }

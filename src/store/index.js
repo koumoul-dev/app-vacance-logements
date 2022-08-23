@@ -104,6 +104,9 @@ export default () => {
     getters: {
       config (state) {
         return state.application && state.application.configuration
+      },
+      captureUrl (state) {
+        return state.application.captureUrl || 'http://localhost:5889'
       }
     },
     mutations: {

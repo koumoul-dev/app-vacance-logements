@@ -1,0 +1,12 @@
+version: '3'
+services:
+  capture:
+    image: koumoul/capture:master
+    network_mode: host
+    shm_size: '1gb'
+    environment:
+      - DEBUG=capture
+      - PUBLIC_URL=http://localhost:5889
+      - PORT=5889
+      - ONLY_SAME_HOST=false
+

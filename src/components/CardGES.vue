@@ -1,7 +1,8 @@
 <template>
   <v-card
     flat
-    color="#c9dbba"
+    :color="params('capture') !== 'true' ? '#c9dbba' : undefined"
+    :outlined="params('capture') === 'true'"
     rounded="xl"
     style="height:100%;display: flex;flex-flow: column;"
   >
@@ -123,6 +124,12 @@ export default {
     },
     totGES () {
       return this.constIndiv + this.constColl
+    }
+  },
+  methods: {
+    params (p) {
+      const params = new URLSearchParams(window.location.search)
+      return params.get(p)
     }
   }
 }

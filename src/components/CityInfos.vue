@@ -15,7 +15,7 @@
       >
         <v-list-item
           color="primary"
-          :input-value="currentLevel === 'region'"
+          :input-value="params('capture') !== 'true' && currentLevel === 'region'"
           @click="select('region')"
         >
           <v-list-item-content>
@@ -35,7 +35,7 @@
       >
         <v-list-item
           color="primary"
-          :input-value="currentLevel === 'department'"
+          :input-value="params('capture') !== 'true' && currentLevel === 'department'"
           @click="select('department')"
         >
           <v-list-item-content>
@@ -55,7 +55,7 @@
       >
         <v-list-item
           color="primary"
-          :input-value="currentLevel === 'epci'"
+          :input-value="params('capture') !== 'true' && currentLevel === 'epci'"
           @click="select('epci')"
         >
           <v-list-item-content>
@@ -75,7 +75,7 @@
       >
         <v-list-item
           color="primary"
-          :input-value="currentLevel === 'city'"
+          :input-value="params('capture') !== 'true' && currentLevel === 'city'"
           @click="select('city')"
         >
           <v-list-item-content>
@@ -111,10 +111,26 @@ export default {
   computed: {
     ...mapState(['inseeInfos', 'currentLevel'])
   },
+  mounted () {
+    const params = new URLSearchParams(window.location.search)
+    if (!params.get('current-level')) {
+      params.set('current-level', this.currentLevel)
+      window.history.replaceState(null, null, '?' + params.toString())
+    } else {
+      this.$store.state.currentLevel = params.get('current-level')
+    }
+  },
   methods: {
+    params (p) {
+      const params = new URLSearchParams(window.location.search)
+      return params.get(p)
+    },
     select (level) {
       if (level !== this.currentLevel) {
         this.$store.commit('setAny', { currentLevel: level })
+        const params = new URLSearchParams(window.location.search)
+        params.set('current-level', level)
+        window.history.replaceState(null, null, '?' + params.toString())
         this.$store.dispatch('fetch')
       }
     }

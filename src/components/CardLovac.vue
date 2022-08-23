@@ -1,7 +1,8 @@
 <template>
   <v-card
     flat
-    color="#b0e0e6"
+    :color="params('capture') !== 'true' ? '#b0e0e6' : undefined"
+    :outlined="params('capture') === 'true'"
     rounded="xl"
     style="height:100%;display: flex;flex-flow: column;"
   >
@@ -102,6 +103,12 @@ export default {
   computed: {
     ...mapState(['lovacData']),
     ...mapGetters(['config'])
+  },
+  methods: {
+    params (p) {
+      const params = new URLSearchParams(window.location.search)
+      return params.get(p)
+    }
   }
 }
 </script>

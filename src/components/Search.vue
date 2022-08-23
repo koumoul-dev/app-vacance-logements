@@ -6,6 +6,7 @@
       :order-sm="0"
     >
       <a
+        v-if="config.leftLogo.length"
         :href="config.leftLink"
         target="blank"
       >
@@ -22,6 +23,7 @@
       :order-sm="2"
     >
       <a
+        v-if="config.rightLogo.length"
         :href="config.rightLink"
         target="blank"
       >
@@ -33,6 +35,7 @@
       </a>
     </v-col>
     <v-col
+      v-if="params('capture') !== 'true'"
       :cols="12"
       :sm="6"
       :order-sm="1"
@@ -89,7 +92,27 @@ export default {
       this.loading = false
     },
     city () {
+      const params = new URLSearchParams(window.location.search)
+      params.set('city-code', this.city.value)
+      params.set('city-text', this.city.text)
+      window.history.replaceState(null, null, '?' + params.toString())
       this.$store.dispatch('refresh')
+    }
+  },
+  mounted () {
+    const params = new URLSearchParams(window.location.search)
+    const value = params.get('city-code')
+    const text = params.get('city-text')
+    if (value && text) {
+      this.search = text
+      this.cities = [{ value, text }]
+      this.$store.state.city = { value, text }
+    }
+  },
+  methods: {
+    params (p) {
+      const params = new URLSearchParams(window.location.search)
+      return params.get(p)
     }
   }
 }

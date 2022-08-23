@@ -7,6 +7,33 @@
           data-iframe-height
         >
           <search />
+          <v-tooltip
+            v-if="inseeInfos && params('capture') !== 'true'"
+            top
+          >
+            <template #activator="{ on }">
+              <v-btn
+                :disabled="!!downloading"
+                icon
+                fab
+                absolute
+                right
+                target="_blank"
+                @click="download(captureLink, inseeInfos.INSEE_COM+'-'+currentLevel+'.pdf')"
+                v-on="on"
+              >
+                <v-icon v-if="!downloading">
+                  mdi-file-pdf-box
+                </v-icon>
+                <v-progress-circular
+                  v-else
+                  indeterminate
+                  color="primary"
+                />
+              </v-btn>
+            </template>
+            <span>Exporter au format PDF</span>
+          </v-tooltip>
           <v-container
             v-if="inseeInfos"
             class="pa-0"
@@ -92,6 +119,8 @@ import CardLovac from './components/CardLovac'
 import CardPc from './components/CardPC'
 import CardGes from './components/CardGES'
 import CityInfos from './components/CityInfos'
+import fileDownload from 'js-file-download'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -104,18 +133,35 @@ export default {
     CardGes,
     CityInfos
   },
+  data: () => ({
+    downloading: false
+  }),
   computed: {
-    ...mapState(['application', 'inseeInfos', 'loading']),
-    ...mapGetters(['config']),
+    ...mapState(['application', 'inseeInfos', 'loading', 'currentLevel']),
+    ...mapGetters(['config', 'captureUrl']),
     configureError () {
-      // if (!this.datasetUrl) return 'Veuillez sélectionner une source de données'
       return null
+    },
+    captureLink () {
+      const params = new URLSearchParams(window.location.search)
+      params.set('capture', true)
+      return `${this.captureUrl}/api/v1/print?format=A2&target=${encodeURIComponent(this.application.exposedUrl + '?' + params.toString())}`
     }
   },
   methods: {
     params (p) {
       const params = new URLSearchParams(window.location.search)
       return params.get(p)
+    },
+    async download (url, name) {
+      this.downloading = true
+      try {
+        const { data } = await axios.get(url, { responseType: 'blob' })
+        fileDownload(data, name)
+      } catch (err) {
+        console.log(err)
+      }
+      this.downloading = null
     }
   }
 }
