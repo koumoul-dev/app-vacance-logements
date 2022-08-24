@@ -15,7 +15,7 @@
       >
         <v-list-item
           color="primary"
-          :input-value="params('capture') !== 'true' && currentLevel === 'region'"
+          :input-value="!capture && currentLevel === 'region'"
           @click="select('region')"
         >
           <v-list-item-content>
@@ -35,7 +35,7 @@
       >
         <v-list-item
           color="primary"
-          :input-value="params('capture') !== 'true' && currentLevel === 'department'"
+          :input-value="!capture && currentLevel === 'department'"
           @click="select('department')"
         >
           <v-list-item-content>
@@ -55,7 +55,7 @@
       >
         <v-list-item
           color="primary"
-          :input-value="params('capture') !== 'true' && currentLevel === 'epci'"
+          :input-value="!capture && currentLevel === 'epci'"
           @click="select('epci')"
         >
           <v-list-item-content>
@@ -75,7 +75,7 @@
       >
         <v-list-item
           color="primary"
-          :input-value="params('capture') !== 'true' && currentLevel === 'city'"
+          :input-value="!capture && currentLevel === 'city'"
           @click="select('city')"
         >
           <v-list-item-content>
@@ -109,28 +109,29 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['inseeInfos', 'currentLevel'])
+    ...mapState(['inseeInfos', 'currentLevel']),
+    capture () {
+      return window.triggerCapture
+    }
   },
   mounted () {
-    const params = new URLSearchParams(window.location.search)
-    if (!params.get('current-level')) {
-      params.set('current-level', this.currentLevel)
-      window.history.replaceState(null, null, '?' + params.toString())
+    const queryParams = new URLSearchParams(window.location.search)
+    if (!queryParams.get('current-level')) {
+      queryParams.set('current-level', this.currentLevel)
+      window.history.replaceState(null, null, '?' + queryParams.toString())
+      if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams }, '*')
     } else {
-      this.$store.state.currentLevel = params.get('current-level')
+      this.$store.state.currentLevel = queryParams.get('current-level')
     }
   },
   methods: {
-    params (p) {
-      const params = new URLSearchParams(window.location.search)
-      return params.get(p)
-    },
     select (level) {
       if (level !== this.currentLevel) {
         this.$store.commit('setAny', { currentLevel: level })
-        const params = new URLSearchParams(window.location.search)
-        params.set('current-level', level)
-        window.history.replaceState(null, null, '?' + params.toString())
+        const queryParams = new URLSearchParams(window.location.search)
+        queryParams.set('current-level', level)
+        window.history.replaceState(null, null, '?' + queryParams.toString())
+        if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams }, '*')
         this.$store.dispatch('fetch')
       }
     }

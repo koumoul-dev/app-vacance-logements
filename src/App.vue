@@ -8,7 +8,7 @@
         >
           <search />
           <v-tooltip
-            v-if="inseeInfos && params('capture') !== 'true'"
+            v-if="inseeInfos && !capture"
             top
           >
             <template #activator="{ on }">
@@ -145,7 +145,10 @@ export default {
     captureLink () {
       const params = new URLSearchParams(window.location.search)
       params.set('capture', true)
-      return `${this.captureUrl}/api/v1/print?format=A2&target=${encodeURIComponent(this.application.exposedUrl + '?' + params.toString())}`
+      return `${this.captureUrl}/api/v1/screenshot?width=1300&height=1500&target=${encodeURIComponent(this.application.exposedUrl + '?' + params.toString())}`
+    },
+    capture () {
+      return window.triggerCapture
     }
   },
   methods: {

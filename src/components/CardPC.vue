@@ -1,8 +1,8 @@
 <template>
   <v-card
     flat
-    :color="params('capture') !== 'true' ? '#faa381' : undefined"
-    :outlined="params('capture') === 'true'"
+    :color="!capture ? '#faa381' : undefined"
+    :outlined="capture"
     rounded="xl"
     style="height:100%;display: flex;flex-flow: column;"
   >
@@ -162,12 +162,9 @@ export default {
     lgtPerc () {
       if (!this.lgtTot) return 0
       return Math.min((this.lovacData.Nb_logvac_2A || 0) * 100 / this.lgtTot, 100)
-    }
-  },
-  methods: {
-    params (p) {
-      const params = new URLSearchParams(window.location.search)
-      return params.get(p)
+    },
+    capture () {
+      return window.triggerCapture
     }
   }
 }

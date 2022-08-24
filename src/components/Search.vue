@@ -35,7 +35,7 @@
       </a>
     </v-col>
     <v-col
-      v-if="params('capture') !== 'true'"
+      v-if="!capture"
       :cols="12"
       :sm="6"
       :order-sm="1"
@@ -92,11 +92,15 @@ export default {
       this.loading = false
     },
     city () {
-      const params = new URLSearchParams(window.location.search)
-      params.set('city-code', this.city.value)
-      params.set('city-text', this.city.text)
-      window.history.replaceState(null, null, '?' + params.toString())
+      const queryParams = new URLSearchParams(window.location.search)
+      queryParams.set('city-code', this.city.value)
+      queryParams.set('city-text', this.city.text)
+      window.history.replaceState(null, null, '?' + queryParams.toString())
+      if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams }, '*')
       this.$store.dispatch('refresh')
+    },
+    capture () {
+      return window.triggerCapture
     }
   },
   mounted () {
@@ -107,12 +111,6 @@ export default {
       this.search = text
       this.cities = [{ value, text }]
       this.$store.state.city = { value, text }
-    }
-  },
-  methods: {
-    params (p) {
-      const params = new URLSearchParams(window.location.search)
-      return params.get(p)
     }
   }
 }

@@ -1,8 +1,8 @@
 <template>
   <v-card
     flat
-    :color="params('capture') !== 'true' ? '#c9dbba' : undefined"
-    :outlined="params('capture') === 'true'"
+    :color="!capture ? '#c9dbba' : undefined"
+    :outlined="capture"
     rounded="xl"
     style="height:100%;display: flex;flex-flow: column;"
   >
@@ -124,12 +124,9 @@ export default {
     },
     totGES () {
       return this.constIndiv + this.constColl
-    }
-  },
-  methods: {
-    params (p) {
-      const params = new URLSearchParams(window.location.search)
-      return params.get(p)
+    },
+    capture () {
+      return window.triggerCapture
     }
   }
 }

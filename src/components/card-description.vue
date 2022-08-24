@@ -1,6 +1,6 @@
 <template>
   <v-menu
-    v-if="params('capture') !== 'true'"
+    v-if="!capture"
     v-model="menu"
     :min-width="`${Math.max(336,windowWidth/3)}px`"
     offset-y
@@ -61,12 +61,9 @@ export default {
     },
     title () {
       return this.config['titleTooltip' + this.field]
-    }
-  },
-  methods: {
-    params (p) {
-      const params = new URLSearchParams(window.location.search)
-      return params.get(p)
+    },
+    capture () {
+      return window.triggerCapture
     }
   }
 }
