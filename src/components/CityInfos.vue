@@ -115,23 +115,23 @@ export default {
     }
   },
   mounted () {
-    const queryParams = new URLSearchParams(window.location.search)
-    if (!queryParams.get('current-level')) {
-      queryParams.set('current-level', this.currentLevel)
-      window.history.replaceState(null, null, '?' + queryParams.toString())
-      if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams }, '*')
+    const params = new URLSearchParams(window.location.search)
+    if (!params.get('current-level')) {
+      params.set('current-level', this.currentLevel)
+      window.history.replaceState(null, null, '?' + params.toString())
+      if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams: Object.fromEntries(params) }, '*')
     } else {
-      this.$store.state.currentLevel = queryParams.get('current-level')
+      this.$store.state.currentLevel = params.get('current-level')
     }
   },
   methods: {
     select (level) {
       if (level !== this.currentLevel) {
         this.$store.commit('setAny', { currentLevel: level })
-        const queryParams = new URLSearchParams(window.location.search)
-        queryParams.set('current-level', level)
-        window.history.replaceState(null, null, '?' + queryParams.toString())
-        if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams }, '*')
+        const params = new URLSearchParams(window.location.search)
+        params.set('current-level', level)
+        window.history.replaceState(null, null, '?' + params.toString())
+        if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams: Object.fromEntries(params) }, '*')
         this.$store.dispatch('fetch')
       }
     }

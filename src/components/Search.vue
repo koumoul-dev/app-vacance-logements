@@ -75,6 +75,9 @@ export default {
     city: {
       set: async function (val) { this.$store.state.city = val },
       get () { return this.$store.state.city }
+    },
+    capture () {
+      return window.triggerCapture
     }
   },
   watch: {
@@ -92,15 +95,12 @@ export default {
       this.loading = false
     },
     city () {
-      const queryParams = new URLSearchParams(window.location.search)
-      queryParams.set('city-code', this.city.value)
-      queryParams.set('city-text', this.city.text)
-      window.history.replaceState(null, null, '?' + queryParams.toString())
-      if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams }, '*')
+      const params = new URLSearchParams(window.location.search)
+      params.set('city-code', this.city.value)
+      params.set('city-text', this.city.text)
+      window.history.replaceState(null, null, '?' + params.toString())
+      if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams: Object.fromEntries(params) }, '*')
       this.$store.dispatch('refresh')
-    },
-    capture () {
-      return window.triggerCapture
     }
   },
   mounted () {
