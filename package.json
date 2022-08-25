@@ -21,6 +21,8 @@
     "core-js": "^3.6.5",
     "iframe-resizer": "^4.3.2",
     "js-file-download": "^0.4.12",
+    "mapbox-gl-supported": "^1.2.0",
+    "maplibre-gl": "^1.14.0",
     "marked": "^4.0.12",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.1",

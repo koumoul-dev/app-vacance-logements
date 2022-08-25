@@ -7,33 +7,6 @@
           data-iframe-height
         >
           <search />
-          <v-tooltip
-            v-if="inseeInfos && !capture"
-            top
-          >
-            <template #activator="{ on }">
-              <v-btn
-                :disabled="!!downloading"
-                icon
-                fab
-                absolute
-                right
-                target="_blank"
-                @click="download(captureLink, inseeInfos.INSEE_COM+'-'+currentLevel+'.pdf')"
-                v-on="on"
-              >
-                <v-icon v-if="!downloading">
-                  mdi-file-pdf-box
-                </v-icon>
-                <v-progress-circular
-                  v-else
-                  indeterminate
-                  color="primary"
-                />
-              </v-btn>
-            </template>
-            <span>Exporter au format PDF</span>
-          </v-tooltip>
           <v-container
             v-if="inseeInfos"
             class="pa-0"
@@ -43,8 +16,17 @@
               v-if="!loading"
               class="mx-0"
             >
-              <v-col :cols="12">
+              <v-col
+                :cols="12"
+                :md="7"
+              >
                 <card-parc />
+              </v-col>
+              <v-col
+                :cols="12"
+                :md="5"
+              >
+                <ml-map />
               </v-col>
               <v-col
                 :cols="12"
@@ -119,6 +101,7 @@ import CardLovac from './components/CardLovac'
 import CardPc from './components/CardPC'
 import CardGes from './components/CardGES'
 import CityInfos from './components/CityInfos'
+import MlMap from './components/Map'
 import fileDownload from 'js-file-download'
 import axios from 'axios'
 
@@ -131,24 +114,17 @@ export default {
     CardLovac,
     CardPc,
     CardGes,
-    CityInfos
+    CityInfos,
+    MlMap
   },
   data: () => ({
     downloading: false
   }),
   computed: {
     ...mapState(['application', 'inseeInfos', 'loading', 'currentLevel']),
-    ...mapGetters(['config', 'captureUrl']),
+    ...mapGetters(['config']),
     configureError () {
       return null
-    },
-    captureLink () {
-      const params = new URLSearchParams(window.location.search)
-      params.set('capture', true)
-      return `${this.captureUrl}/api/v1/screenshot?width=1300&height=1500&target=${encodeURIComponent(this.application.exposedUrl + '?' + params.toString())}`
-    },
-    capture () {
-      return window.triggerCapture
     }
   },
   methods: {

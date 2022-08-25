@@ -99,7 +99,12 @@ export default () => {
       lovacData: null,
       evolutionData: null,
       pcData: null,
-      currentLevel: 'city'
+      currentLevel: 'city',
+      compare: {
+        datasetOffset: 0,
+        property: 'TX_RP'
+      },
+      compareData: null
     },
     getters: {
       config (state) {
@@ -107,6 +112,9 @@ export default () => {
       },
       captureUrl (state) {
         return state.application.captureUrl || 'http://localhost:5889'
+      },
+      tileserverUrl (state) {
+        return state.application.apiUrl + '/remote-services/tileserver-koumoul/proxy'
       }
     },
     mutations: {
@@ -116,7 +124,7 @@ export default () => {
     },
     actions: {
       async refresh ({ state, getters, commit, dispatch }) {
-        commit('setAny', { inseeInfos: null })
+        // commit('setAny', { inseeInfos: null })
         if (state.city) {
           try {
             const code = inseeMapping[state.city.value] || state.city.value
@@ -126,12 +134,13 @@ export default () => {
               inseeInfos.INSEE_COM = state.city.value
               inseeInfos.NOM_COM = state.city.text.split(' (')[0]
             }
-            commit('setAny', { inseeInfos, currentLevel: 'city' })
+            // commit('setAny', { inseeInfos, currentLevel: 'city' })
+            commit('setAny', { inseeInfos })
           } catch (err) { }
         }
         dispatch('fetch')
       },
-      async fetch ({ state, getters, commit }) {
+      async fetch ({ state, getters, commit, dispatch }) {
         commit('setAny', {
           log1Data: null,
           lovacData: null,
@@ -152,7 +161,26 @@ export default () => {
             commit('setAny', { log1Data, lovacData, evolutionData, pcData })
           } catch (err) { }
           commit('setAny', { loading: false })
+          dispatch('fetchCompare')
         }
+      },
+      async fetchCompare ({ state, getters, commit }) {
+        try {
+          const propName = {
+            0: inseePropName[state.currentLevel],
+            4: inseePropName[state.currentLevel],
+            8: lovacPropName[state.currentLevel],
+            12: pcPropName[state.currentLevel]
+          }[state.compare.datasetOffset]
+          const params = { size: 2000, select: state.compare.property + ',' + propName }
+          if (state.currentLevel === 'city') {
+            params.qs = (state.compare.datasetOffset === 8 ? 'CODE_DEPT' : 'DEP') + ':' + state.log1Data.DEP
+          }
+          // const params = { qs: `${lovacPropName[state.currentLevel]}:${state.inseeInfos[levelPropName[state.currentLevel]]}` }
+          const results = (await axios.get(getters.config.datasets[state.compare.datasetOffset + levelOffset[state.currentLevel]].href + '/lines', { params })).data.results
+          commit('setAny', { compareData: results })
+          // commit('setAny', { log1Data, lovacData, evolutionData, pcData })
+        } catch (err) { }
       },
       async setError ({ state }, error) {
         console.error('report error', error)
