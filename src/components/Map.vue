@@ -1,5 +1,9 @@
 <template lang="html">
-  <div :style="`height:100%;width:100%`">
+  <v-card
+    :style="`height:100%;min-height:400px;width:100%`"
+    rounded="lg"
+    flat
+  >
     <v-progress-linear
       v-if="loading"
       style="z-index:1;pointer-events: none;"
@@ -10,12 +14,14 @@
       id="map"
       :style="`height: calc(100% - 4px);margin-top:${!loading ? 4 : 0}px`"
     />
-  </div>
+  </v-card>
 </template>
+
 <script>
 import { mapState, mapGetters } from 'vuex'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import axios from 'axios'
+import { levelPropName, lovacPropName, inseePropName, pcPropName, levelOffset } from '../assets/defs.js'
 
 const maplibregl = require('maplibre-gl')
 
@@ -24,13 +30,6 @@ const zooms = {
   epci: 9,
   department: 7,
   region: 6
-}
-
-const levelPropName = {
-  city: 'INSEE_COM',
-  epci: 'CODE_EPCI',
-  department: 'INSEE_DEP',
-  region: 'INSEE_REG'
 }
 
 const levels = [{
@@ -54,46 +53,38 @@ const levels = [{
 
 export default {
   data: () => ({
-    loading: true
+    loading: true,
+    compareLevel: null,
+    compareData: null,
+    selected: null
   }),
   computed: {
-    ...mapState(['inseeInfos', 'currentLevel', 'compareData']),
+    ...mapState(['inseeInfos', 'currentLevel', 'compare']),
     ...mapGetters(['tileserverUrl', 'config'])
   },
   watch: {
-    // layers: {
-    //   handler (layers) {
-    //     for (const layer of Object.values(layers)) {
-    //       for (const id of layer.ids) {
-    //         this.map.setLayoutProperty(id, 'visibility', layer.visible ? 'visible' : 'none')
-    //         const l = this.config.layers.find(e => e.dataset.id === id)
-    //         const source = this.map.getSource(id)
-    //         if (source && source.tiles) {
-    //           const select = ['_id']
-    //           if (l.colors.type === 'enum' && l.colors.enumOptions.field) select.push(l.colors.enumOptions.field)
-    //           else if (l.colors.type === 'range' && l.colors.rangeOptions.field) select.push(l.colors.rangeOptions.field)
-    //           if (l.shapes.type === 'icon-multiple' && l.shapes.field) select.push(l.shapes.field)
-    //           else if (l.shapes.type === 'circle' && layer.shapes.radius.field) select.push(l.shapes.radius.field)
-    //           const qs = []
-    //           Object.entries(layer.filters || {}).forEach(([field, value]) => {
-    //             qs.push(`(${field}:"${value}")`)
-    //           })
-    //           const dataTilesUrl = `${this.datasetInfos[id].href}/lines?format=pbf&size=10000&sort=_rand&select=${select.join(',')}${qs.length ? ('&qs=' + qs.join(' AND ')) : ''}&finalizedAt=${this.datasets[id].finalizedAt}&xyz={x},{y},{z}`
-    //           if (source.tiles[0] !== dataTilesUrl) {
-    //             source.tiles = [dataTilesUrl]
-    //             this.map.style.sourceCaches[id].clearTiles()
-    //             this.map.style.sourceCaches[id].update(this.map.transform)
-    //             this.map.triggerRepaint()
-    //           }
-    //         }
-    //       }
-    //     }
-    //   },
-    //   deep: true
-    // },
-    // datasets (val) {
-    //   if (!this.map) this.initMap()
-    // },
+    compare: {
+      handler () {
+        this.updateCompare()
+      },
+      deep: true
+    },
+    inseeInfos: {
+      handler (newV, oldV) {
+        this.selectFeature()
+        if (!oldV || newV.INSEE_REG !== oldV.INSEE_REG) this.updateCompare()
+      },
+      deep: true
+    },
+    currentLevel (newV, oldV) {
+      if (this.map && this.map.isStyleLoaded()) this.updateAdminDivsLayer(newV, oldV)
+    },
+    loading (val) {
+      if (!val && this.map) {
+        this.map.resize()
+        this.loading = false
+      }
+    }
   },
   mounted () {
     this.initMap()
@@ -125,68 +116,7 @@ export default {
       this.map.on('moveend', (e) => { this.loading = true })
       this.map.once('load', () => {
         this.map.addSource('admin-divs', { type: 'vector', tiles: [this.tileserverUrl + '/data/admin-divs-latest/{z}/{x}/{y}.pbf'], promoteId: 'code' })
-        for (const level of levels) {
-          if (level.id === this.currentLevel) {
-            this.map.addLayer({
-              id: 'admin-divs-colors-' + level.id,
-              type: 'fill',
-              source: 'admin-divs',
-              'source-layer': level['source-layer'],
-              paint: {
-                'fill-color': ['string', ['feature-state', 'color'], 'white'],
-                'fill-opacity': 0.7
-              }
-            })
-
-            this.map.addLayer({
-              id: 'admin-divs-lines-' + level.id,
-              type: 'line',
-              source: 'admin-divs',
-              'source-layer': level['source-layer'],
-              paint: {
-                'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], 'red', '#AAAAAA'],
-                'line-width': 1,
-                'line-offset': ['case', ['boolean', ['feature-state', 'selected'], false], 1, 0]
-              }
-            })
-
-            this.map.addLayer({
-              id: 'admin-divs-labels-' + level.id,
-              source: 'admin-divs',
-              'source-layer': level['source-layer'],
-              type: 'symbol',
-              paint: {
-                'text-color': '#333333', // this.$vuetify.theme.themes.light.primary,
-                'text-halo-color': 'hsl(0, 0%, 100%)',
-                'text-halo-width': 1
-              },
-              layout: {
-                'text-field': '{name}',
-                'text-font': ['Klokantech Noto Sans Regular'],
-                'text-size': 14
-              }
-            })
-
-            this.map.setFeatureState({
-              source: 'admin-divs',
-              sourceLayer: level['source-layer'],
-              id: this.inseeInfos[levelPropName[this.currentLevel]]
-            }, {
-              selected: true
-            })
-
-            // Change the cursor to a pointer when the it enters a feature.
-            this.map.on('mouseenter', 'admin-divs-colors-' + level.id, (e) => {
-              const feature = e.features && e.features[0]
-              if (feature && (!feature.state || !feature.state.selected)) this.map.getCanvas().style.cursor = 'pointer'
-            })
-
-            // Change it back to a pointer when it leaves.
-            this.map.on('mouseleave', 'admin-divs-colors-' + level.id, () => {
-              this.map.getCanvas().style.cursor = ''
-            })
-          }
-        }
+        this.updateAdminDivsLayer(this.currentLevel)
       })
 
       // "idle" event seems to be the best indication that the map is fully loaded
@@ -200,14 +130,14 @@ export default {
         layers: ['admin-divs-colors-' + this.currentLevel]
       }).pop()
       if (feature) {
-        const level = levels.find(l => l.id === this.currentLevel)
-        this.map.setFeatureState({
-          source: 'admin-divs',
-          sourceLayer: level['source-layer'],
-          id: this.inseeInfos[levelPropName[this.currentLevel]]
-        }, {
-          selected: false
-        })
+        // const level = levels.find(l => l.id === this.currentLevel)
+        // this.map.setFeatureState({
+        //   source: 'admin-divs',
+        //   sourceLayer: level['source-layer'],
+        //   id: this.inseeInfos[levelPropName[this.currentLevel]]
+        // }, {
+        //   selected: false
+        // })
         // this.$store.commit('setAny', { city: { value: feature.properties.code, text: feature.properties.name } })
         // this.$store.commit('setAny', { city: null })
 
@@ -220,30 +150,147 @@ export default {
         // }
         this.$store.commit('setAny', { city: { value: inseeInfos.INSEE_COM, text: inseeInfos.NOM_COM } })
       }
-      // if (this.selected) {
-      //   this.selected.forEach(feature => {
-      //     this.map.setFeatureState({
-      //       source: feature.source,
-      //       sourceLayer: 'results',
-      //       id: feature.id
-      //     }, {
-      //       selected: false
-      //     })
-      //   })
-      //   this.$store.commit('setAny', { selected: null })
-      // }
-      // if (features && features.length) {
-      //   features.slice(0, 1).forEach(feature => {
-      //     this.map.setFeatureState({
-      //       source: feature.source,
-      //       sourceLayer: 'results',
-      //       id: feature.id
-      //     }, {
-      //       selected: true
-      //     })
-      //   })
-      //   this.$store.commit('setAny', { selected: features.slice(0, 1) })
-      // }
+    },
+    selectFeature () {
+      if (this.selected) {
+        this.map.setFeatureState(this.selected, {
+          selected: false
+        })
+      }
+      const level = levels.find(l => l.id === this.currentLevel)
+      this.selected = {
+        source: 'admin-divs',
+        sourceLayer: level['source-layer'],
+        id: this.inseeInfos[levelPropName[this.currentLevel]]
+      }
+      this.map.setFeatureState(this.selected, {
+        selected: true
+      })
+      this.map.setCenter(this.inseeInfos._geopoint.split(',').reverse())
+    },
+    updateAdminDivsLayer (newLevel, oldLevel) {
+      if (oldLevel) {
+        this.map.removeLayer('admin-divs-colors-' + oldLevel)
+        this.map.removeLayer('admin-divs-lines-' + oldLevel)
+        this.map.removeLayer('admin-divs-labels-' + oldLevel)
+        this.map.setZoom(zooms[newLevel])
+      }
+
+      const idx = levels.findIndex(l => l.id === newLevel)
+      const level = levels[idx]
+      this.map.addLayer({
+        id: 'admin-divs-colors-' + newLevel,
+        type: 'fill',
+        source: 'admin-divs',
+        'source-layer': level['source-layer'],
+        paint: {
+          'fill-color': this.$vuetify.theme.themes.light.primary, // ['string', ['feature-state', 'color'], this.$vuetify.theme.themes.light.primary],
+          'fill-opacity': ['number', ['feature-state', 'opacity'], 0]
+        }
+      })
+
+      if (idx > 0) {
+        this.map.addLayer({
+          id: 'admin-divs-lines-' + levels[idx - 1].id,
+          type: 'line',
+          source: 'admin-divs',
+          'source-layer': levels[idx - 1]['source-layer'],
+          paint: {
+            'line-color': 'black',
+            'line-width': 2
+          },
+          filter: ['in', 'code', this.inseeInfos[levelPropName[levels[idx - 1].id]]]
+        })
+      }
+
+      this.map.addLayer({
+        id: 'admin-divs-lines-' + newLevel,
+        type: 'line',
+        source: 'admin-divs',
+        'source-layer': level['source-layer'],
+        paint: {
+          'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], 'red', '#AAAAAA'],
+          'line-width': 1,
+          'line-offset': ['case', ['boolean', ['feature-state', 'selected'], false], 1, 0]
+        }
+      })
+
+      this.map.addLayer({
+        id: 'admin-divs-labels-' + newLevel,
+        source: 'admin-divs',
+        'source-layer': level['source-layer'],
+        type: 'symbol',
+        paint: {
+          'text-color': '#333333', // this.$vuetify.theme.themes.light.primary,
+          'text-halo-color': 'hsl(0, 0%, 100%)',
+          'text-halo-width': 1
+        },
+        layout: {
+          'text-field': '{name}',
+          'text-font': ['Klokantech Noto Sans Regular'],
+          'text-size': 14
+        }
+      })
+
+      this.selectFeature()
+
+      // Change the cursor to a pointer when the it enters a feature.
+      this.map.on('mouseenter', 'admin-divs-colors-' + newLevel, (e) => {
+        const feature = e.features && e.features[0]
+        if (feature && (!feature.state || !feature.state.selected)) this.map.getCanvas().style.cursor = 'pointer'
+      })
+
+      // Change it back to a pointer when it leaves.
+      this.map.on('mouseleave', 'admin-divs-colors-' + newLevel, () => {
+        this.map.getCanvas().style.cursor = ''
+      })
+
+      this.updateCompare()
+    },
+    async updateCompare () {
+      if (this.compareData) {
+        this.compareData.forEach(d => {
+          this.map.setFeatureState({
+            source: 'admin-divs',
+            sourceLayer: this.compareLevel,
+            id: d.code
+          }, {
+            opacity: undefined
+          })
+        })
+      }
+      try {
+        const codePropName = {
+          0: inseePropName[this.currentLevel],
+          4: inseePropName[this.currentLevel],
+          8: lovacPropName[this.currentLevel],
+          12: pcPropName[this.currentLevel]
+        }[this.compare.datasetOffset]
+        const params = { size: 5000, select: this.compare.property + ',' + codePropName }
+        if (this.currentLevel === 'city') {
+          params.qs = (this.compare.datasetOffset === 8 ? 'CODE_REG' : 'REG') + ':' + this.inseeInfos.INSEE_REG
+        }
+        // const params = { qs: `${lovacPropName[this.currentLevel]}:${this.inseeInfos[levelPropName[this.currentLevel]]}` }
+        const results = (await axios.get(this.config.datasets[this.compare.datasetOffset + levelOffset[this.currentLevel]].href + '/lines', { params })).data.results
+        this.compareData = results.map(l => ({ code: l[codePropName], value: Number(l[this.compare.property]) }))
+
+        const level = levels.find(l => l.id === this.currentLevel)
+        this.compareLevel = level['source-layer']
+        const values = this.compareData.map(d => d.value)
+        const min = Math.min(...values)
+        const max = Math.max(...values)
+        this.compareData.forEach(d => {
+          this.map.setFeatureState({
+            source: 'admin-divs',
+            sourceLayer: this.compareLevel,
+            id: d.code
+          }, {
+            opacity: (d.value - min) / (max - min)
+          })
+        })
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }

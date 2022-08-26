@@ -11,6 +11,7 @@
           <v-btn
             class="px-1"
             outlined
+            small
             v-on="{...onDialog, ...onTooltip}"
           >
             <v-icon v-if="value[0]<value[value.length-1]">

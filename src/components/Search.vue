@@ -99,7 +99,6 @@ export default {
       params.set('city-code', this.city.value)
       params.set('city-text', this.city.text)
       window.history.replaceState(null, null, '?' + params.toString())
-      if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams: Object.fromEntries(params) }, '*')
       this.$store.dispatch('refresh')
     }
   },

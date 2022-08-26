@@ -1,9 +1,9 @@
 <template>
+  <!-- :color="!capture ? '#c9dbba' : undefined"
+  :outlined="capture" -->
   <v-card
-    flat
-    :color="!capture ? '#c9dbba' : undefined"
-    :outlined="capture"
-    rounded="xl"
+    outlined
+    rounded="lg"
     style="height:100%;display: flex;flex-flow: column;"
   >
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
@@ -87,7 +87,13 @@
         class="px-5"
       >
         <v-col class="text-center px-5 mb-5">
+          <v-progress-circular
+            v-if="loading"
+            indeterminate
+            :size="80"
+          />
           <v-alert
+            v-else
             :value="true"
             type="warning"
             outlined
@@ -109,12 +115,13 @@
 
 <script>
 import CardDescription from './card-description'
+// import CompareSelect from './compare-select'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: { CardDescription },
   computed: {
-    ...mapState(['pcData']),
+    ...mapState(['pcData', 'loading']),
     ...mapGetters(['config']),
     constIndiv () {
       return (425 * 112 * this.pcData.NB_LGT_IND_MEC) / 1000

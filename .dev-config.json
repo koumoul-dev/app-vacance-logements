@@ -61,24 +61,24 @@
       "id": "lovac-regions-01012020"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-neufs-communes-18",
-      "title": "Logements neufs Communes 18",
-      "id": "logements-neufs-communes-18"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/amenagement-et-urbanisme-communes-2019",
+      "title": "Aménagement et urbanisme - Communes",
+      "id": "amenagement-et-urbanisme-communes-2019"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-neufs-epci-2018",
-      "title": "Logements neufs EPCI 2018",
-      "id": "logements-neufs-epci-2018"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/amenagement-et-urbanisme-epci-2019",
+      "title": "Aménagement et urbanisme - EPCI",
+      "id": "amenagement-et-urbanisme-epci-2019"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-neufs-departements-2018",
-      "title": "Logements neufs Départements 2018",
-      "id": "logements-neufs-departements-2018"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/amenagement-et-urbanisme-dep-2019",
+      "title": "Aménagement et urbanisme - Départements",
+      "id": "amenagement-et-urbanisme-dep-2019"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-neufs-regions-2018",
-      "title": "Logements neufs Régions 2018",
-      "id": "logements-neufs-regions-2018"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/amenagement-et-urbanisme-reg-2019",
+      "title": "Aménagement et urbanisme - Régions",
+      "id": "amenagement-et-urbanisme-reg-2019"
     }
   ],
   "rightLink": "https://www.ademe.fr/",

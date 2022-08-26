@@ -1,43 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import { levelPropName, lovacPropName, inseePropName, pcPropName, levelOffset } from '../assets/defs.js'
 
 Vue.use(Vuex)
-
-const levelOffset = {
-  city: 0,
-  epci: 1,
-  department: 2,
-  region: 3
-}
-
-const levelPropName = {
-  city: 'INSEE_COM',
-  epci: 'CODE_EPCI',
-  department: 'INSEE_DEP',
-  region: 'INSEE_REG'
-}
-
-const lovacPropName = {
-  city: 'INSEE_COM',
-  epci: 'CODE_EPCI',
-  department: 'CODE_DEPT',
-  region: 'CODE_REG'
-}
-
-const inseePropName = {
-  city: 'CODGEO',
-  epci: 'EPCI',
-  department: 'DEP',
-  region: 'REG'
-}
-
-const pcPropName = {
-  city: 'CODGEO',
-  epci: 'EPCI',
-  department: 'DEP',
-  region: 'REG'
-}
 
 const inseeMapping = {
   75101: '75056',
@@ -103,8 +69,7 @@ export default () => {
       compare: {
         datasetOffset: 0,
         property: 'TX_RP'
-      },
-      compareData: null
+      }
     },
     getters: {
       config (state) {
@@ -161,26 +126,7 @@ export default () => {
             commit('setAny', { log1Data, lovacData, evolutionData, pcData })
           } catch (err) { }
           commit('setAny', { loading: false })
-          dispatch('fetchCompare')
         }
-      },
-      async fetchCompare ({ state, getters, commit }) {
-        try {
-          const propName = {
-            0: inseePropName[state.currentLevel],
-            4: inseePropName[state.currentLevel],
-            8: lovacPropName[state.currentLevel],
-            12: pcPropName[state.currentLevel]
-          }[state.compare.datasetOffset]
-          const params = { size: 2000, select: state.compare.property + ',' + propName }
-          if (state.currentLevel === 'city') {
-            params.qs = (state.compare.datasetOffset === 8 ? 'CODE_DEPT' : 'DEP') + ':' + state.log1Data.DEP
-          }
-          // const params = { qs: `${lovacPropName[state.currentLevel]}:${state.inseeInfos[levelPropName[state.currentLevel]]}` }
-          const results = (await axios.get(getters.config.datasets[state.compare.datasetOffset + levelOffset[state.currentLevel]].href + '/lines', { params })).data.results
-          commit('setAny', { compareData: results })
-          // commit('setAny', { log1Data, lovacData, evolutionData, pcData })
-        } catch (err) { }
       },
       async setError ({ state }, error) {
         console.error('report error', error)

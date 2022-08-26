@@ -13,18 +13,17 @@
           >
             <city-infos />
             <v-row
-              v-if="!loading"
               class="mx-0"
             >
               <v-col
                 :cols="12"
-                :md="7"
+                :md="5"
               >
                 <card-parc />
               </v-col>
               <v-col
                 :cols="12"
-                :md="5"
+                :md="7"
               >
                 <ml-map />
               </v-col>
@@ -55,6 +54,7 @@
             </v-row>
           </v-container>
           <v-container
+            v-else
             class="px-5"
           >
             <v-col class="text-center pa-6 mt-6">
@@ -64,7 +64,7 @@
                 :size="100"
               />
               <v-alert
-                v-else-if="!inseeInfos"
+                v-else
                 :value="true"
                 type="info"
                 outlined

@@ -1,9 +1,9 @@
 <template>
+  <!-- :color="!capture ? '#dcdba8' : undefined"
+  :outlined="capture" -->
   <v-card
-    flat
-    :color="!capture ? '#dcdba8' : undefined"
-    :outlined="capture"
-    rounded="xl"
+    outlined
+    rounded="lg"
     style="height:100%;display: flex;flex-flow: column;"
   >
     <div class="text-center text-h5 py-3 grey--text text--darken-1 font-weight-bold">
@@ -22,14 +22,25 @@
           :md="6"
         >
           <v-row align="center">
-            <v-col :cols="6">
-              <span>Logements vacants</span>
-            </v-col>
-            <v-col :cols="3">
-              <strong>{{ log1Data.TOT_LV.toLocaleString('fr') }}</strong>
+            <v-col
+              :cols="7"
+              class="pa-2"
+            >
+              <!-- <span>Logements vacants</span> -->
+              <compare-select
+                label="Logements vacants"
+                :dataset-offset="0"
+                property="TOT_LV"
+              />
             </v-col>
             <v-col
               :cols="3"
+              class="pa-2"
+            >
+              <strong>{{ log1Data.TOT_LV.toLocaleString('fr') }}</strong>
+            </v-col>
+            <v-col
+              :cols="2"
               class="px-1 py-0"
             >
               <history-graph
@@ -46,14 +57,25 @@
           :md="6"
         >
           <v-row align="center">
-            <v-col :cols="6">
-              <span>Taux de vacance</span>
-            </v-col>
-            <v-col :cols="3">
-              <strong>{{ log1Data.TX_LV.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+            <v-col
+              :cols="7"
+              class="pa-2"
+            >
+              <!-- <span>Taux de vacance</span> -->
+              <compare-select
+                label="Taux de vacance"
+                :dataset-offset="0"
+                property="TX_LV"
+              />
             </v-col>
             <v-col
               :cols="3"
+              class="pa-2"
+            >
+              <strong>{{ log1Data.TX_LV.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+            </v-col>
+            <v-col
+              :cols="2"
               class="px-1 py-0"
             >
               <history-graph
@@ -72,10 +94,21 @@
           :md="6"
         >
           <v-row align="center">
-            <v-col :cols="8">
-              <span>Part des Logements Individuels vacants</span>
+            <v-col
+              :cols="7"
+              class="pa-2"
+            >
+              <!-- <span>Part des Logements Individuels vacants</span> -->
+              <compare-select
+                label="Part des Logements Individuels vacants"
+                :dataset-offset="0"
+                property="TX_LV_MI"
+              />
             </v-col>
-            <v-col :cols="4">
+            <v-col
+              :cols="4"
+              class="pa-2"
+            >
               <strong>{{ log1Data.TX_LV_MI.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
             </v-col>
           </v-row>
@@ -85,10 +118,21 @@
           :md="6"
         >
           <v-row align="center">
-            <v-col :cols="8">
-              <span>Part des Logements Collectifs vacants</span>
+            <v-col
+              :cols="7"
+              class="pa-2"
+            >
+              <!-- <span>Part des Logements Collectifs vacants</span> -->
+              <compare-select
+                label="Part des Logements Collectifs vacants"
+                :dataset-offset="0"
+                property="TX_LV_COLL"
+              />
             </v-col>
-            <v-col :cols="4">
+            <v-col
+              :cols="4"
+              class="pa-2"
+            >
               <strong>{{ log1Data.TX_LV_COLL.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
             </v-col>
           </v-row>
@@ -105,6 +149,7 @@
             smooth
             auto-line-width
             type="bar"
+            :gradient="[$vuetify.theme.themes.light.primary]"
             :labels="ageLabels"
             :value="agesMi"
             :padding="16"
@@ -126,6 +171,7 @@
             smooth
             auto-line-width
             type="bar"
+            :gradient="[$vuetify.theme.themes.light.primary]"
             :labels="ageLabels"
             :value="agesColl"
             :padding="16"
@@ -140,7 +186,13 @@
         class="px-5"
       >
         <v-col class="text-center px-5 mb-5">
+          <v-progress-circular
+            v-if="loading"
+            indeterminate
+            :size="80"
+          />
           <v-alert
+            v-else
             :value="true"
             type="warning"
             outlined
@@ -163,12 +215,13 @@
 <script>
 import HistoryGraph from './history-graph'
 import CardDescription from './card-description'
+import CompareSelect from './compare-select'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
-  components: { HistoryGraph, CardDescription },
+  components: { HistoryGraph, CardDescription, CompareSelect },
   computed: {
-    ...mapState(['evolutionData', 'log1Data']),
+    ...mapState(['evolutionData', 'log1Data', 'loading']),
     ...mapGetters(['config']),
     agesMi () {
       return [
@@ -182,7 +235,7 @@ export default {
     },
     agesColl () {
       return [
-        this.log1Data.LV_av19_COLL || this.log1Data.LV_av19_COL, // or for temporary compatibility
+        typeof this.log1Data.LV_av19_COLL === 'number' ? this.log1Data.LV_av19_COLL : this.log1Data.LV_av19_COL, // or for temporary compatibility
         this.log1Data.LV_19_45_COLL,
         this.log1Data.LV_46_70_COLL,
         this.log1Data.LV_71_90_COLL,
@@ -199,9 +252,6 @@ export default {
         '1991 - 2005',
         '2006 - 2015'
       ]
-    },
-    capture () {
-      return window.triggerCapture
     }
   }
 }

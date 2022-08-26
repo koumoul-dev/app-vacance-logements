@@ -1,6 +1,6 @@
 <template>
   <v-card
-    rounded="xl"
+    rounded="lg"
     class="pa-2 ma-2"
     outlined
   >
@@ -119,7 +119,6 @@ export default {
     if (!params.get('current-level')) {
       params.set('current-level', this.currentLevel)
       window.history.replaceState(null, null, '?' + params.toString())
-      if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams: Object.fromEntries(params) }, '*')
     } else {
       this.$store.state.currentLevel = params.get('current-level')
     }
@@ -131,7 +130,6 @@ export default {
         const params = new URLSearchParams(window.location.search)
         params.set('current-level', level)
         window.history.replaceState(null, null, '?' + params.toString())
-        if (global.parent && global.parent !== global.self) parent.postMessage({ viframe: true, queryParams: Object.fromEntries(params) }, '*')
         this.$store.dispatch('fetch')
       }
     }
