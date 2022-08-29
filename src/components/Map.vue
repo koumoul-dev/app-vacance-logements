@@ -189,20 +189,6 @@ export default {
         }
       })
 
-      if (idx > 0) {
-        this.map.addLayer({
-          id: 'admin-divs-lines-' + levels[idx - 1].id,
-          type: 'line',
-          source: 'admin-divs',
-          'source-layer': levels[idx - 1]['source-layer'],
-          paint: {
-            'line-color': 'black',
-            'line-width': 2
-          },
-          filter: ['in', 'code', this.inseeInfos[levelPropName[levels[idx - 1].id]]]
-        })
-      }
-
       this.map.addLayer({
         id: 'admin-divs-lines-' + newLevel,
         type: 'line',
@@ -214,6 +200,20 @@ export default {
           'line-offset': ['case', ['boolean', ['feature-state', 'selected'], false], 1, 0]
         }
       })
+
+      if (idx > 0) {
+        this.map.addLayer({
+          id: 'admin-divs-lines-' + levels[idx - 1].id,
+          type: 'line',
+          source: 'admin-divs',
+          'source-layer': levels[idx - 1]['source-layer'],
+          paint: {
+            'line-color': 'black',
+            'line-width': 1
+          },
+          filter: ['in', 'code', this.inseeInfos[levelPropName[levels[idx - 1].id]]]
+        })
+      }
 
       this.map.addLayer({
         id: 'admin-divs-labels-' + newLevel,
