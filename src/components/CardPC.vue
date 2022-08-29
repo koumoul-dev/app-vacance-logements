@@ -35,6 +35,14 @@
               class="pa-2"
             >
               <strong>{{ pcData.NB_LGT_TOT_AUT.toLocaleString('fr') }}</strong>
+               &nbsp;
+              <v-btn
+                icon
+                small
+                @click="expandAuthorized = !expandAuthorized"
+              >
+                <v-icon>mdi-chevron-{{ expandAuthorized ? 'up' : 'down' }}<v-icon /></v-icon>
+              </v-btn>
             </v-col>
           </v-row>
           <v-row align="center">
@@ -57,44 +65,52 @@
               <strong>{{ (100*pcData.NB_LGT_TOT_AUT/log1Data.TOT_PARC).toLocaleString('fr', {maximumFractionDigits: 2}) }} %</strong>
             </v-col>
           </v-row>
-          <v-row align="center">
-            <v-col
-              :cols="8"
-              class="pa-2"
+          <v-expand-transition>
+            <v-card
+              v-show="expandAuthorized"
+              flat
+              class="mt-2"
             >
-              <!-- <span>Logements Individuels autorisés</span> -->
-              <compare-select
-                label="Logements Individuels autorisés"
-                :dataset-offset="12"
-                property="NB_LGT_IND_AUT"
-              />
-            </v-col>
-            <v-col
-              :cols="4"
-              class="pa-2"
-            >
-              <strong>{{ pcData.NB_LGT_IND_AUT.toLocaleString('fr') }}</strong>
-            </v-col>
-          </v-row>
-          <v-row align="center">
-            <v-col
-              :cols="8"
-              class="pa-2"
-            >
-              <!-- <span>Logements Collectifs autorisés</span> -->
-              <compare-select
-                label="Logements Collectifs autorisés"
-                :dataset-offset="12"
-                property="NB_LGT_COL_AUT"
-              />
-            </v-col>
-            <v-col
-              :cols="4"
-              class="pa-2"
-            >
-              <strong>{{ pcData.NB_LGT_COL_AUT.toLocaleString('fr') }}</strong>
-            </v-col>
-          </v-row>
+              <v-row align="center">
+                <v-col
+                  :cols="8"
+                  class="pa-2"
+                >
+                  <!-- <span>Logements Individuels autorisés</span> -->
+                  <compare-select
+                    label="Logements Individuels autorisés"
+                    :dataset-offset="12"
+                    property="NB_LGT_IND_AUT"
+                  />
+                </v-col>
+                <v-col
+                  :cols="4"
+                  class="pa-2"
+                >
+                  <strong>{{ pcData.NB_LGT_IND_AUT.toLocaleString('fr') }}</strong>
+                </v-col>
+              </v-row>
+              <v-row align="center">
+                <v-col
+                  :cols="8"
+                  class="pa-2"
+                >
+                  <!-- <span>Logements Collectifs autorisés</span> -->
+                  <compare-select
+                    label="Logements Collectifs autorisés"
+                    :dataset-offset="12"
+                    property="NB_LGT_COL_AUT"
+                  />
+                </v-col>
+                <v-col
+                  :cols="4"
+                  class="pa-2"
+                >
+                  <strong>{{ pcData.NB_LGT_COL_AUT.toLocaleString('fr') }}</strong>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-expand-transition>
         </v-col>
         <v-col :cols="2">
           <v-img
@@ -128,15 +144,15 @@
               <v-btn
                 icon
                 small
-                @click="expand = !expand"
+                @click="expandBuilt = !expandBuilt"
               >
-                <v-icon>mdi-chevron-{{ expand ? 'up' : 'down' }}<v-icon /></v-icon>
+                <v-icon>mdi-chevron-{{ expandBuilt ? 'up' : 'down' }}<v-icon /></v-icon>
               </v-btn>
             </v-col>
           </v-row>
           <v-expand-transition>
             <v-card
-              v-show="expand"
+              v-show="expandBuilt"
               flat
               class="mt-2"
             >
@@ -187,18 +203,10 @@
           <v-img
             v-scale-transition
             src="../assets/logements mis en chantier.svg"
-            :height="expand? 96 : 32"
+            :height="expandBuilt? 96 : 32"
             contain
-            :class="expand ? 'mt-3': ''"
+            :class="expandBuilt ? 'mt-3': ''"
           />
-          <!-- <v-scale-transition>
-            <v-img
-              v-show="expand"
-              src="../assets/logements mis en chantier.svg"
-              height="96"
-              contain
-            />
-          </v-scale-transition> -->
         </v-col>
       </v-row>
       <v-divider class="my-3" />
@@ -292,7 +300,8 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   components: { CardDescription, CompareSelect },
   data: () => ({
-    expand: false
+    expandAuthorized: false,
+    expandBuilt: false
   }),
   computed: {
     ...mapState(['pcData', 'lovacData', 'log1Data', 'loading']),
