@@ -3,7 +3,8 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import store from './store'
 import VueWindowSize from 'vue-window-size'
-require('iframe-resizer/js/iframeResizer.contentWindow')
+
+// iframe-resizer is injected by data-fair based on the df:overflow meta
 global.iFrameResizer = {
   heightCalculationMethod: 'taggedElement'
 }
