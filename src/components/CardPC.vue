@@ -201,7 +201,6 @@
           :cols="2"
         >
           <v-img
-            v-scale-transition
             src="../assets/logements mis en chantier.svg"
             :height="expandBuilt? 96 : 32"
             contain

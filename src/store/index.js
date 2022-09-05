@@ -75,9 +75,6 @@ export default () => {
       config (state) {
         return state.application && state.application.configuration
       },
-      captureUrl (state) {
-        return state.application.captureUrl || 'http://localhost:5889'
-      },
       tileserverUrl (state) {
         return state.application.apiUrl + '/remote-services/tileserver-koumoul/proxy'
       }

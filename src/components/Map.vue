@@ -121,7 +121,6 @@ export default {
 
       // "idle" event seems to be the best indication that the map is fully loaded
       this.map.on('idle', () => {
-        if (window.triggerCapture && this.map.getSource('data-fair')) window.triggerCapture()
         this.loading = false
       })
     },
@@ -130,6 +129,7 @@ export default {
         layers: ['admin-divs-colors-' + this.currentLevel]
       }).pop()
       if (feature) {
+        const idx = levels.findIndex(l => l.id === this.currentLevel)
         // const level = levels.find(l => l.id === this.currentLevel)
         // this.map.setFeatureState({
         //   source: 'admin-divs',
@@ -149,6 +149,7 @@ export default {
         //   inseeInfos.NOM_COM = state.city.text.split(' (')[0]
         // }
         this.$store.commit('setAny', { city: { value: inseeInfos.INSEE_COM, text: inseeInfos.NOM_COM } })
+        if (idx > 0) this.map.setFilter('admin-divs-lines-' + levels[idx - 1].id, ['in', 'code', inseeInfos[levelPropName[levels[idx - 1].id]]])
       }
     },
     selectFeature () {
@@ -174,6 +175,8 @@ export default {
         this.map.removeLayer('admin-divs-lines-' + oldLevel)
         this.map.removeLayer('admin-divs-labels-' + oldLevel)
         this.map.setZoom(zooms[newLevel])
+        const idx = levels.findIndex(l => l.id === oldLevel)
+        if (idx > 0) this.map.removeLayer('admin-divs-lines-' + levels[idx - 1].id)
       }
 
       const idx = levels.findIndex(l => l.id === newLevel)
