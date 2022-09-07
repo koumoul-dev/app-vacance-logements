@@ -26,6 +26,7 @@
                 :md="7"
               >
                 <ml-map />
+                <map-legend />
               </v-col>
               <v-col
                 :cols="12"
@@ -102,6 +103,7 @@ import CardPc from './components/CardPC'
 import CardGes from './components/CardGES'
 import CityInfos from './components/CityInfos'
 import MlMap from './components/Map'
+import MapLegend from './components/legend'
 import fileDownload from 'js-file-download'
 import axios from 'axios'
 
@@ -115,7 +117,8 @@ export default {
     CardPc,
     CardGes,
     CityInfos,
-    MlMap
+    MlMap,
+    MapLegend
   },
   data: () => ({
     downloading: false

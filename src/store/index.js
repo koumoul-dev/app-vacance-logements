@@ -69,7 +69,8 @@ export default () => {
       compare: {
         datasetOffset: 0,
         property: 'TX_RP'
-      }
+      },
+      legend: null
     },
     getters: {
       config (state) {

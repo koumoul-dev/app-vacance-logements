@@ -1,6 +1,6 @@
 <template lang="html">
   <v-card
-    :style="`height:100%;min-height:400px;width:100%`"
+    :style="`height: calc(100% - 36px);min-height:400px;width:100%`"
     rounded="lg"
     flat
   >
@@ -12,6 +12,7 @@
     />
     <div
       id="map"
+      ref="map"
       :style="`height: calc(100% - 4px);margin-top:${!loading ? 4 : 0}px`"
     />
   </v-card>
@@ -59,7 +60,7 @@ export default {
     selected: null
   }),
   computed: {
-    ...mapState(['inseeInfos', 'currentLevel', 'compare']),
+    ...mapState(['inseeInfos', 'currentLevel', 'compare', 'legend']),
     ...mapGetters(['tileserverUrl', 'config'])
   },
   watch: {
@@ -129,8 +130,6 @@ export default {
         layers: ['admin-divs-colors-' + this.currentLevel]
       }).pop()
       if (feature) {
-        const idx = levels.findIndex(l => l.id === this.currentLevel)
-        // const level = levels.find(l => l.id === this.currentLevel)
         // this.map.setFeatureState({
         //   source: 'admin-divs',
         //   sourceLayer: level['source-layer'],
@@ -149,7 +148,15 @@ export default {
         //   inseeInfos.NOM_COM = state.city.text.split(' (')[0]
         // }
         this.$store.commit('setAny', { city: { value: inseeInfos.INSEE_COM, text: inseeInfos.NOM_COM } })
+        const idx = levels.findIndex(l => l.id === this.currentLevel)
         if (idx > 0) this.map.setFilter('admin-divs-lines-' + levels[idx - 1].id, ['in', 'code', inseeInfos[levelPropName[levels[idx - 1].id]]])
+        const level = levels[idx]
+        const value = this.map.getFeatureState({
+          source: 'admin-divs',
+          sourceLayer: level['source-layer'],
+          id: inseeInfos[levelPropName[this.currentLevel]]
+        }).value
+        this.$store.commit('setAny', { legend: { ...this.legend, value } })
       }
     },
     selectFeature () {
@@ -282,15 +289,19 @@ export default {
         const values = this.compareData.map(d => d.value)
         const min = Math.min(...values)
         const max = Math.max(...values)
+        let value = null
         this.compareData.forEach(d => {
           this.map.setFeatureState({
             source: 'admin-divs',
             sourceLayer: this.compareLevel,
             id: d.code
           }, {
-            opacity: (d.value - min) / (max - min)
+            opacity: 0.1 + 0.9 * (d.value - min) / (max - min),
+            value: d.value
           })
+          if (d.code === this.inseeInfos[levelPropName[level.id]]) value = d.value
         })
+        this.$store.commit('setAny', { legend: { min, max, width: this.$refs.map.clientWidth, value } })
       } catch (err) {
         console.log(err)
       }
