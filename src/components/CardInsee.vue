@@ -66,6 +66,7 @@
                 label="Taux de vacance"
                 :dataset-offset="0"
                 property="TX_LV"
+                bold
               />
             </v-col>
             <v-col

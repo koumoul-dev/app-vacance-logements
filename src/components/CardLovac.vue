@@ -46,6 +46,7 @@
             label="Taux de vacance"
             :dataset-offset="8"
             property="Prop_logvac_pp"
+            bold
           />
         </v-col>
         <v-col
@@ -63,7 +64,7 @@
         >
           <!-- <span>Logements vacants &lt; 2 ans</span> -->
           <compare-select
-            label="Logements vacants &lt; 2 ans"
+            label="Vacance frictionnelle (&lt; 2 ans)"
             :dataset-offset="8"
             property="Prop_logvac_pp_C"
           />
@@ -83,7 +84,7 @@
         >
           <!-- <span>Logements vacants &gt; 2 ans</span> -->
           <compare-select
-            label="Logements vacants &gt; 2 ans"
+            label="Vacance structurelle (&gt; 2 ans)"
             :dataset-offset="8"
             property="Prop_logvac_pp_2A"
           />

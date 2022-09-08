@@ -26,6 +26,13 @@ exports.pcPropName = {
   region: 'REG'
 }
 
+exports.contextPropName = {
+  city: 'CODE_GEO',
+  epci: 'CODE_EPCI',
+  department: 'CODE_DEP',
+  region: 'CODE_REG'
+}
+
 exports.levelOffset = {
   city: 0,
   epci: 1,

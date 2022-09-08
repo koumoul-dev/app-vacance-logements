@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import { levelPropName, lovacPropName, inseePropName, pcPropName, levelOffset } from '../assets/defs.js'
+import { levelPropName, lovacPropName, inseePropName, pcPropName, levelOffset, contextPropName } from '../assets/defs.js'
 
 Vue.use(Vuex)
 
@@ -65,6 +65,7 @@ export default () => {
       lovacData: null,
       evolutionData: null,
       pcData: null,
+      contextData: null,
       currentLevel: 'city',
       compare: {
         datasetOffset: 0,
@@ -108,7 +109,8 @@ export default () => {
           log1Data: null,
           lovacData: null,
           evolutionData: null,
-          pcData: null
+          pcData: null,
+          contextData: null
         })
         if (state.inseeInfos) {
           commit('setAny', { loading: true })
@@ -121,7 +123,14 @@ export default () => {
             const evolutionData = results.filter(d => typeof d.TOT_PARC === 'number').sort((d1, d2) => d2.ANNEE - d1.ANNEE).filter((d, i) => i % 5 === 0).reverse()
             params.qs = `${pcPropName[state.currentLevel]}:${state.inseeInfos[levelPropName[state.currentLevel]]}`
             const pcData = (await axios.get(getters.config.datasets[12 + levelOffset[state.currentLevel]].href + '/lines', { params })).data.results[0]
-            commit('setAny', { log1Data, lovacData, evolutionData, pcData })
+            params.qs = `${contextPropName[state.currentLevel]}:${state.inseeInfos[levelPropName[state.currentLevel]]}`
+            params.field = contextPropName[state.currentLevel]
+            params.size = 1
+            params.metric_field = 'POP_COM'
+            params.metric = 'sum'
+            const contextData = (await axios.get(getters.config.datasets[16].href + '/values_agg', { params })).data.aggs[0]
+            console.log('contextData', contextData)
+            commit('setAny', { log1Data, lovacData, evolutionData, pcData, contextData })
           } catch (err) { }
           commit('setAny', { loading: false })
         }

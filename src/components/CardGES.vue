@@ -16,71 +16,94 @@
       v-if="pcData"
       class="black--text"
     >
+      <div class="text-h6 py-3 grey--text text--darken-1 font-weight-bold">
+        Emissions de GES (estimations, eqCO2)
+      </div>
       <v-row align="center">
-        <v-col :cols="8">
-          <span>GES émis pour la construction neuve</span>
+        <v-col
+          :cols="7"
+          :offset="1"
+        >
+          <span>Total pour la construction neuve</span>
         </v-col>
         <v-col :cols="4">
           <strong>{{ totGES.toLocaleString('fr', {maximumFractionDigits: 0}) }} t</strong>
         </v-col>
       </v-row>
       <v-row align="center">
-        <v-col :cols="8">
-          <span>GES émis pour la construction de logements individuels</span>
+        <v-col
+          :cols="7"
+          :offset="1"
+        >
+          <span>Logements individuels</span>
         </v-col>
         <v-col :cols="4">
           <strong>{{ constIndiv.toLocaleString('fr', {maximumFractionDigits: 0}) }} t</strong>
         </v-col>
       </v-row>
       <v-row align="center">
-        <v-col :cols="8">
-          <span>GES émis pour la construction de logements collectifs</span>
+        <v-col
+          :cols="7"
+          :offset="1"
+        >
+          <span>Logements collectifs</span>
         </v-col>
         <v-col :cols="4">
           <strong>{{ constColl.toLocaleString('fr', {maximumFractionDigits: 0}) }} t</strong>
         </v-col>
       </v-row>
-      <div class="text-center text-h6 py-3 grey--text text--darken-1 font-weight-bold">
+      <div class="text-h6 py-3 grey--text text--darken-1 font-weight-bold">
         Cela correspond à :
       </div>
       <v-row align="center">
         <v-col
-          :cols="4"
-          class="text-right"
-        >
-          <strong>{{ (totGES/0.00014).toLocaleString('fr') }}</strong>
-        </v-col>
-        <v-col :cols="8">
-          <span>km parcourus en citadine thermique</span>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col
-          :cols="4"
-          class="text-right"
+          :cols="2"
+          :offset="1"
         >
           <strong>{{ (totGES/1.0088).toLocaleString('fr', {maximumFractionDigits: 0}) }}</strong>
         </v-col>
-        <v-col :cols="8">
-          <span>A/R Paris - New York en avion</span>
+        <v-col :cols="9">
+          <span>vols A/R Paris - New York</span>
         </v-col>
       </v-row>
       <v-row align="center">
         <v-col
-          :cols="4"
-          class="text-right"
+          :cols="2"
+          :offset="1"
         >
-          <strong>{{ (totGES/0.001858).toLocaleString('fr', {maximumFractionDigits: 0}) }}</strong>
+          <strong>{{ (contextData && contextData.results[0].POP_COM ? totGES/contextData.results[0].POP_COM : 0).toLocaleString('fr', {maximumFractionDigits: 1}) }}</strong>
         </v-col>
-        <v-col :cols="8">
-          <span>A/R Paris - Bordeaux en TGV</span>
+        <v-col :cols="9">
+          <span>t. CO2 / habitant</span>
         </v-col>
       </v-row>
-
-      <!-- Emission carbone maison individuelle = 425 kg co2 . m²
-        Emission carbone logement collectif = 525 kg co2 . m²
-        Surface moyenne maison individuelle = 112 m²
-        Surface moyenne logement collectif = 63 m² -->
+      <template v-if="lovacData">
+        <div class="text-h6 py-3 grey--text text--darken-1 font-weight-bold">
+          Gisement vacant
+        </div>
+        <v-row align="center">
+          <v-col
+            :cols="7"
+            :offset="1"
+          >
+            <span>Potentiel vacant mobilisable (nb logement)</span>
+          </v-col>
+          <v-col :cols="4">
+            <strong>{{ lovacData.Nb_logvac_2A.toLocaleString('fr', {maximumFractionDigits: 0}) }}</strong>
+          </v-col>
+        </v-row>
+        <v-row align="center">
+          <v-col
+            :cols="7"
+            :offset="1"
+          >
+            <span>Potentiel vacant mobilisable (production neuve)</span>
+          </v-col>
+          <v-col :cols="4">
+            <strong>{{ (100*lovacData.Nb_logvac_2A/pcData.NB_LGT_TOT_AUT).toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+          </v-col>
+        </v-row>
+      </template>
     </v-card-text>
     <v-card-text v-else>
       <v-container
@@ -121,7 +144,7 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   components: { CardDescription },
   computed: {
-    ...mapState(['pcData', 'loading']),
+    ...mapState(['pcData', 'loading', 'contextData', 'lovacData']),
     ...mapGetters(['config']),
     constIndiv () {
       return (425 * 112 * this.pcData.NB_LGT_IND_MEC) / 1000

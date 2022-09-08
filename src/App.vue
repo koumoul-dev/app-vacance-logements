@@ -12,6 +12,7 @@
             class="pa-0"
           >
             <city-infos />
+            <context />
             <v-row
               class="mx-0"
             >
@@ -102,6 +103,7 @@ import CardLovac from './components/CardLovac'
 import CardPc from './components/CardPC'
 import CardGes from './components/CardGES'
 import CityInfos from './components/CityInfos'
+import Context from './components/Context'
 import MlMap from './components/Map'
 import MapLegend from './components/legend'
 import fileDownload from 'js-file-download'
@@ -117,6 +119,7 @@ export default {
     CardPc,
     CardGes,
     CityInfos,
+    Context,
     MlMap,
     MapLegend
   },

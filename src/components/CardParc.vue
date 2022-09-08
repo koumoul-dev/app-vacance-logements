@@ -26,6 +26,7 @@
             label="Parc total de logements"
             :dataset-offset="0"
             property="TOT_PARC"
+            bold
           />
         </v-col>
         <v-col
