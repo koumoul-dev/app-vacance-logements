@@ -98,7 +98,7 @@ export default {
       const params = new URLSearchParams(window.location.search)
       params.set('city-code', this.city.value)
       params.set('city-text', this.city.text)
-      window.history.replaceState(null, null, '?' + params.toString())
+      window.history.replaceState(null, null, window.location.pathname + '?' + params.toString())
       this.$store.dispatch('refresh')
     }
   },

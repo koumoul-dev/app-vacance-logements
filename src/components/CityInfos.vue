@@ -118,7 +118,7 @@ export default {
     const params = new URLSearchParams(window.location.search)
     if (!params.get('current-level')) {
       params.set('current-level', this.currentLevel)
-      window.history.replaceState(null, null, '?' + params.toString())
+      window.history.replaceState(null, null, window.location.pathname + '?' + params.toString())
     } else {
       this.$store.state.currentLevel = params.get('current-level')
     }
@@ -129,7 +129,7 @@ export default {
         this.$store.commit('setAny', { currentLevel: level })
         const params = new URLSearchParams(window.location.search)
         params.set('current-level', level)
-        window.history.replaceState(null, null, '?' + params.toString())
+        window.history.replaceState(null, null, window.location.pathname + '?' + params.toString())
         this.$store.dispatch('fetch')
       }
     }
