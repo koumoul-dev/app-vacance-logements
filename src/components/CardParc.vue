@@ -101,8 +101,7 @@
           :cols="4"
           class="pa-2"
         >
-          <strong v-if="currentLevel === 'city'">{{ log1Data.TX_LS.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
-          <strong v-else>A venir</strong>
+          <strong>{{ log1Data.TX_LS.toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
         </v-col>
       </v-row>
       <v-row align="center">
