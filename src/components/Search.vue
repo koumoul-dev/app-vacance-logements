@@ -1,5 +1,8 @@
 <template>
-  <v-row align="center">
+  <v-row
+    align="center"
+    :class="capture ? 'mt-3' : ''"
+  >
     <v-col
       :cols="6"
       :sm="3"
@@ -35,13 +38,13 @@
       </a>
     </v-col>
     <v-col
-      v-if="!capture"
       :cols="12"
       :sm="6"
       :order-sm="1"
       class="py-0"
     >
       <v-autocomplete
+        v-if="!capture"
         v-model="city"
         class="mt-5"
         :items="cities"
