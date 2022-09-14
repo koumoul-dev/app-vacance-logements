@@ -9,7 +9,7 @@
       <v-tooltip top>
         <template #activator="{ on: onTooltip }">
           <v-btn
-            class="px-1"
+            class="px-0"
             outlined
             small
             v-on="{...onDialog, ...onTooltip}"

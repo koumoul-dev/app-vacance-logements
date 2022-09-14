@@ -41,7 +41,7 @@
             </v-col>
             <v-col
               :cols="2"
-              class="px-1 py-0"
+              class="pa-0"
             >
               <history-graph
                 v-if="evolutionData && evolutionData.length > 1"
@@ -77,7 +77,7 @@
             </v-col>
             <v-col
               :cols="2"
-              class="px-1 py-0"
+              class="pa-0"
             >
               <history-graph
                 v-if="evolutionData && evolutionData.length > 1"

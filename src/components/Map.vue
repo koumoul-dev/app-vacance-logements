@@ -6,14 +6,14 @@
   >
     <v-progress-linear
       v-if="loading"
-      style="z-index:1;pointer-events: none;"
+      style="z-index:1;pointer-events:none;position:absolute"
       indeterminate
       color="primary"
     />
     <div
       id="map"
       ref="map"
-      :style="`height: calc(100% - 4px);margin-top:${!loading ? 4 : 0}px`"
+      style="height:100%;"
     />
   </v-card>
 </template>
