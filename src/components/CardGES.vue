@@ -100,7 +100,8 @@
             <span>Potentiel vacant mobilisable (production neuve)</span>
           </v-col>
           <v-col :cols="4">
-            <strong>{{ (100*lovacData.Nb_logvac_2A/pcData.NB_LGT_TOT_AUT).toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+            <strong v-if="pcData.NB_LGT_TOT_AUT_N">{{ (100*lovacData.Nb_logvac_2A/pcData.NB_LGT_TOT_AUT_N).toLocaleString('fr', {maximumFractionDigits: 1}) }} %</strong>
+            <strong v-else>-</strong>
           </v-col>
         </v-row>
       </template>
