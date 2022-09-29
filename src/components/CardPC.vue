@@ -78,6 +78,44 @@
                 >
                   <!-- <span>Logements Individuels autorisés</span> -->
                   <compare-select
+                    label="Logements autorisés neufs"
+                    :dataset-offset="12"
+                    property="NB_LGT_TOT_AUT_N"
+                  />
+                </v-col>
+                <v-col
+                  :cols="4"
+                  class="pa-2"
+                >
+                  <strong>{{ pcData.NB_LGT_TOT_AUT_N.toLocaleString('fr') }}</strong>
+                </v-col>
+              </v-row>
+              <v-row align="center">
+                <v-col
+                  :cols="8"
+                  class="pa-2"
+                >
+                  <!-- <span>Logements Individuels autorisés</span> -->
+                  <compare-select
+                    label="Logements autorisés sur construction existante"
+                    :dataset-offset="12"
+                    property="NB_LGT_TOT_AUT_E"
+                  />
+                </v-col>
+                <v-col
+                  :cols="4"
+                  class="pa-2"
+                >
+                  <strong>{{ pcData.NB_LGT_TOT_AUT_E.toLocaleString('fr') }}</strong>
+                </v-col>
+              </v-row>
+              <v-row align="center">
+                <v-col
+                  :cols="8"
+                  class="pa-2"
+                >
+                  <!-- <span>Logements Individuels autorisés</span> -->
+                  <compare-select
                     label="Logements Individuels autorisés"
                     :dataset-offset="12"
                     property="NB_LGT_IND_AUT"
