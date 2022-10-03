@@ -140,6 +140,15 @@
           "title": "Sources vignette EMISSIONS GES",
           "type": "string",
           "default": "Ademe, Base Carbone"
+        },
+        "titleTooltipContext": {
+          "title": "Titre infobulle CONTEXTE",
+          "type": "string"
+        },
+        "descContext": {
+          "title": "Description infobulle CONTEXTE",
+          "type": "string",
+          "x-display": "textarea"
         }
       }
     }

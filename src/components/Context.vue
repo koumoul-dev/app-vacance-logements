@@ -10,7 +10,7 @@
     >
       <v-col
         :cols="6"
-        :sm="3"
+        :sm="2"
         class="py-0 px-1 text-center"
       >
         <v-list-item>
@@ -41,7 +41,7 @@
         </v-list-item>
       </v-col>
       <v-col
-        :cols="6"
+        :cols="5"
         :sm="3"
         class="py-0 px-1 text-center"
       >
@@ -57,8 +57,8 @@
         </v-list-item>
       </v-col>
       <v-col
-        :cols="6"
-        :sm="3"
+        :cols="5"
+        :sm="2"
         class="py-0 px-1 text-center"
       >
         <v-list-item>
@@ -71,6 +71,14 @@
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
+      </v-col>
+      <v-col
+        :cols="2"
+        class="py-0 px-1 text-center"
+      >
+        <card-description
+          field="Context"
+        />
       </v-col>
     </v-row>
     <v-card-text v-else>
@@ -98,8 +106,10 @@
 
 <script>
 import { mapState } from 'vuex'
+import CardDescription from './card-description'
 
 export default {
+  components: { CardDescription },
   computed: {
     ...mapState(['contextData', 'loading', 'currentLevel'])
   }

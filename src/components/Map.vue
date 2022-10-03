@@ -130,23 +130,8 @@ export default {
         layers: ['admin-divs-colors-' + this.currentLevel]
       }).pop()
       if (feature) {
-        // this.map.setFeatureState({
-        //   source: 'admin-divs',
-        //   sourceLayer: level['source-layer'],
-        //   id: this.inseeInfos[levelPropName[this.currentLevel]]
-        // }, {
-        //   selected: false
-        // })
-        // this.$store.commit('setAny', { city: { value: feature.properties.code, text: feature.properties.name } })
-        // this.$store.commit('setAny', { city: null })
-
-        //  const code = inseeMapping[state.city.value] || state.city.value
         const params = { qs: `${levelPropName[this.currentLevel]}:${feature.properties.code}`, sort: '-POPULATION' }
         const inseeInfos = (await axios.get('https://opendata.koumoul.com/data-fair/api/v1/datasets/france-contours-2020-commune-medium/lines', { params })).data.results[0]
-        // if (inseeMapping[state.city.value]) {
-        //   inseeInfos.INSEE_COM = state.city.value
-        //   inseeInfos.NOM_COM = state.city.text.split(' (')[0]
-        // }
         this.$store.commit('setAny', { city: { value: inseeInfos.INSEE_COM, text: inseeInfos.NOM_COM } })
         const idx = levels.findIndex(l => l.id === this.currentLevel)
         if (idx > 0) this.map.setFilter('admin-divs-lines-' + levels[idx - 1].id, ['in', 'code', inseeInfos[levelPropName[levels[idx - 1].id]]])
