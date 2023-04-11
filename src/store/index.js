@@ -93,7 +93,7 @@ export default () => {
           try {
             const code = inseeMapping[state.city.value] || state.city.value
             const params = { qs: `INSEE_COM:${code}` }
-            const inseeInfos = (await axios.get('https://opendata.koumoul.com/data-fair/api/v1/datasets/france-contours-2020-commune-medium/lines', { params })).data.results[0]
+            const inseeInfos = (await axios.get('https://opendata.koumoul.com/data-fair/api/v1/datasets/contours-des-communes/lines', { params })).data.results[0]
             if (inseeMapping[state.city.value]) {
               inseeInfos.INSEE_COM = state.city.value
               inseeInfos.NOM_COM = state.city.text.split(' (')[0]
