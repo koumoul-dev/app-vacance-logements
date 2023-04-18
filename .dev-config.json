@@ -84,6 +84,26 @@
       "href": "http://localhost:5888/data-fair/api/v1/datasets/contexte",
       "title": "Contexte",
       "id": "contexte"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/wikipedia-communes",
+      "title": "wikipedia communes",
+      "id": "wikipedia-communes"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/wikipedia-epci-csv",
+      "title": "wikipedia epci csv",
+      "id": "wikipedia-epci-csv"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/wikipedia-departements-drom",
+      "title": "wikipedia departements drom",
+      "id": "wikipedia-departements-drom"
+    },
+    {
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/wikipedia-regions",
+      "title": "wikipedia regions",
+      "id": "wikipedia-regions"
     }
   ],
   "rightLink": "https://www.ademe.fr/",

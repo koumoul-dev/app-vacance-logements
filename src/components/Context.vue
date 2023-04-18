@@ -78,7 +78,15 @@
       >
         <card-description
           field="Context"
+          dense
         />
+        <br>
+        <a
+          v-if="linkPage"
+          :href="linkPage.ARTICLE"
+          target="_blank"
+          class="text-caption"
+        >Page Wikipédia</a>
       </v-col>
     </v-row>
     <v-card-text v-else>
@@ -111,7 +119,7 @@ import CardDescription from './card-description'
 export default {
   components: { CardDescription },
   computed: {
-    ...mapState(['contextData', 'loading', 'currentLevel'])
+    ...mapState(['contextData', 'loading', 'currentLevel', 'linkPage'])
   }
 }
 </script>

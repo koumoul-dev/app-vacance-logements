@@ -10,7 +10,7 @@
         <template #activator="{ on: onTooltip }">
           <v-btn
             icon
-            class="mb-1"
+            :style="`margin-bottom:${dense ? -8 : 4}px`"
             v-on="{...onDialog, ...onTooltip}"
           >
             <v-icon class="grey--text text--darken-1">
@@ -47,7 +47,8 @@ import { mapGetters } from 'vuex'
 
 export default {
   props: {
-    field: { type: String, required: true }
+    field: { type: String, required: true },
+    dense: { type: Boolean, default: false }
   },
   data () {
     return {

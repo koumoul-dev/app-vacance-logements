@@ -39,3 +39,10 @@ exports.levelOffset = {
   department: 2,
   region: 3
 }
+
+exports.linkPropName = {
+  city: 'CODGEO',
+  epci: 'EPCI',
+  department: 'DEP',
+  region: 'REG'
+}
