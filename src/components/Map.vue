@@ -267,7 +267,7 @@ export default {
         }
         // const params = { qs: `${lovacPropName[this.currentLevel]}:${this.inseeInfos[levelPropName[this.currentLevel]]}` }
         const results = (await axios.get(this.config.datasets[this.compare.datasetOffset + levelOffset[this.currentLevel]].href + '/lines', { params })).data.results
-        this.compareData = results.map(l => ({ code: l[codePropName], value: Number(l[this.compare.property]) }))
+        this.compareData = results.filter(l => l[this.compare.property] !== undefined).map(l => ({ code: l[codePropName], value: Number(l[this.compare.property]) }))
 
         const level = levels.find(l => l.id === this.currentLevel)
         this.compareLevel = level['source-layer']

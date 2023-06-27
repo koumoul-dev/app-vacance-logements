@@ -41,9 +41,9 @@
       "id": "evolution-parc-vacance-reg"
     },
     {
-      "href": "http://localhost:5888/data-fair/api/v1/datasets/lovac-communes-01012020",
-      "title": "LOVAC - Communes (01/01/2020)",
-      "id": "lovac-communes-01012020"
+      "href": "http://localhost:5888/data-fair/api/v1/datasets/logements-vacants-du-parc-prive-par-commune-au-01012021-lovac2",
+      "title": "Lovac 2021 - Communes",
+      "id": "logements-vacants-du-parc-prive-par-commune-au-01012021-lovac2"
     },
     {
       "href": "http://localhost:5888/data-fair/api/v1/datasets/lovac-epci-01012020",
