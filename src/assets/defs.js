@@ -1,8 +1,8 @@
 exports.levelPropName = {
-  city: 'INSEE_COM',
-  epci: 'CODE_EPCI',
-  department: 'INSEE_DEP',
-  region: 'INSEE_REG'
+  city: 'insee_com',
+  epci: 'code_epci',
+  department: 'insee_dep',
+  region: 'insee_reg'
 }
 
 exports.lovacPropName = {

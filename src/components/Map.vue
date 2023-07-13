@@ -131,8 +131,8 @@ export default {
       }).pop()
       if (feature) {
         const params = { qs: `${levelPropName[this.currentLevel]}:${feature.properties.code}`, sort: '-POPULATION' }
-        const inseeInfos = (await axios.get('https://opendata.koumoul.com/data-fair/api/v1/datasets/contours-des-communes/lines', { params })).data.results[0]
-        this.$store.commit('setAny', { city: { value: inseeInfos.INSEE_COM, text: inseeInfos.NOM_COM } })
+        const inseeInfos = (await axios.get('https://opendata.koumoul.com/data-fair/api/v1/datasets/france-contours-2023-commune-precise/lines', { params })).data.results[0]
+        this.$store.commit('setAny', { city: { value: inseeInfos.insee_com, text: inseeInfos.nom_com } })
         const idx = levels.findIndex(l => l.id === this.currentLevel)
         if (idx > 0) this.map.setFilter('admin-divs-lines-' + levels[idx - 1].id, ['in', 'code', inseeInfos[levelPropName[levels[idx - 1].id]]])
         const level = levels[idx]
@@ -263,7 +263,7 @@ export default {
         }[this.compare.datasetOffset]
         const params = { size: 5000, select: this.compare.property + ',' + codePropName }
         if (this.currentLevel === 'city') {
-          params.qs = (this.compare.datasetOffset === 8 ? 'CODE_REG' : 'REG') + ':' + this.inseeInfos.INSEE_REG
+          params.qs = (this.compare.datasetOffset === 8 ? 'CODE_REG' : 'REG') + ':' + this.inseeInfos.insee_reg
         }
         // const params = { qs: `${lovacPropName[this.currentLevel]}:${this.inseeInfos[levelPropName[this.currentLevel]]}` }
         const results = (await axios.get(this.config.datasets[this.compare.datasetOffset + levelOffset[this.currentLevel]].href + '/lines', { params })).data.results

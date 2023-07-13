@@ -23,7 +23,7 @@
               Région
             </v-list-item-title>
             <v-list-item-subtitle>
-              {{ inseeInfos.NOM_REG }}
+              {{ inseeInfos.nom_reg }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -43,7 +43,7 @@
               Département
             </v-list-item-title>
             <v-list-item-subtitle>
-              {{ inseeInfos.NOM_DEP }}
+              {{ inseeInfos.nom_dep }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -63,7 +63,7 @@
               Intercommunalité
             </v-list-item-title>
             <v-list-item-subtitle>
-              {{ inseeInfos.NOM_EPCI }}
+              {{ inseeInfos.nom_epci }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -83,7 +83,7 @@
               Commune
             </v-list-item-title>
             <v-list-item-subtitle>
-              {{ inseeInfos.NOM_COM }}
+              {{ inseeInfos.nom_com }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
