@@ -130,7 +130,7 @@ export default {
         layers: ['admin-divs-colors-' + this.currentLevel]
       }).pop()
       if (feature) {
-        const params = { qs: `${levelPropName[this.currentLevel]}:${feature.properties.code}`, sort: '-POPULATION' }
+        const params = { qs: `${levelPropName[this.currentLevel]}:${feature.properties.code}`, sort: '-population' }
         const inseeInfos = (await axios.get('https://opendata.koumoul.com/data-fair/api/v1/datasets/france-contours-2023-commune-precise/lines', { params })).data.results[0]
         this.$store.commit('setAny', { city: { value: inseeInfos.insee_com, text: inseeInfos.nom_com } })
         const idx = levels.findIndex(l => l.id === this.currentLevel)
