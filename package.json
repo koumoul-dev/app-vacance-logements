@@ -12,7 +12,7 @@
     "dev-src": "vue-cli-service serve",
     "build": "vue-cli-service build --modern",
     "postpublish": "node scripts/postpublish.js",
-    "prepublish": "PUBLIC_URL=https://cdn.jsdelivr.net/npm/app-vacance-logements@${npm_package_version}/dist vue-cli-service build --modern"
+    "prepublishOnly": "PUBLIC_URL=https://cdn.jsdelivr.net/npm/app-vacance-logements@${npm_package_version}/dist vue-cli-service build --modern"
   },
   "dependencies": {
     "@data-fair/components-app": "^0.4.2",
