@@ -89,7 +89,7 @@ export default {
       if (!this.search || this.search.length < 3) {
         this.cities = [...this.cities]
       } else {
-        const cities = (await axios.get('https://datanova.laposte.fr/data-fair/api/v1/datasets/laposte-hexasmal/lines', { params: { q: this.search, q_mode: 'complete' } })).data.results
+        const cities = (await axios.get('https://data.laposte.fr/data-fair/api/v1/datasets/laposte-hexasmal/lines', { params: { q: this.search, q_mode: 'complete' } })).data.results
         this.cities = cities.map(r => ({ text: r.nom_de_la_commune + ` (${r.code_postal})`, value: r.code_commune_insee }))
         if ('paris'.includes(this.search.toLowerCase())) this.cities.unshift({ text: 'PARIS', value: '75056' })
         if ('lyon'.includes(this.search.toLowerCase())) this.cities.unshift({ text: 'LYON', value: '69123' })
